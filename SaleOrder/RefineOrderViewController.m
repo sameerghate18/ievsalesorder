@@ -107,57 +107,7 @@ typedef enum {
     }];
 }
 
-- (void)hidePicker  {
-    
-    [UIView animateWithDuration:0.2 animations:^{
-        self.pickerContainer.frame = CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, 200);
-    } completion:^(BOOL finished) {
-        
-    }];
-}
-
-- (IBAction)done:(id)sender {
-    
-    [self hidePicker];
-    
-    NSString *selectedValue = [itemsForPicker objectAtIndex:[_dataPickerView selectedRowInComponent:0]];
-    
-    switch (pickertype) {
-        case PickerForDocument:
-            model.docDescription = selectedValue;
-            [_docButton setTitle:selectedValue forState:UIControlStateNormal];
-            break;
-            
-        case PickerForPartyNames:
-            model.partyName = selectedValue;
-            [_partyNameButton setTitle:selectedValue forState:UIControlStateNormal];
-            break;
-            
-        case PickerForEndDate:
-            model.endDate = selectedValue;
-            [_endDateButton setTitle:selectedValue forState:UIControlStateNormal];
-            break;
-            
-        case PickerForStartDate:
-            model.startDate = selectedValue;
-            [_startDateButton setTitle:selectedValue forState:UIControlStateNormal];
-            break;
-            
-        default:
-            break;
-    }
-    
-}
-
-- (IBAction)cancel:(id)sender {
-    
-    [self hidePicker];
-    
-}
-
 - (IBAction)searchAction:(id)sender {
-    
-//    [self hidePicker];
     
     if (model.startDate && model.endDate) {
         [self dismissViewControllerAnimated:YES completion:^{
@@ -250,11 +200,9 @@ typedef enum {
         pickertype = PickerForPartyNames;
     }
     else if (textField.tag == 1002) {
-//        itemsForPicker = [_items valueForKey:@"doc_date"];
         textField.inputView = datePickerView;
     }
     else if (textField.tag == 1003) {
-//        itemsForPicker = [_items valueForKey:@"doc_date"];
         textField.inputView = datePickerView;
     }
     
@@ -275,6 +223,7 @@ typedef enum {
     
     currentTextfield.text = [Utility stringFromDate:datePicker.date];
 }
+
 /*
 #pragma mark - Navigation
 

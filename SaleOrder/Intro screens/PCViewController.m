@@ -76,8 +76,6 @@ typedef enum {
 
 -(void)pullData
 {
-    AppDelegate *appDel = [[UIApplication sharedApplication] delegate];
-    
     [SVProgressHUD showWithStatus:@"Please wait" maskType:SVProgressHUDMaskTypeBlack];
     
     NSString *urlString;

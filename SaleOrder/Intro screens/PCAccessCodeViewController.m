@@ -30,7 +30,7 @@ typedef enum{
     SetupConnectionTypeCheckDevice
 }SetupConnectionType;
 
-@interface PCAccessCodeViewController () <UITextFieldDelegate,PCUpdateMobileNumberViewControllerDelegate>
+@interface PCAccessCodeViewController () <UITextFieldDelegate,PCUpdateMobileNumberViewControllerDelegate, ConnectionHandlerDelegate>
 
 {
     NSMutableArray *usersList;

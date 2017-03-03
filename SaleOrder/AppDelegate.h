@@ -10,7 +10,7 @@
 #import "PCCompanyModel.h"
 #import "PCUserModel.h"
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate, UITabBarControllerDelegate>
 
 @property (strong, nonatomic) PCUserModel *loggedUser;
 @property (strong, nonatomic) PCCompanyModel *selectedCompany;

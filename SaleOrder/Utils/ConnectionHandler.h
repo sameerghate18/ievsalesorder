@@ -26,6 +26,7 @@
 
 @protocol ConnectionHandlerDelegate <NSObject>
 
+@optional
 -(void)connectionHandler:(ConnectionHandler*)conHandler didRecieveData:(NSData*)data;
 -(void)connectionHandler:(ConnectionHandler*)conHandler errorRecievingData:(NSError*)error;
 

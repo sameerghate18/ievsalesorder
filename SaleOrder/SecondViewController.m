@@ -37,6 +37,9 @@
 @end
 
 @interface SecondViewController () <UITableViewDelegate, UITableViewDataSource, RefineOrderViewControllerDelegate>
+{
+    UIRefreshControl *refreshControl;
+}
 
 @property(nonatomic, strong) IBOutlet UITableView *ordersTableview;
 @property(nonatomic, strong) NSMutableArray *orderItems;
@@ -49,8 +52,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    
+    refreshControl = [[UIRefreshControl alloc] init];
+    [refreshControl addTarget:self action:@selector(getOrderHistory) forControlEvents:UIControlEventValueChanged];
+    
+    NSAttributedString *refreshString = [[NSAttributedString alloc] initWithString:@"Refreshing..." attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12]}];
+    refreshControl.attributedTitle = refreshString;
+    [self.ordersTableview addSubview:refreshControl];
+    
     [self getOrderHistory];
 }
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -91,6 +104,7 @@
             }];
             
             _arrayForTableview = self.orderItems ;
+            [refreshControl endRefreshing];
             [_ordersTableview reloadData];
             
             [SVProgressHUD dismiss];

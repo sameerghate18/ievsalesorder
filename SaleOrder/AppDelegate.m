@@ -12,7 +12,7 @@
 #define kAppIdentiier @"com.pcsofterp.IEV"
 #define kAppKeychainIdentifier @"appUniqueCode"
 
-@interface AppDelegate () <UITabBarControllerDelegate>
+@interface AppDelegate ()
 
 @end
 

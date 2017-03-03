@@ -61,7 +61,7 @@
     
     OrderHistoryDetailModel *item = self.orderHistoryItems[indexPath.row];
     cell.titleLabel.text = item.descr;
-    cell.descriptionLabel.text =  [Utility stringWithCurrencySymbolForValue:item.total forCurrencyCode:@"INR"];
+    cell.descriptionLabel.text =  [Utility stringWithCurrencySymbolForValue:[NSString stringWithFormat:@"%@",item.total] forCurrencyCode:@"INR"];
     
     return cell;
 }

@@ -13,12 +13,6 @@
       "idiom" : "universal",
       "filename" : "bg_home@3x.png",
       "scale" : "3x"
-    },
-    {
-      "idiom" : "universal",
-      "filename" : "bg_home-568h@2x.png",
-      "subtype" : "retina4",
-      "scale" : "2x"
     }
   ],
   "info" : {
