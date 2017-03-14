@@ -97,13 +97,14 @@
         NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
         
         NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:urlString] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:1800];
+        request.HTTPMethod = khttp_Method_POST;
         
         NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
             
             NSHTTPURLResponse *resp = (NSHTTPURLResponse*)response;
             
             dispatch_async(dispatch_get_main_queue(), ^{
-                
+            
                 if (completionBlock) {
                     completionBlock(data,error);
                 }

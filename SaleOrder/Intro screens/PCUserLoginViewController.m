@@ -178,7 +178,18 @@
     
     passwordString = [passwordString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     
-    [self webauthenticate:usernameString password:passwordString];
+    if (usernameString.length>0 || passwordString.length>0) {
+        [self webauthenticate:usernameString password:passwordString];
+    }
+    else    {
+        UIAlertController *blankFieldsAlert = [UIAlertController alertControllerWithTitle:@"Login" message:@"Username and password cannot be left blank." preferredStyle:UIAlertControllerStyleAlert];
+        
+        [blankFieldsAlert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+        }]];
+        
+        [self presentViewController:blankFieldsAlert animated:YES completion:NULL];
+    }
 }
 
 -(void)webauthenticate:(NSString*)username password:(NSString*)password

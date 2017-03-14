@@ -168,6 +168,22 @@
 
 - (void)searchController:(RefineOrderViewController*)controller searchCriteria:(SearchCriteriaModel*)searchModel  {
     
+    // if doc desc
+    //
+    
+    NSString *queryString = nil;
+    
+    if (searchModel.docDescription==nil) {
+        
+    }
+    else if (searchModel.docDescription==nil) {
+        
+    }
+    else if (searchModel.docDescription==nil) {
+        
+    }
+    
+    
     if (searchModel.docDescription || searchModel.partyName) {
         
         NSArray *filteredArray;
@@ -176,7 +192,17 @@
             NSPredicate *datePredicate = [NSPredicate predicateWithFormat:@"(doc_date >= %@) AND (doc_date <= %@)", searchModel.startDate, searchModel.endDate];
             filteredArray = [_orderItems filteredArrayUsingPredicate:datePredicate];
             
-            NSString *searchString = [NSString stringWithFormat:@"(doc_desc contains[c] '%@') AND (party_name contains[c] '%@')", searchModel.docDescription, searchModel.partyName];
+            NSString *searchString;
+            if (searchModel.docDescription == nil) {
+                searchString = [NSString stringWithFormat:@"(party_name contains[c] '%@')", searchModel.partyName];
+            }
+            else if (searchModel.partyName == nil)  {
+                searchString = [NSString stringWithFormat:@"(doc_desc contains[c] '%@')", searchModel.docDescription];
+            }
+            else    {
+                searchString = [NSString stringWithFormat:@"(doc_desc contains[c] '%@') AND (party_name contains[c] '%@')", searchModel.docDescription, searchModel.partyName];
+            }
+            
             NSPredicate *namePredicate = [NSPredicate predicateWithFormat:searchString];
             
             _arrayForTableview = [filteredArray filteredArrayUsingPredicate:namePredicate];
@@ -198,9 +224,20 @@
             
         }
         else    {
-            NSString *searchString = [NSString stringWithFormat:@"(doc_desc contains[c] '%@') AND (party_name contains[c] '%@')", searchModel.docDescription, searchModel.partyName];
+            
+            NSString *searchString;
+            if (searchModel.docDescription == nil) {
+                searchString = [NSString stringWithFormat:@"(party_name contains[c] '%@')", searchModel.partyName];
+            }
+            else if (searchModel.partyName == nil)  {
+                searchString = [NSString stringWithFormat:@"(doc_desc contains[c] '%@')", searchModel.docDescription];
+            }
+            else    {
+                searchString = [NSString stringWithFormat:@"(doc_desc contains[c] '%@') AND (party_name contains[c] '%@')", searchModel.docDescription, searchModel.partyName];
+            }
+            
             NSPredicate *namePredicate = [NSPredicate predicateWithFormat:searchString];
-            _arrayForTableview = [_orderItems filteredArrayUsingPredicate:namePredicate];
+            filteredArray = [_orderItems filteredArrayUsingPredicate:namePredicate];
             
             if (filteredArray.count == 0) {
                 

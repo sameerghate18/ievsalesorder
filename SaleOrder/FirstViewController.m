@@ -99,12 +99,14 @@ typedef enum {
     PartyModel *selectedParty;
     DropDownFor dropdownFor;
     UITextField *currentTextfield, *rateTextfield;
+    
 }
 @property (nonatomic, strong) NSMutableArray *docSeriesArray, *partyNamesArray, *documentsArray, *itemsArray, *itemCodeArray;
 @property (nonatomic, strong) IBOutlet UITableView *inputTableview;
 @property (nonatomic, strong) IBOutlet UIView *pickerViewContainer;
 @property (nonatomic, strong) IBOutlet UIPickerView *dataPickerView;
 @property (nonatomic, strong) IBOutlet UILabel *totalAmountLabel;
+@property (strong, nonatomic) id textValidationBlock;
 
 @end
 
@@ -269,20 +271,41 @@ typedef enum {
     
     [newItemAlert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
         textField.placeholder = @"Rate";
+//        textField.keyboardType = UIKeyboardTypeNumberPad;
         rateTextfield = textField;
-        textField.keyboardType = UIKeyboardTypeNumberPad;
+        textField.tag = 1003;
+//        textField.delegate = self;
     }];
     
     [newItemAlert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
         textField.placeholder = @"Quantity";
         textField.keyboardType = UIKeyboardTypeNumberPad;
+        textField.tag = 1004;
+        textField.delegate = self;
     }];
     
+    __block BOOL shouldDismiss = YES;
+    
     [newItemAlert addAction:[UIAlertAction actionWithTitle:@"Add item" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        for (UITextField *tf in newItemAlert.textFields) {
+            if (tf.text.length == 0) {
+                tf.text = @"Cannot be left blank";
+                shouldDismiss = NO;
+                return ;
+            }
+        }
+        
+//        if (currentTextfield.text == nil) {
+//            currentTextfield.text = @"Cannot be left blank";
+//            return;
+//        }
         
         SONewOrderItem *newItem = [[SONewOrderItem alloc] init];
 
         newItem.itemCode = selectedValueFromPicker;
+        NSString *rateText = newItemAlert.textFields[1].text;
+        
         newItem.rate = selectedItemRate;
         newItem.quantity = newItemAlert.textFields.lastObject.text;
         
@@ -322,8 +345,6 @@ typedef enum {
     
 }
 
-
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -343,23 +364,37 @@ typedef enum {
     else if (textField.tag == 1002) {
         [self getItems];
     }
+    else if (textField.tag == 1003) {
+        selectedItemRate = textField.text;
+    }
     
     return YES;
 }
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField    {
     
+    currentTextfield = nil;
+ 
     if (textField.tag == 1000) {
         itemsForPicker = [_itemsArray valueForKey:@"imCode"];
         dropdownFor = DropDownForItemNames;
+        textField.inputView = _dataPickerView;
+        [_dataPickerView reloadAllComponents];
+
     }
     else if (textField.tag == 1001) {
          itemsForPicker = [self.documentsArray valueForKey:@"docDescription"];
         dropdownFor = DropDownForDocSeries;
+        textField.inputView = _dataPickerView;
+        [_dataPickerView reloadAllComponents];
+
     }
     else if (textField.tag == 1002) {
          itemsForPicker = [self.partyNamesArray valueForKey:@"partyName"];
         dropdownFor = DropDownForPartyNames;
+        textField.inputView = _dataPickerView;
+        [_dataPickerView reloadAllComponents];
+
         
         if (!selectedDocument) {
             UIAlertController *msgActionSheet = [UIAlertController alertControllerWithTitle:nil message:@"Select document series first." preferredStyle:UIAlertControllerStyleAlert];
@@ -373,9 +408,8 @@ typedef enum {
         }
     }
     
-    [_dataPickerView reloadAllComponents];
-    currentTextfield = textField;
-    textField.inputView = _dataPickerView;
+        currentTextfield = textField;
+    
 
     return YES;
 }
@@ -474,7 +508,6 @@ typedef enum {
     return dropdownCell;
 }
 
-
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section   {
     
     if (section == 1) {
@@ -484,14 +517,14 @@ typedef enum {
         headerLabel.textColor = [UIColor darkGrayColor];
         headerLabel.textAlignment = NSTextAlignmentCenter;
         
-        return headerLabel;
+        return _pickerViewContainer;
     }
-    return nil;
+    return _pickerViewContainer;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section   {
      if (section == 1) {
-         return 30;
+         return 45;
      }
     return 0;
 }
@@ -670,6 +703,7 @@ typedef enum {
     [itemsString appendString:@"]"];
     
     NSString *param = [itemsString stringByReplacingOccurrencesOfString:@"\"" withString:@"%22"];
+    param = [param stringByReplacingOccurrencesOfString:@" " withString:@""];
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     

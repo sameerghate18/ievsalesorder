@@ -37,6 +37,8 @@ typedef enum {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     model = [[SearchCriteriaModel alloc] init];
+//    model.docDescription = @"*";
+//    model.partyName = @"* ";
     
 //    self.pickerContainer.frame = CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, 200);
 //    [self.view addSubview:self.pickerContainer];
@@ -109,24 +111,24 @@ typedef enum {
 
 - (IBAction)searchAction:(id)sender {
     
-    if (model.startDate && model.endDate) {
+//    if (model.startDate && model.endDate) {
         [self dismissViewControllerAnimated:YES completion:^{
             if ([_delegate respondsToSelector:@selector(searchController:searchCriteria:)]) {
                 [_delegate searchController:self searchCriteria:model];
             }
         }];
-    }
-    else    {
-        UIAlertController *datesReqAlert = [UIAlertController alertControllerWithTitle:@"Start and end dates must be selected." message:nil preferredStyle:UIAlertControllerStyleAlert];
-        
-        [datesReqAlert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-            
-            [datesReqAlert dismissViewControllerAnimated:YES completion:NULL];
-            
-        }]];
-        
-        [self presentViewController:datesReqAlert animated:YES completion:NULL];
-    }
+//    }
+//    else    {
+//        UIAlertController *datesReqAlert = [UIAlertController alertControllerWithTitle:@"Start and end dates must be selected." message:nil preferredStyle:UIAlertControllerStyleAlert];
+//        
+//        [datesReqAlert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+//            
+//            [datesReqAlert dismissViewControllerAnimated:YES completion:NULL];
+//            
+//        }]];
+//        
+//        [self presentViewController:datesReqAlert animated:YES completion:NULL];
+//    }
     
     
     
