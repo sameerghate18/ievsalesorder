@@ -116,4 +116,31 @@
     }
 }
 
+- (void)submitOrderToURL:(NSString*)urlString body:(NSDictionary*)bodyParams completion:(void(^)(id responseData, NSError *error))completionBlock   {
+    
+    Reachability *reachability = [Reachability reachabilityForInternetConnection];
+    
+    if ([reachability currentReachabilityStatus] != NotReachable ) {
+        
+        NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration] ;
+        [configuration setRequestCachePolicy:NSURLRequestUseProtocolCachePolicy];
+        
+        AFURLSessionManager *session = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+        
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:urlString] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:1800];
+        request.HTTPMethod = khttp_Method_POST;
+        
+        NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request uploadProgress:NULL downloadProgress:NULL completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                completionBlock(responseObject,error);
+                
+            });
+        }];
+        
+        [dataTask resume];
+    }
+}
+
 @end

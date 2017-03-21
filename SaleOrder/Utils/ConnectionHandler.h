@@ -22,6 +22,8 @@
 
 - (void)fetchDataForPOSTURLwithStringOutput:(NSString*)urlString completion:(void(^)(NSData *responseData, NSError *error))completionBlock ;
 
+- (void)submitOrderToURL:(NSString*)urlString body:(NSDictionary*)bodyParams completion:(void(^)(id responseData, NSError *error))completionBlock;
+
 @end
 
 @protocol ConnectionHandlerDelegate <NSObject>
