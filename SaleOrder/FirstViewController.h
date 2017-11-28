@@ -34,6 +34,7 @@
 @property (nonatomic, retain) IBOutlet UILabel *qtyLabel;
 @property (nonatomic, retain) IBOutlet UILabel *amountLabel;
 @property (nonatomic, retain) IBOutlet UIButton *deleteBtn;
+@property (nonatomic, retain) IBOutlet UIButton *editBtn;
 
 -(void)fillValues:(SONewOrderItem*)orderItem;
 

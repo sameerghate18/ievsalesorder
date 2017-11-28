@@ -271,10 +271,10 @@ typedef enum {
     
     [newItemAlert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
         textField.placeholder = @"Rate";
-//        textField.keyboardType = UIKeyboardTypeNumberPad;
+        textField.keyboardType = UIKeyboardTypeNumberPad;
         rateTextfield = textField;
         textField.tag = 1003;
-//        textField.delegate = self;
+        textField.delegate = self;
     }];
     
     [newItemAlert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
@@ -294,6 +294,7 @@ typedef enum {
                 shouldDismiss = NO;
                 return ;
             }
+            selectedItemRate = rateTextfield.text;
         }
         
 //        if (currentTextfield.text == nil) {
@@ -306,10 +307,11 @@ typedef enum {
         newItem.itemCode = selectedValueFromPicker;
         NSString *rateText = newItemAlert.textFields[1].text;
         
-        newItem.rate = selectedItemRate;
+        NSString *rateStr = [selectedItemRate stringByReplacingCharactersInRange:NSMakeRange(0, 1) withString:@""];
+        newItem.rate = [rateStr stringByReplacingOccurrencesOfString:@"," withString:@""];
         newItem.quantity = newItemAlert.textFields.lastObject.text;
         
-        float rate = [newItem.rate floatValue];
+        double rate = [newItem.rate doubleValue];
         double qty = [newItem.quantity doubleValue];
         double amount = rate*qty;
         
@@ -371,6 +373,22 @@ typedef enum {
     return YES;
 }
 
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string    {
+    
+    if (textField.tag == 1003) {
+        NSLog(@"shouldChangeCharactersInRange - %@", string);
+        NSMutableString *mStr = [[NSMutableString alloc] initWithString:string];
+        if (textField.text.length == 1 && [string isEqualToString:@""]) {
+            return NO;
+        }
+        else {
+            selectedItemRate = textField.text;
+            return  YES;
+        }
+    }
+    return YES;
+}
+
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField    {
     
     currentTextfield = nil;
@@ -428,6 +446,86 @@ typedef enum {
     
     totalAmount -= itemToDelete.amount;
     self.totalAmountLabel.text = [Utility stringWithCurrencySymbolForValue:[NSString stringWithFormat:@"Total: %.2f", totalAmount] forCurrencyCode:DEFAULT_CURRENCY_CODE];
+}
+
+-(IBAction)editItemAction:(id)sender    {
+    
+    NSInteger tag = ((UIButton*)sender).tag;
+    SONewOrderItem *itemToEdit = orderItems[tag];
+    double amountBefore = itemToEdit.amount;
+    
+    UIAlertController *editItemAlert = [UIAlertController alertControllerWithTitle:@"Edit item" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    
+    [editItemAlert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+        textField.placeholder = @"Item code";
+        textField.keyboardType = UIKeyboardTypeNumberPad;
+        textField.tag = 1000;
+        textField.delegate = self;
+        textField.text = itemToEdit.itemCode;
+    }];
+    
+    [editItemAlert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+        textField.placeholder = @"Rate";
+        textField.keyboardType = UIKeyboardTypeNumberPad;
+        rateTextfield = textField;
+        textField.tag = 1003;
+        textField.delegate = self;
+        textField.text = [Utility stringWithCurrencySymbolForValue:itemToEdit.rate forCurrencyCode:DEFAULT_CURRENCY_CODE];
+    }];
+    
+    [editItemAlert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+        textField.placeholder = @"Quantity";
+        textField.keyboardType = UIKeyboardTypeNumberPad;
+        textField.tag = 1004;
+        textField.delegate = self;
+        textField.text = itemToEdit.quantity;
+    }];
+    
+    __block BOOL shouldDismiss = YES;
+    
+    [editItemAlert addAction:[UIAlertAction actionWithTitle:@"Update" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        for (UITextField *tf in editItemAlert.textFields) {
+            if (tf.text.length == 0) {
+                tf.text = @"Cannot be left blank";
+                shouldDismiss = NO;
+                return ;
+            }
+            selectedItemRate = rateTextfield.text;
+        }
+        
+        itemToEdit.itemCode = selectedValueFromPicker;
+        NSString *rateText = editItemAlert.textFields[1].text;
+        
+        NSString *rateStr = [selectedItemRate stringByReplacingCharactersInRange:NSMakeRange(0, 1) withString:@""];
+        itemToEdit.rate = [rateStr stringByReplacingOccurrencesOfString:@"," withString:@""];
+        itemToEdit.quantity = editItemAlert.textFields.lastObject.text;
+        
+        double rate = [itemToEdit.rate doubleValue];
+        double qty = [itemToEdit.quantity doubleValue];
+        double amount = rate*qty;
+        
+        itemToEdit.amount = amount;
+        
+        [orderItems replaceObjectAtIndex:tag withObject:itemToEdit];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [_inputTableview reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationFade];
+            
+            
+            totalAmount += (itemToEdit.amount - amountBefore);
+            self.totalAmountLabel.text = [Utility stringWithCurrencySymbolForValue:[NSString stringWithFormat:@"Total: %.2f", totalAmount] forCurrencyCode:DEFAULT_CURRENCY_CODE];
+        });
+        
+    }]];
+     
+        [editItemAlert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            
+            [editItemAlert dismissViewControllerAnimated:YES completion:NULL];
+            
+        }]];
+        
+        [self presentViewController:editItemAlert animated:YES completion:NULL];
 }
 
 #pragma mark - UITableviewDelegate methods
@@ -501,6 +599,7 @@ typedef enum {
     else if (indexPath.section==1)  {
         
         orderItemCell.deleteBtn.tag = indexPath.row;
+        orderItemCell.editBtn.tag = indexPath.row;
         [orderItemCell fillValues:[orderItems objectAtIndex:indexPath.row]];
         
         return orderItemCell;
