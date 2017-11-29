@@ -16,6 +16,7 @@ static NSString *dropdownIdentifier = @"dropdownIdentifier";
 static NSString *textfieldIdentifer = @"textfieldIdentifer";
 static NSString *submitIdentifer = @"submitIdentifer";
 static NSString *newItemIdentifier = @"newItemIdentifier";
+static NSString *noitemIdentifier = @"noitemIdentifier";
 
 typedef enum {
     DropDownForDocSeries,
@@ -260,6 +261,18 @@ typedef enum {
         return;
     }
     
+    if (_itemsArray.count == 0) {
+      
+        UIAlertController *noItemActionSheet = [UIAlertController alertControllerWithTitle:nil message:@"No items are available for the selected document and party name. Try choosing different values." preferredStyle:UIAlertControllerStyleAlert];
+        [noItemActionSheet addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [self dismissViewControllerAnimated:YES completion:NULL];
+        }]];
+        
+        [self presentViewController:noItemActionSheet animated:YES completion:NULL];
+        return;
+    }
+    
+    
     UIAlertController *newItemAlert = [UIAlertController alertControllerWithTitle:@"Add a new item" message:nil preferredStyle:UIAlertControllerStyleAlert];
     
     [newItemAlert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
@@ -342,7 +355,7 @@ typedef enum {
     
     totalAmount += orderItem.amount;
     
-    NSString *currencyStr = [Utility stringWithCurrencySymbolForValue:[NSString stringWithFormat:@"%.2f", totalAmount] forCurrencyCode:@"INR"];
+    NSString *currencyStr = [Utility stringWithCurrencySymbolForValue:[NSString stringWithFormat:@"%.2f", totalAmount] forCurrencyCode:DEFAULT_CURRENCY_CODE];
     self.totalAmountLabel.text = [NSString stringWithFormat:@"Total: %@", currencyStr];
     
 }
@@ -512,9 +525,9 @@ typedef enum {
         dispatch_async(dispatch_get_main_queue(), ^{
             [_inputTableview reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationFade];
             
-            
-            totalAmount += (itemToEdit.amount - amountBefore);
-            self.totalAmountLabel.text = [Utility stringWithCurrencySymbolForValue:[NSString stringWithFormat:@"Total: %.2f", totalAmount] forCurrencyCode:DEFAULT_CURRENCY_CODE];
+            totalAmount = totalAmount + (itemToEdit.amount - amountBefore);
+            NSString *currencyStr = [Utility stringWithCurrencySymbolForValue:[NSString stringWithFormat:@"%.2f", totalAmount] forCurrencyCode:DEFAULT_CURRENCY_CODE];
+            self.totalAmountLabel.text = [NSString stringWithFormat:@"Total: %@", currencyStr];
         });
         
     }]];
@@ -540,6 +553,11 @@ typedef enum {
         return 4;
     }
     else  {
+        
+        if (orderItems.count == 0) {
+            return 1;
+        }
+        
         return orderItems.count;
     }
 }
@@ -549,6 +567,7 @@ typedef enum {
     PCInputTableviewCell *inputCell = [tableView dequeueReusableCellWithIdentifier:textfieldIdentifer];
     PCDropdownTableviewCell *dropdownCell = [tableView dequeueReusableCellWithIdentifier:dropdownIdentifier];
     PCItemOrderTableviewCell *orderItemCell = [tableView dequeueReusableCellWithIdentifier:newItemIdentifier];
+    UITableViewCell *noItemsCell = [tableView dequeueReusableCellWithIdentifier:noitemIdentifier];
     
     if (indexPath.section == 0) {
         
@@ -598,6 +617,10 @@ typedef enum {
     }
     else if (indexPath.section==1)  {
         
+        if (orderItems.count == 0) {
+            return noItemsCell;
+        }
+        
         orderItemCell.deleteBtn.tag = indexPath.row;
         orderItemCell.editBtn.tag = indexPath.row;
         [orderItemCell fillValues:[orderItems objectAtIndex:indexPath.row]];
@@ -637,7 +660,13 @@ typedef enum {
         rowHeight = 76.0;
     }
     else if (indexPath.section == 1)    {
-        rowHeight = 130.0;
+        
+        if (orderItems.count == 0) {
+            rowHeight = 76.0;
+        }
+        else    {
+            rowHeight = 130.0;
+        }
     }
     return rowHeight                                                      ;
 }
@@ -668,6 +697,14 @@ typedef enum {
 //            [self performSegueWithIdentifier:@"newtodropdown" sender:objectsArray];
 //        }
 //    }
+    
+    if (indexPath.section == 1)    {
+        
+        if (orderItems.count == 0) {
+        }
+        else    {
+        }
+    }
 }
 
 #pragma mark -
@@ -686,6 +723,19 @@ typedef enum {
 -(void)presentDropdownMenu:(NSIndexPath*)selectedRow  {
     
     actionSheet = [UIAlertController alertControllerWithTitle:@"Select a value" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    actionSheet.view.backgroundColor = [UIColor clearColor];
+    
+    UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+    UIVisualEffectView *blurEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+    [blurEffectView setFrame:self.pickerViewContainer.bounds];
+    [self.pickerViewContainer addSubview:blurEffectView];
+    
+//    // Vibrancy effect
+//    UIVibrancyEffect *vibrancyEffect = [UIVibrancyEffect effectForBlurEffect:blurEffect];
+//    UIVisualEffectView *vibrancyEffectView = [[UIVisualEffectView alloc] initWithEffect:vibrancyEffect];
+//    [vibrancyEffectView setFrame:self.pickerViewContainer.bounds];
+//
+//    [[blurEffectView contentView] addSubview:vibrancyEffectView];
     
     self.pickerViewContainer.frame = actionSheet.view.bounds;
     [actionSheet.view addSubview:self.pickerViewContainer];
@@ -765,6 +815,19 @@ typedef enum {
     currentTextfield.text = selectedValueFromPicker = itemsForPicker[row];
     
     [_inputTableview reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
+}
+
+- (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view{
+    UILabel* tView = (UILabel*)view;
+    if (!tView){
+        tView = [[UILabel alloc] init];
+        // Setup label properties - frame, font, colors etc
+        [tView setFont:[UIFont systemFontOfSize:16]];
+        [tView setTextAlignment:NSTextAlignmentCenter];
+    }
+    // Fill the label text here
+    tView.text = itemsForPicker[row];
+    return tView;
 }
 
 #pragma mark - 
