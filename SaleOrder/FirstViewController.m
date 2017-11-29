@@ -349,9 +349,10 @@ typedef enum {
     if (!orderItems)
         orderItems = [[NSMutableArray alloc] init];
     
+    [_inputTableview beginUpdates];
     [orderItems addObject:orderItem];
-    
-    [_inputTableview reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationFade];
+    [_inputTableview insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:orderItems.count-1 inSection:1]] withRowAnimation:UITableViewRowAnimationFade];
+    [_inputTableview endUpdates];
     
     totalAmount += orderItem.amount;
     
@@ -451,12 +452,12 @@ typedef enum {
     NSInteger tag = ((UIButton*)sender).tag;
     
     SONewOrderItem *itemToDelete = orderItems[tag];
-    [orderItems removeObject:itemToDelete];
     
     [_inputTableview beginUpdates];
+    [orderItems removeObject:itemToDelete];
     [_inputTableview deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:tag inSection:1]] withRowAnimation:UITableViewRowAnimationFade];
     [_inputTableview endUpdates];
-    
+
     totalAmount -= itemToDelete.amount;
     self.totalAmountLabel.text = [Utility stringWithCurrencySymbolForValue:[NSString stringWithFormat:@"Total: %.2f", totalAmount] forCurrencyCode:DEFAULT_CURRENCY_CODE];
 }
@@ -554,11 +555,12 @@ typedef enum {
     }
     else  {
         
-        if (orderItems.count == 0) {
-            return 1;
-        }
-        
-        return orderItems.count;
+//        if (orderItems.count == 0) {
+//            return 1;
+//        }
+//        else    {
+            return orderItems.count;
+//        }
     }
 }
 
@@ -939,6 +941,7 @@ typedef enum {
     selectedValueFromTextfield = @"";
     selectedDocument = nil;
     selectedParty = nil;
+    totalAmount = 0;
     _totalAmountLabel.text = [NSString stringWithFormat:@"Total: %@",[Utility stringWithCurrencySymbolForValue:@"0" forCurrencyCode:DEFAULT_CURRENCY_CODE]];
     [orderItems removeAllObjects];
     [_inputTableview reloadData];

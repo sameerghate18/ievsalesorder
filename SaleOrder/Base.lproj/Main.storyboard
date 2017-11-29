@@ -421,6 +421,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <outlet property="amountLabel" destination="FOs-OQ-8Ev" id="5sh-7Q-RKS"/>
+                                            <outlet property="deleteBtn" destination="2XJ-BB-ETF" id="HKN-G4-6y9"/>
                                             <outlet property="editBtn" destination="UrP-zy-i2h" id="kh9-ky-5HT"/>
                                             <outlet property="headerLabel" destination="ysp-Eo-qbc" id="cXL-qA-GfG"/>
                                             <outlet property="qtyLabel" destination="1W6-S8-j83" id="wtB-vX-bWX"/>

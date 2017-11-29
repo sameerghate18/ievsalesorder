@@ -56,22 +56,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "SaleOrder/FirstViewController.m"
-            timestampString = "533677900.635488"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "459"
-            endingLineNumber = "459"
-            landmarkName = "-deleteItemAction:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -108,7 +92,7 @@
                   moduleName = "SaleOrder"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Sameer/Work/IEV%20SalesOrder/SaleOrder/Intro%20screens/PCAccessCodeViewController.m"
-                  timestampString = "533677900.817266"
+                  timestampString = "533684218.640557"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "526"
@@ -123,7 +107,7 @@
                   moduleName = "SaleOrder"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Sameer/Work/IEV%20SalesOrder/SaleOrder/Intro%20screens/PCAccessCodeViewController.m"
-                  timestampString = "533677900.826923"
+                  timestampString = "533684218.653879"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "528"
@@ -156,7 +140,7 @@
                   moduleName = "SaleOrder"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Sameer/Work/IEV%20SalesOrder/SaleOrder/SecondViewController.m"
-                  timestampString = "533677900.834688"
+                  timestampString = "533684218.661664"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "214"
@@ -171,7 +155,7 @@
                   moduleName = "SaleOrder"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Sameer/Work/IEV%20SalesOrder/SaleOrder/SecondViewController.m"
-                  timestampString = "533677900.845459"
+                  timestampString = "533684218.665448"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "214"
@@ -188,11 +172,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SaleOrder/FirstViewController.m"
-            timestampString = "533677900.637194"
+            timestampString = "533684599.915428"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "874"
-            endingLineNumber = "874"
+            startingLineNumber = "876"
+            endingLineNumber = "876"
             landmarkName = "-placeOrderAction:"
             landmarkType = "7">
          </BreakpointContent>
@@ -200,23 +184,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "SaleOrder/FirstViewController.m"
-            timestampString = "533677900.638211"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "880"
-            endingLineNumber = "880"
-            landmarkName = "-placeOrderAction:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SaleOrder/SecondViewController.m"
@@ -232,11 +200,11 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SaleOrder/FirstViewController.m"
-            timestampString = "533677900.63898"
+            timestampString = "533684599.916301"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "324"
@@ -252,11 +220,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SaleOrder/FirstViewController.m"
-            timestampString = "533677900.639584"
+            timestampString = "533684599.916882"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "383"
-            endingLineNumber = "383"
+            startingLineNumber = "384"
+            endingLineNumber = "384"
             landmarkName = "-textFieldShouldEndEditing:"
             landmarkType = "7">
          </BreakpointContent>
@@ -268,11 +236,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SaleOrder/FirstViewController.m"
-            timestampString = "533677900.640361"
+            timestampString = "533684599.917472"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "468"
-            endingLineNumber = "468"
+            startingLineNumber = "469"
+            endingLineNumber = "469"
             landmarkName = "-editItemAction:"
             landmarkType = "7">
          </BreakpointContent>
@@ -284,12 +252,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SaleOrder/FirstViewController.m"
-            timestampString = "533677900.641255"
+            timestampString = "533684599.918068"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "215"
-            endingLineNumber = "215"
-            landmarkName = "-getItems"
+            startingLineNumber = "882"
+            endingLineNumber = "882"
+            landmarkName = "-placeOrderAction:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -300,12 +268,44 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SaleOrder/FirstViewController.m"
-            timestampString = "533677900.641957"
+            timestampString = "533684599.918637"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "241"
-            endingLineNumber = "241"
-            landmarkName = "-getItems"
+            startingLineNumber = "452"
+            endingLineNumber = "452"
+            landmarkName = "-deleteItemAction:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SaleOrder/FirstViewController.m"
+            timestampString = "533684599.919345"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "945"
+            endingLineNumber = "945"
+            landmarkName = "-clearFields"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SaleOrder/FirstViewController.m"
+            timestampString = "533684599.920585"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "626"
+            endingLineNumber = "626"
+            landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
