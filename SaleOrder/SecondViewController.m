@@ -26,7 +26,7 @@
     }
     else if ([singleOrder.status isEqualToString:@"Approved"]) {
         self.statusLabel.text = @"Approved";
-        self.statusLabel.textColor = [UIColor greenColor];
+        self.statusLabel.textColor = [UIColor colorWithRed:0 green:0.501 blue:0 alpha:1.0];
     }
     else if ([singleOrder.status isEqualToString:@"In progress"]) {
         self.statusLabel.text = @"In progress";
@@ -122,13 +122,21 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section    {
     
+    if (_arrayForTableview.count == 0) {
+        return 1;
+    }
     return _arrayForTableview.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath  {
     
     OrderHistoryCell *cell = [tableView dequeueReusableCellWithIdentifier:@"orderCellIdentifier"];
-
+    UITableViewCell *noOrderCell = [tableView dequeueReusableCellWithIdentifier:@"noitemIdentifier"];
+    
+    if (_arrayForTableview.count == 0) {
+        return noOrderCell;
+    }
+    
     OrderHistoryModel *model = _arrayForTableview[indexPath.row];
     [cell fillValuesAndStatus:model];
     

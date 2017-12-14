@@ -83,8 +83,7 @@ typedef enum {
     if (dataType == DATA_TYPE_COMPANYLIST) {
         dataTypeURL = [NSMutableString stringWithString:kCompanyListService];
         
-        //
-        urlString = @"http://www.ievmobile.com/SALEIEV/Service.svc/getallcompany";
+        urlString = kGetAllCompanyURL;//@"http://www.ievmobile.com/SALEIEV/Service.svc/getallcompany";
         
     }
 //    else if (dataType == DATA_TYPE_USERLIST) {

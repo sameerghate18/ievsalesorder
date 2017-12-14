@@ -49,6 +49,7 @@ typedef enum {
     
     datePickerView = [[UIDatePicker alloc] init];
     [datePickerView addTarget:self action:@selector(datePickerValueChanged:) forControlEvents:UIControlEventValueChanged];
+    [datePickerView setDatePickerMode:UIDatePickerModeDate];
     [datePickerView setMaximumDate:[NSDate date]];
     
     UITapGestureRecognizer *tapper = [[UITapGestureRecognizer alloc]
@@ -194,11 +195,18 @@ typedef enum {
     if (textField.tag == 1000) {
         itemsForPicker = [_items valueForKey:@"doc_desc"];
         textField.inputView = _dataPickerView;
+        
+        if (pickertype != PickerForDocument) {
+            [_dataPickerView selectRow:0 inComponent:0 animated:YES];
+        }
         pickertype = PickerForDocument;
     }
     else if (textField.tag == 1001) {
         itemsForPicker = [_items valueForKey:@"party_name"];
         textField.inputView = _dataPickerView;
+        if (pickertype != PickerForPartyNames) {
+            [_dataPickerView selectRow:0 inComponent:0 animated:YES];
+        }
         pickertype = PickerForPartyNames;
     }
     else if (textField.tag == 1002) {

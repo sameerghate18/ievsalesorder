@@ -35,6 +35,7 @@
 @property (nonatomic, retain) IBOutlet UILabel *amountLabel;
 @property (nonatomic, retain) IBOutlet UIButton *deleteBtn;
 @property (nonatomic, retain) IBOutlet UIButton *editBtn;
+@property (nonatomic) NSInteger cellIndex;
 
 -(void)fillValues:(SONewOrderItem*)orderItem;
 

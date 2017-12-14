@@ -62,9 +62,10 @@ typedef enum
 #define kAccessCode @"accessCode"
 #define kPhoneNumber @"phoneNumber"
 
-#define kVerifyCodeURL @"http://www.ievmobile.com/SALEIEV/Service.svc/getserviceurl?scocd="
+#define kVerifyCodeURL [NSString stringWithFormat:@"%@/getserviceurl?scocd=",kAppBaseURL]
 
-#define kLicenseAddURL @"http://www.ievmobile.com/SALEIEV/Service.svc/getupdatelic?scocd="
+#define kLicenseAddURL(scocd) [NSString stringWithFormat:@"%@/getupdatelic?scocd=%@",kAppBaseURL,scocd];
+#define kGetAllCompanyURL [NSString stringWithFormat:@"%@getallcompany",kAppBaseURL];
 
 #define GET_PARTY_URL(scocd, partyst, doctype, docsr)  \
 [NSString stringWithFormat:@"%@GetParty?scocd=%@&partyst=%@&doctype=%@&docsr=%@",kAppBaseURL,scocd,partyst,doctype,docsr];  \
@@ -72,8 +73,8 @@ typedef enum
 #define GET_ITEM_URL(scocd,docsr,partyno,imloc) \
 [NSString stringWithFormat:@"%@GetItem?scocd=%@&docsr=%@&doctype=%@&partyno=%@&imloc=%@&loctype=%@",kAppBaseURL,scocd,docsr,kDefaultDocType,partyno,imloc,kDefaultLocType];  \
 
-#define GET_SUBMIT_ORDER_URL(scocd,userid,doctype,docsr,imloc,partyno,items,mobno) \
-[NSString stringWithFormat:@"https://www.ievmobile.com/SALEIEV/Service.svc/SubmitOrder1?scocd=%@&userid=%@&doctype=%@&docsr=%@&partyst=%@&partyno=%@&imloc=%@&items=%@&mobno=%@",scocd, userid, doctype, docsr, kDefaultPartySt, partyno, imloc, items, mobno]; \
+#define GET_SUBMIT_ORDER_URL(baseURL,scocd,userid,doctype,docsr,imloc,partyno,items,mobno) \
+[NSString stringWithFormat:@"%@/SubmitOrder1?scocd=%@&userid=%@&doctype=%@&docsr=%@&partyst=%@&partyno=%@&imloc=%@&items=%@&mobno=%@",baseURL,scocd, userid, doctype, docsr, kDefaultPartySt, partyno, imloc, items, mobno]; \
 
 #define GET_DOC_SERIES(scocd,userid,doctype) \
 [NSString stringWithFormat:@"%@GetDocSeries?scocd=%@&userid=%@&doctype=%@",kAppBaseURL,scocd,userid,doctype];  \
@@ -127,6 +128,7 @@ typedef enum
 #define kUserLoginTag 201
 
 #define kDateFormat @"MM/dd/yyyy HH:mm:ss a"
+#define kOnlyDateFormat @"dd/MM/yyyy"
 
 // Settings
 

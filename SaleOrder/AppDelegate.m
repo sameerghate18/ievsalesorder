@@ -92,28 +92,28 @@
     
     if (tabBarController.selectedIndex == 3) {
         
-        UIAlertController *confirmLogout = [UIAlertController alertControllerWithTitle:@"Are you sure you want to logout?" message:nil preferredStyle:UIAlertControllerStyleAlert];
-        
-        [confirmLogout addAction:[UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-            
-            [confirmLogout dismissViewControllerAnimated:YES completion:^{
-            }];
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                UINavigationController *rootNav = [kStoryboard instantiateViewControllerWithIdentifier:@"RootNavControllerForLogin"];
-                [self instantiateAppFlowWithNavController:rootNav];
-            });
-            
-        }]];
-        
-        [confirmLogout addAction:[UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-            
-            [confirmLogout dismissViewControllerAnimated:YES completion:NULL];
-            
-        }]];
-        
-        [tabBarController presentViewController:confirmLogout animated:YES completion:NULL];
-        
+//        UIAlertController *confirmLogout = [UIAlertController alertControllerWithTitle:@"Are you sure you want to logout?" message:nil preferredStyle:UIAlertControllerStyleAlert];
+//
+//        [confirmLogout addAction:[UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+//
+//            [confirmLogout dismissViewControllerAnimated:YES completion:^{
+//            }];
+//
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                UINavigationController *rootNav = [kStoryboard instantiateViewControllerWithIdentifier:@"RootNavControllerForLogin"];
+//                [self instantiateAppFlowWithNavController:rootNav];
+//            });
+//
+//        }]];
+//
+//        [confirmLogout addAction:[UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+//
+//            [confirmLogout dismissViewControllerAnimated:YES completion:NULL];
+//
+//        }]];
+//
+//        [tabBarController presentViewController:confirmLogout animated:YES completion:NULL];
+//
     }
 
 }

@@ -15,4 +15,5 @@
 +(UIColor *)randomColor;
 +(NSString*)stringFromDate:(NSDate*)inputDate;
 +(NSDate*)dateFromInputString:(NSString*)inputString;
++(NSString*)stringDateFromServerDate:(NSString*)serverDate;
 @end

@@ -72,9 +72,18 @@
     //2/22/2017 12:00:00 AM
     
     NSDateFormatter *format = [[NSDateFormatter alloc] init];
-    [format setDateFormat:kDateFormat];
-    
+    [format setDateFormat:kOnlyDateFormat];
     return [format stringFromDate:inputDate];
+}
+
++(NSString*)stringDateFromServerDate:(NSString*)serverDate  {
+    //4/2/2016 12:00:00 AM
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"MM/dd/yyyy HH:mm:ss a"];
+    NSDate *newDate = [dateFormat dateFromString:serverDate];
+    [dateFormat setDateFormat:@"dd/MM/yyyy"];
+    NSString *finalString = [dateFormat stringFromDate:newDate];
+    return finalString;
 }
 
 +(NSDate*)dateFromInputString:(NSString*)inputString    {

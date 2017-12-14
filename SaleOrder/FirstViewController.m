@@ -348,9 +348,9 @@ typedef enum {
     
     if (!orderItems)
         orderItems = [[NSMutableArray alloc] init];
+    [orderItems addObject:orderItem];
     
     [_inputTableview beginUpdates];
-    [orderItems addObject:orderItem];
     [_inputTableview insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:orderItems.count-1 inSection:1]] withRowAnimation:UITableViewRowAnimationFade];
     [_inputTableview endUpdates];
     
@@ -406,27 +406,28 @@ typedef enum {
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField    {
     
     currentTextfield = nil;
- 
+    
     if (textField.tag == 1000) {
         itemsForPicker = [_itemsArray valueForKey:@"imCode"];
-        dropdownFor = DropDownForItemNames;
+//        dropdownFor = DropDownForItemNames;
         textField.inputView = _dataPickerView;
-        [_dataPickerView reloadAllComponents];
-
     }
     else if (textField.tag == 1001) {
          itemsForPicker = [self.documentsArray valueForKey:@"docDescription"];
+        
+        if (dropdownFor != DropDownForDocSeries) {
+            [_dataPickerView selectRow:0 inComponent:0 animated:YES];
+        }
         dropdownFor = DropDownForDocSeries;
         textField.inputView = _dataPickerView;
-        [_dataPickerView reloadAllComponents];
-
     }
     else if (textField.tag == 1002) {
          itemsForPicker = [self.partyNamesArray valueForKey:@"partyName"];
+        if (dropdownFor != DropDownForPartyNames) {
+            [_dataPickerView selectRow:0 inComponent:0 animated:YES];
+        }
         dropdownFor = DropDownForPartyNames;
         textField.inputView = _dataPickerView;
-        [_dataPickerView reloadAllComponents];
-
         
         if (!selectedDocument) {
             UIAlertController *msgActionSheet = [UIAlertController alertControllerWithTitle:nil message:@"Select document series first." preferredStyle:UIAlertControllerStyleAlert];
@@ -439,33 +440,33 @@ typedef enum {
             return NO;
         }
     }
-    
+    [_dataPickerView reloadAllComponents];
         currentTextfield = textField;
-    
-
     return YES;
 }
 
 
 - (IBAction)deleteItemAction:(id)sender     {
     
-    NSInteger tag = ((UIButton*)sender).tag;
+    NSIndexPath *indexPath = (NSIndexPath*)sender;
     
-    SONewOrderItem *itemToDelete = orderItems[tag];
+    SONewOrderItem *itemToDelete = orderItems[indexPath.row];
     
     [_inputTableview beginUpdates];
     [orderItems removeObject:itemToDelete];
-    [_inputTableview deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:tag inSection:1]] withRowAnimation:UITableViewRowAnimationFade];
+    [_inputTableview deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:indexPath.row inSection:1]] withRowAnimation:UITableViewRowAnimationFade];
     [_inputTableview endUpdates];
-
+    
     totalAmount -= itemToDelete.amount;
-    self.totalAmountLabel.text = [Utility stringWithCurrencySymbolForValue:[NSString stringWithFormat:@"Total: %.2f", totalAmount] forCurrencyCode:DEFAULT_CURRENCY_CODE];
+    
+    NSString *currencyStr = [Utility stringWithCurrencySymbolForValue:[NSString stringWithFormat:@"%.2f", totalAmount] forCurrencyCode:DEFAULT_CURRENCY_CODE];
+    self.totalAmountLabel.text = [NSString stringWithFormat:@"Total: %@", currencyStr];
 }
 
 -(IBAction)editItemAction:(id)sender    {
     
-    NSInteger tag = ((UIButton*)sender).tag;
-    SONewOrderItem *itemToEdit = orderItems[tag];
+    NSIndexPath *indexPath = (NSIndexPath*)sender;
+    SONewOrderItem *itemToEdit = orderItems[indexPath.row];
     double amountBefore = itemToEdit.amount;
     
     UIAlertController *editItemAlert = [UIAlertController alertControllerWithTitle:@"Edit item" message:nil preferredStyle:UIAlertControllerStyleAlert];
@@ -521,7 +522,7 @@ typedef enum {
         
         itemToEdit.amount = amount;
         
-        [orderItems replaceObjectAtIndex:tag withObject:itemToEdit];
+        [orderItems replaceObjectAtIndex:indexPath.row withObject:itemToEdit];
         
         dispatch_async(dispatch_get_main_queue(), ^{
             [_inputTableview reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationFade];
@@ -584,7 +585,7 @@ typedef enum {
                 
             case 1 :
                 
-                dropdownCell.headerLabel.text = @"Location";
+                dropdownCell.headerLabel.text = @"Location : ";
                 dropdownCell.valueLabel.text = selectedDocument.imLocation;
                 dropdownCell.selectionStyle = UITableViewCellSelectionStyleNone;
                 dropdownCell.dropdownImage.hidden = TRUE;
@@ -605,7 +606,7 @@ typedef enum {
                 
             case 3 :
                 
-                dropdownCell.headerLabel.text = @"Party Code";
+                dropdownCell.headerLabel.text = @"Party Code : ";
                 dropdownCell.valueLabel.text = selectedParty.partyNumber;
                 dropdownCell.selectionStyle = UITableViewCellSelectionStyleNone;
                 dropdownCell.dropdownImage.hidden = TRUE;
@@ -625,6 +626,8 @@ typedef enum {
         
         orderItemCell.deleteBtn.tag = indexPath.row;
         orderItemCell.editBtn.tag = indexPath.row;
+        orderItemCell.cellIndex = indexPath.row;
+        NSLog(@"orderItemCell deleteBtn.tag - %ld, editBtn.tag - %ld", (long)indexPath.row, (long)indexPath.row);
         [orderItemCell fillValues:[orderItems objectAtIndex:indexPath.row]];
         
         return orderItemCell;
@@ -659,7 +662,12 @@ typedef enum {
     
     if (indexPath.section == 0) {
         
-        rowHeight = 76.0;
+        if ((indexPath.row == 0) || (indexPath.row == 2))  {
+            rowHeight = 100.0;
+        }
+        else if ((indexPath.row == 1) || (indexPath.row == 3))  {
+            rowHeight = 50.0;
+        }
     }
     else if (indexPath.section == 1)    {
         
@@ -708,6 +716,37 @@ typedef enum {
         }
     }
 }
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath   {
+    
+    if (indexPath.section == 1) {
+        return YES;
+    }
+    return NO;
+}
+
+- (nullable NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath  {
+    
+    if (indexPath.section == 1) {
+        
+        UITableViewRowAction *editOption = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"Edit" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+            
+            [self editItemAction:indexPath];
+            
+        }];
+        editOption.backgroundColor = [UIColor blueColor];
+        
+        UITableViewRowAction *deleteOption = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:@"Delete" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+            [self deleteItemAction:indexPath];
+        }];
+        deleteOption.backgroundColor = [UIColor redColor];
+        
+        return @[deleteOption, editOption];
+    }
+    
+    return nil;
+}
+
 
 #pragma mark -
 
@@ -794,6 +833,7 @@ typedef enum {
     switch (dropdownFor) {
         case DropDownForDocSeries:
             selectedDocument = self.documentsArray[row];
+            selectedParty = nil;
             break;
             
         case DropDownForPartyNames:
@@ -871,7 +911,7 @@ typedef enum {
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
-    NSString *urlString = GET_SUBMIT_ORDER_URL(appDel.selectedCompany.CO_CD,appDel.loggedUser.USER_ID,kDefaultDocType,selectedDocument.documentSR,selectedDocument.imLocation,selectedParty.partyNumber,param,[defaults valueForKey:kPhoneNumber]);
+    NSString *urlString = GET_SUBMIT_ORDER_URL(appDel.baseURL, appDel.selectedCompany.CO_CD,appDel.loggedUser.USER_ID,kDefaultDocType,selectedDocument.documentSR,selectedDocument.imLocation,selectedParty.partyNumber,param,[defaults valueForKey:kPhoneNumber]);
     
     ConnectionHandler *postOrder = [[ConnectionHandler alloc] init];
     
@@ -887,27 +927,27 @@ typedef enum {
         
         dispatch_async(dispatch_get_main_queue(), ^{
             
-//            if ([opStr containsString:@"Record Inserted"]) {
+            if ([opStr isEqualToString:@""]) {
                 [SVProgressHUD showSuccessWithStatus:@"Order Placed"];
             
             [self clearFields];
             
-//            }
-//            else    {
-//              
-//                [SVProgressHUD dismiss];
-//                
-//                UIAlertController *orderError = [UIAlertController alertControllerWithTitle:@"Error placing order. Please try again." message:nil preferredStyle:UIAlertControllerStyleAlert];
-//                
-//                [orderError addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-//                    
-//                    [orderError dismissViewControllerAnimated:YES completion:NULL];
-//                    
-//                }]];
-//                
-//                [self presentViewController:orderError animated:YES completion:NULL];
-//                
-//            }
+            }
+            else    {
+              
+                [SVProgressHUD dismiss];
+                
+                UIAlertController *orderError = [UIAlertController alertControllerWithTitle:@"Error placing order. Please try again." message:nil preferredStyle:UIAlertControllerStyleAlert];
+                
+                [orderError addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+                    
+                    [orderError dismissViewControllerAnimated:YES completion:NULL];
+                    
+                }]];
+                
+                [self presentViewController:orderError animated:YES completion:NULL];
+                
+            }
         });
         
     }];

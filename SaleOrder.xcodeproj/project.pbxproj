@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		424644A71FD07DDC000B53BD /* MoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 424644A61FD07DDC000B53BD /* MoreViewController.m */; };
 		424C90531E47907000F41DD2 /* SONewOrderItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 424C90521E47907000F41DD2 /* SONewOrderItem.m */; };
 		428A8EB11CEE282A00DE96C7 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 428A8EA51CEE282A00DE96C7 /* AFHTTPSessionManager.m */; };
 		428A8EB21CEE282A00DE96C7 /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 428A8EA81CEE282A00DE96C7 /* AFNetworkReachabilityManager.m */; };
@@ -53,6 +54,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		424644A51FD07DDC000B53BD /* MoreViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MoreViewController.h; sourceTree = "<group>"; };
+		424644A61FD07DDC000B53BD /* MoreViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MoreViewController.m; sourceTree = "<group>"; };
 		424C90511E47907000F41DD2 /* SONewOrderItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SONewOrderItem.h; sourceTree = "<group>"; };
 		424C90521E47907000F41DD2 /* SONewOrderItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SONewOrderItem.m; sourceTree = "<group>"; };
 		428A8EA41CEE282A00DE96C7 /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPSessionManager.h; sourceTree = "<group>"; };
@@ -329,6 +332,8 @@
 				42C3AE091E52B13E00D7F64B /* TwoLineCellTableViewCell.m */,
 				42D4E44B1E55478100E18110 /* RefineOrderViewController.h */,
 				42D4E44C1E55478100E18110 /* RefineOrderViewController.m */,
+				424644A51FD07DDC000B53BD /* MoreViewController.h */,
+				424644A61FD07DDC000B53BD /* MoreViewController.m */,
 			);
 			path = SaleOrder;
 			sourceTree = "<group>";
@@ -420,6 +425,7 @@
 				428A8EB31CEE282A00DE96C7 /* AFSecurityPolicy.m in Sources */,
 				4298E1771CEB84CF004CAAD6 /* MarqueeLabel.m in Sources */,
 				428A8EB11CEE282A00DE96C7 /* AFHTTPSessionManager.m in Sources */,
+				424644A71FD07DDC000B53BD /* MoreViewController.m in Sources */,
 				4298E1611CEB84C4004CAAD6 /* PCDeviceLicenseModel.m in Sources */,
 				42D4E44D1E55478100E18110 /* RefineOrderViewController.m in Sources */,
 				42C6CB371E4ABE84005397CF /* DropdownMenuViewController.m in Sources */,
@@ -511,7 +517,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PROVISIONING_PROFILE = "99315a7b-0a14-42d9-a6b2-129094bf5335";
 				SDKROOT = iphoneos;
@@ -523,15 +529,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				DEVELOPMENT_TEAM = 7VKE5C6GBK;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/SaleOrder/PrefixHeader.pch";
 				INFOPLIST_FILE = SaleOrder/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.pcsofterp.ievsaleorder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "8c7e5310-1cf5-40d1-9424-2eaa7c45cc5e";
+				PROVISIONING_PROFILE = "4371b402-21b4-41e3-97a3-0529c8b2d3aa";
 				PROVISIONING_PROFILE_SPECIFIER = IEVSaleOrderDistAdhocProfile;
 			};
 			name = Adhoc;
@@ -577,7 +584,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE = "6b8e5d55-2079-430d-9496-f66f37f6353b";
@@ -620,7 +627,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PROVISIONING_PROFILE = "99315a7b-0a14-42d9-a6b2-129094bf5335";
 				SDKROOT = iphoneos;
@@ -632,16 +639,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Harsha Jain (AVHRN2AQNY)";
 				DEVELOPMENT_TEAM = 7VKE5C6GBK;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/SaleOrder/PrefixHeader.pch";
 				INFOPLIST_FILE = SaleOrder/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.pcsofterp.ievsaleorder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "1e97dbc5-04d1-4818-944d-d536add06ec7";
+				PROVISIONING_PROFILE = "2ee1a1a5-572e-467c-b734-6647218eee5d";
 				PROVISIONING_PROFILE_SPECIFIER = IEVSaleOrder_Development;
 			};
 			name = Debug;
@@ -650,13 +658,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				DEVELOPMENT_TEAM = 7VKE5C6GBK;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/SaleOrder/PrefixHeader.pch";
 				INFOPLIST_FILE = SaleOrder/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.pcsofterp.ievsaleorder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "81fa1edb-0c4a-455b-a8ee-6e47dabd17a7";
+				PROVISIONING_PROFILE_SPECIFIER = IEVSaleOrderAppStoreProfile;
 			};
 			name = Release;
 		};

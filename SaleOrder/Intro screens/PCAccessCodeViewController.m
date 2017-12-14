@@ -337,13 +337,11 @@ typedef enum{
     [self setUserPhoneNumber:phoneNumber];
     
     ConnectionHandler *registerDeviceConnection = [[ConnectionHandler alloc] init];
-//    registerDeviceConnection.delegate = self;
     registerDeviceConnection.tag = kUpdateLicenseTag;
     
-    NSString *urlString = [NSString stringWithFormat:@"%@GetUpdateLic?scocd=%@",kAppBaseURL,_codeTF.text];
+    NSString *urlString = kLicenseAddURL(_codeTF.text);
+    //[NSString stringWithFormat:@"%@GetUpdateLic?scocd=%@",kAppBaseURL,_codeTF.text];
     setupConnectionType = SetupConnectionTypeUpdateLicense;
-    
-//    [registerDeviceConnection fetchDataForURL:urlString body:nil completion:NULL];
     
     [registerDeviceConnection fetchDataForPOSTURL:urlString body:nil completion:^(id responseData, NSError *error) {
         

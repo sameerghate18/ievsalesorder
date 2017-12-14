@@ -52,12 +52,21 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section    {
+    
+    if (self.orderHistoryItems.count == 0) {
+        return  1;
+    }
     return self.orderHistoryItems.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath  {
     
     TwoLineCellTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"itemBasicCell"];
+    UITableViewCell *noItemCell = [tableView dequeueReusableCellWithIdentifier:@"noitemIdentifier"];
+    
+    if (self.orderHistoryItems.count == 0) {
+        return  noItemCell;
+    }
     
     OrderHistoryDetailModel *item = self.orderHistoryItems[indexPath.row];
     cell.titleLabel.text = item.descr;
