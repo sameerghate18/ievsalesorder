@@ -10,7 +10,7 @@
 
 @interface MoreViewController () <UITableViewDelegate, UITableViewDataSource>
 {
-    NSArray *itemsArray;
+    NSArray *itemsArray, *itemImagesArray;
 }
 @end
 
@@ -19,6 +19,7 @@
 
 - (void)viewDidLoad {
     itemsArray = @[@"About SaleOrder app", @"Logout"];
+    itemImagesArray = @[@"info",@"logout"];
 }
 
 - (IBAction)logoutAction:(id)sender {
@@ -67,6 +68,7 @@
         cell.contentView.backgroundColor = [UIColor clearColor];
     }
     
+    cell.imageView.image = [UIImage imageNamed:itemImagesArray[indexPath.row]];
     cell.textLabel.text = itemsArray[indexPath.row];
     
     return cell;
