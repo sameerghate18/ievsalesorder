@@ -51,21 +51,24 @@
     AppDelegate *appDel = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     
     NSString *urlStr = GET_ORDER_DETAIL(appDel.selectedCompany.CO_CD, appDel.loggedUser.USER_ID,self.selectedOrderModel.doc_type,self.selectedOrderModel.doc_no);
-    
+    NSString *detailURL = [urlStr stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
     ConnectionHandler *orderDetails = [[ConnectionHandler alloc] init];
     
     [SVProgressHUD showWithStatus:@"Please wait..."];
     
-    [orderDetails fetchDataForPOSTURL:urlStr body:nil completion:^(id responseData, NSError *error) {
+    [orderDetails fetchDataForPOSTURL:detailURL body:nil completion:^(id responseData, NSError *error) {
         
         if (!orderItemsArray) {
             orderItemsArray = [[NSMutableArray alloc] init];
         }
         [orderItemsArray removeAllObjects];
         
+        NSError *jsonerror = nil;
+        NSArray *array = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingAllowFragments error:&jsonerror];
+        
         dispatch_async(dispatch_get_main_queue(), ^{
             
-            for (NSDictionary *dict in responseData) {
+            for (NSDictionary *dict in array) {
                 OrderHistoryDetailModel *itemDet = [OrderHistoryDetailModel dictionaryToModel:dict];
                 [orderItemsArray addObject:itemDet];
             }

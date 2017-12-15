@@ -21,7 +21,6 @@ typedef enum {
 
 @interface PCViewController () <NSURLConnectionDelegate, UITableViewDataSource, UITableViewDelegate, ConnectionHandlerDelegate>
 {
-    UIAlertView *alert;
     NSMutableData *recievedData;
     NSMutableArray *companyList;
     NSMutableArray *usersList;
@@ -104,9 +103,10 @@ typedef enum {
         
         __block NSString *errorString;
         
-        if ([responseData isKindOfClass:[NSArray class]]) {
-            
-            for (NSDictionary *dict in responseData) {
+        NSError *jsonerror = nil;
+        NSArray *companyJsonArray = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingAllowFragments error:&jsonerror];
+        
+            for (NSDictionary *dict in companyJsonArray) {
                 PCCompanyModel *cMod = [[PCCompanyModel alloc] init];
                 [cMod setValuesForKeysWithDictionary:dict];
                 [companyList addObject:cMod];
@@ -123,9 +123,13 @@ typedef enum {
             [companyList addObjectsFromArray:[sortedArray copy]];
             
             if (companyList.count == 0) {
-                UIAlertView *noCompList = [[UIAlertView alloc] initWithTitle:@"No companies found." message:@"Could not find list of companies." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:@"Retry",nil];
-                noCompList.tag = 100;
-                [noCompList show];
+                
+                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"No companies found." message:@"Could not find list of companies." preferredStyle:UIAlertControllerStyleAlert];
+                [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+                [alert addAction:[UIAlertAction actionWithTitle:@"Retry" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                    [self pullData];
+                }]];
+                [self presentViewController:alert animated:YES completion:nil];
                 return;
             }
             
@@ -134,27 +138,7 @@ typedef enum {
                 [_companyTableview reloadInputViews];
                 [_companyTableview reloadData];
             });
-            
-        }
-        else if ([responseData isKindOfClass:[NSString class]])   {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                
-                [SVProgressHUD dismiss];
-                errorString = responseData;
-                errorString = [errorString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-                errorString = [errorString substringWithRange:NSMakeRange(1, errorString.length-2)];
-                errorString = [errorString capitalizedString];
-                
-                if ([errorString  caseInsensitiveCompare:@"IEV C003"] == NSOrderedSame) {
-                    UIAlertView *invalidAlert = [[UIAlertView alloc] initWithTitle:@"Sign in" message:@"Invalid connection string to connect to company.\nPlease try again." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-                    [invalidAlert show];
-                }
-            });
-        }
-        
     }];
-    
-//    [handler fetchDataForURL:urlString body:nil completion:NULL];
 }
 
 -(void)connectionHandler:(ConnectionHandler*)conHandler didRecieveData:(NSData*)data
@@ -192,9 +176,13 @@ typedef enum {
             [companyList addObjectsFromArray:[sortedArray copy]];
             
             if (companyList.count == 0) {
-                UIAlertView *noCompList = [[UIAlertView alloc] initWithTitle:@"No companies found." message:@"Could not find list of companies." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:@"Retry",nil];
-                noCompList.tag = 100;
-                [noCompList show];
+                
+                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"No companies found." message:@"Could not find list of companies." preferredStyle:UIAlertControllerStyleAlert];
+                [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+                [alert addAction:[UIAlertAction actionWithTitle:@"Retry" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                    [self pullData];
+                }]];
+                [self presentViewController:alert animated:YES completion:nil];
                 return;
             }
             
@@ -215,8 +203,10 @@ typedef enum {
                 errorString = [errorString capitalizedString];
                 
                 if ([errorString  caseInsensitiveCompare:@"IEV C003"] == NSOrderedSame) {
-                    UIAlertView *invalidAlert = [[UIAlertView alloc] initWithTitle:@"Sign in" message:@"Invalid connection string to connect to company.\nPlease try again." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-                    [invalidAlert show];
+                    
+                    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Sign in" message:@"Invalid connection string to connect to company.\nPlease try again." preferredStyle:UIAlertControllerStyleAlert];
+                    [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+                    [self presentViewController:alert animated:YES completion:nil];
                 }
             });
         }
@@ -262,10 +252,12 @@ typedef enum {
             
             [SVProgressHUD dismiss];
             
-            UIAlertView *noInternetalert = [[UIAlertView alloc] initWithTitle:@"IEV" message:@"Internet connection appears to be unavailable.\nPlease check your connection and try again." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:@"Retry",nil];
-            noInternetalert.tag = 101;
-            [noInternetalert show];
-            
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"IEV" message:@"Internet connection appears to be unavailable.\nPlease check your connection and try again." preferredStyle:UIAlertControllerStyleAlert];
+            [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+            [alert addAction:[UIAlertAction actionWithTitle:@"Retry" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                [self pullData];
+            }]];
+            [self presentViewController:alert animated:YES completion:nil];
         });
         return;
     }
@@ -273,9 +265,13 @@ typedef enum {
     
     [SVProgressHUD dismiss];
 //    [SVProgressHUD showErrorWithStatus:@"Error getting data"];
-    UIAlertView *noCompList = [[UIAlertView alloc] initWithTitle:@"Error." message:@"Could not fetch data from server." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:@"Retry",nil];
-    noCompList.tag = 100;
-    [noCompList show];
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error." message:@"Could not fetch data from server." preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"Retry" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self pullData];
+    }]];
+    [self presentViewController:alert animated:YES completion:nil];
     
     if (dataType == DATA_TYPE_COMPANYLIST) {
         

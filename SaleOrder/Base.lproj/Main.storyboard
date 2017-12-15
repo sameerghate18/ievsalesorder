@@ -211,13 +211,14 @@
                                                 </imageView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="is6-QY-zef" firstAttribute="centerX" secondItem="tsR-aD-pGM" secondAttribute="centerX" constant="-22" id="22j-4t-ji2"/>
                                                 <constraint firstItem="osV-Ch-AUb" firstAttribute="top" secondItem="uEn-Te-f1R" secondAttribute="bottom" constant="19" id="GHT-i0-QIY"/>
                                                 <constraint firstItem="uEn-Te-f1R" firstAttribute="trailing" secondItem="tsR-aD-pGM" secondAttribute="trailingMargin" id="QaI-uJ-rGD"/>
+                                                <constraint firstItem="osV-Ch-AUb" firstAttribute="leading" secondItem="is6-QY-zef" secondAttribute="trailing" constant="8" id="azn-60-CvC"/>
                                                 <constraint firstItem="is6-QY-zef" firstAttribute="top" secondItem="uEn-Te-f1R" secondAttribute="bottom" constant="18" id="c0t-xe-8s1"/>
                                                 <constraint firstItem="uEn-Te-f1R" firstAttribute="top" secondItem="tsR-aD-pGM" secondAttribute="topMargin" constant="2" id="cMY-pN-uAg"/>
+                                                <constraint firstAttribute="trailing" secondItem="osV-Ch-AUb" secondAttribute="trailing" constant="9" id="g4M-0R-0bf"/>
+                                                <constraint firstItem="is6-QY-zef" firstAttribute="leading" secondItem="tsR-aD-pGM" secondAttribute="leading" constant="8" id="jKN-hm-Mqk"/>
                                                 <constraint firstItem="uEn-Te-f1R" firstAttribute="leading" secondItem="tsR-aD-pGM" secondAttribute="leadingMargin" id="pTL-xJ-xo3"/>
-                                                <constraint firstItem="osV-Ch-AUb" firstAttribute="trailing" secondItem="is6-QY-zef" secondAttribute="trailing" constant="43" id="sY5-0h-OsL"/>
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="subviews">
@@ -228,7 +229,6 @@
                                                     <exclude reference="QaI-uJ-rGD"/>
                                                     <exclude reference="cMY-pN-uAg"/>
                                                     <exclude reference="pTL-xJ-xo3"/>
-                                                    <exclude reference="22j-4t-ji2"/>
                                                     <exclude reference="c0t-xe-8s1"/>
                                                 </mask>
                                             </variation>
@@ -241,7 +241,6 @@
                                                     <include reference="QaI-uJ-rGD"/>
                                                     <include reference="cMY-pN-uAg"/>
                                                     <include reference="pTL-xJ-xo3"/>
-                                                    <include reference="22j-4t-ji2"/>
                                                     <include reference="c0t-xe-8s1"/>
                                                 </mask>
                                             </variation>
@@ -303,7 +302,7 @@
                                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="toD-lt-IRL">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="toD-lt-IRL">
                                                             <rect key="frame" x="9" y="84" width="100" height="21"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="21" id="yn7-Pz-ndf"/>
@@ -321,7 +320,7 @@
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1W6-S8-j83">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="1W6-S8-j83">
                                                             <rect key="frame" x="124" y="84" width="98" height="21"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="21" id="TeU-XY-HjF"/>
@@ -2255,14 +2254,14 @@
                                                     </constraints>
                                                     <variation key="default">
                                                         <mask key="constraints">
-                                                            <exclude reference="v5u-9B-R2y"/>
                                                             <exclude reference="eOl-Ap-K3S"/>
+                                                            <exclude reference="v5u-9B-R2y"/>
                                                         </mask>
                                                     </variation>
                                                     <variation key="heightClass=regular-widthClass=compact">
                                                         <mask key="constraints">
-                                                            <include reference="v5u-9B-R2y"/>
                                                             <include reference="eOl-Ap-K3S"/>
+                                                            <include reference="v5u-9B-R2y"/>
                                                         </mask>
                                                     </variation>
                                                 </imageView>
@@ -2304,14 +2303,14 @@
                                                     <color key="highlightedColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <variation key="default">
                                                         <mask key="constraints">
-                                                            <exclude reference="dNN-g1-irZ"/>
                                                             <exclude reference="Gpq-cX-pYi"/>
+                                                            <exclude reference="dNN-g1-irZ"/>
                                                         </mask>
                                                     </variation>
                                                     <variation key="heightClass=regular-widthClass=compact">
                                                         <mask key="constraints">
-                                                            <include reference="dNN-g1-irZ"/>
                                                             <include reference="Gpq-cX-pYi"/>
+                                                            <include reference="dNN-g1-irZ"/>
                                                         </mask>
                                                     </variation>
                                                 </label>
@@ -2361,14 +2360,14 @@
                                                     <nil key="highlightedColor"/>
                                                     <variation key="default">
                                                         <mask key="constraints">
-                                                            <exclude reference="lM7-zL-pP1"/>
                                                             <exclude reference="NVv-9I-WqN"/>
+                                                            <exclude reference="lM7-zL-pP1"/>
                                                         </mask>
                                                     </variation>
                                                     <variation key="heightClass=regular-widthClass=compact">
                                                         <mask key="constraints">
-                                                            <include reference="lM7-zL-pP1"/>
                                                             <include reference="NVv-9I-WqN"/>
+                                                            <include reference="lM7-zL-pP1"/>
                                                         </mask>
                                                     </variation>
                                                 </label>
@@ -2379,14 +2378,14 @@
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="constraints">
-                                                    <exclude reference="Yg0-Xv-FhP"/>
                                                     <exclude reference="E4T-wp-h9K"/>
+                                                    <exclude reference="Yg0-Xv-FhP"/>
                                                 </mask>
                                             </variation>
                                             <variation key="heightClass=regular-widthClass=compact">
                                                 <mask key="constraints">
-                                                    <include reference="Yg0-Xv-FhP"/>
                                                     <include reference="E4T-wp-h9K"/>
+                                                    <include reference="Yg0-Xv-FhP"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
@@ -2444,23 +2443,23 @@
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="constraints">
-                                                    <exclude reference="CQn-3F-XK3"/>
                                                     <exclude reference="ApO-1M-7dw"/>
+                                                    <exclude reference="CQn-3F-XK3"/>
                                                     <exclude reference="nby-8K-Im4"/>
+                                                    <exclude reference="G6x-qQ-QKJ"/>
                                                     <exclude reference="HTP-Q7-sk0"/>
                                                     <exclude reference="HkV-pO-9AP"/>
-                                                    <exclude reference="G6x-qQ-QKJ"/>
                                                     <exclude reference="nwT-bd-AIK"/>
                                                 </mask>
                                             </variation>
                                             <variation key="heightClass=regular-widthClass=compact">
                                                 <mask key="constraints">
-                                                    <include reference="CQn-3F-XK3"/>
                                                     <include reference="ApO-1M-7dw"/>
+                                                    <include reference="CQn-3F-XK3"/>
                                                     <include reference="nby-8K-Im4"/>
+                                                    <include reference="G6x-qQ-QKJ"/>
                                                     <include reference="HTP-Q7-sk0"/>
                                                     <include reference="HkV-pO-9AP"/>
-                                                    <include reference="G6x-qQ-QKJ"/>
                                                     <include reference="nwT-bd-AIK"/>
                                                 </mask>
                                             </variation>
@@ -2564,14 +2563,14 @@ PIN - 411004</string>
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="constraints">
-                                                    <exclude reference="avG-FB-1T5"/>
                                                     <exclude reference="7pP-VX-Uvh"/>
+                                                    <exclude reference="avG-FB-1T5"/>
                                                 </mask>
                                             </variation>
                                             <variation key="heightClass=regular-widthClass=compact">
                                                 <mask key="constraints">
-                                                    <include reference="avG-FB-1T5"/>
                                                     <include reference="7pP-VX-Uvh"/>
+                                                    <include reference="avG-FB-1T5"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
@@ -2613,14 +2612,14 @@ PIN - 411004</string>
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="constraints">
-                                                    <exclude reference="gIM-ma-W2l"/>
                                                     <exclude reference="Wz9-N2-hG8"/>
+                                                    <exclude reference="gIM-ma-W2l"/>
                                                 </mask>
                                             </variation>
                                             <variation key="heightClass=regular-widthClass=compact">
                                                 <mask key="constraints">
-                                                    <include reference="gIM-ma-W2l"/>
                                                     <include reference="Wz9-N2-hG8"/>
+                                                    <include reference="gIM-ma-W2l"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
@@ -2693,14 +2692,14 @@ PIN - 411004</string>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="default">
                                                         <mask key="constraints">
-                                                            <exclude reference="pwK-BT-R5C"/>
                                                             <exclude reference="LHX-nD-sFw"/>
+                                                            <exclude reference="pwK-BT-R5C"/>
                                                         </mask>
                                                     </variation>
                                                     <variation key="heightClass=regular-widthClass=compact">
                                                         <mask key="constraints">
-                                                            <include reference="pwK-BT-R5C"/>
                                                             <include reference="LHX-nD-sFw"/>
+                                                            <include reference="pwK-BT-R5C"/>
                                                         </mask>
                                                     </variation>
                                                 </label>
@@ -2760,14 +2759,14 @@ PIN - 411004</string>
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="constraints">
-                                                    <exclude reference="BAS-sD-w6T"/>
                                                     <exclude reference="A3C-Qz-HZK"/>
+                                                    <exclude reference="BAS-sD-w6T"/>
                                                 </mask>
                                             </variation>
                                             <variation key="heightClass=regular-widthClass=compact">
                                                 <mask key="constraints">
-                                                    <include reference="BAS-sD-w6T"/>
                                                     <include reference="A3C-Qz-HZK"/>
+                                                    <include reference="BAS-sD-w6T"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
@@ -2792,18 +2791,18 @@ PIN - 411004</string>
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="constraints">
+                                                    <exclude reference="ZqA-Bp-xYp"/>
                                                     <exclude reference="cZE-rS-DFb"/>
                                                     <exclude reference="ez3-y0-ceo"/>
                                                     <exclude reference="rRg-ni-bz5"/>
-                                                    <exclude reference="ZqA-Bp-xYp"/>
                                                 </mask>
                                             </variation>
                                             <variation key="heightClass=regular-widthClass=compact">
                                                 <mask key="constraints">
+                                                    <include reference="ZqA-Bp-xYp"/>
                                                     <include reference="cZE-rS-DFb"/>
                                                     <include reference="ez3-y0-ceo"/>
                                                     <include reference="rRg-ni-bz5"/>
-                                                    <include reference="ZqA-Bp-xYp"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>

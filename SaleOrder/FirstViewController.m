@@ -162,7 +162,10 @@ typedef enum {
                 
                 [self.documentsArray removeAllObjects];
                 
-                for (NSDictionary *dict in responseData) {
+                NSError *jsonerror = nil;
+                NSArray *array = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingAllowFragments error:&jsonerror];
+                
+                for (NSDictionary *dict in array) {
                     
                     DocumentModel *aDoc = [DocumentModel dictionaryToModel:dict];
                     [self.documentsArray addObject:aDoc];
@@ -196,7 +199,10 @@ typedef enum {
                 }
                 [_partyNamesArray removeAllObjects];
                 
-                for (NSDictionary *dict in responseData) {
+                NSError *jsonerror = nil;
+                NSArray *array = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingAllowFragments error:&jsonerror];
+                
+                for (NSDictionary *dict in array) {
                     
                     PartyModel *aParty = [PartyModel dictionaryToModel:dict];
                     
@@ -223,16 +229,15 @@ typedef enum {
     [itemConn fetchDataForPOSTURL:urlstr body:nil completion:^(id responseData, NSError *error) {
         
         dispatch_async(dispatch_get_main_queue(), ^{
-            
-            NSError *error = nil;
-            
-            NSArray *itemsArr = (NSArray*)responseData;
-            
+
             if (!error) {
                 if (!self.itemsArray) {
                     self.itemsArray = [[NSMutableArray alloc] init];
                 }
                 [_itemsArray removeAllObjects];
+                
+                NSError *jsonerror = nil;
+                NSArray *itemsArr = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingAllowFragments error:&jsonerror];
                 
                 for (NSDictionary *dict in itemsArr) {
                     
@@ -251,7 +256,7 @@ typedef enum {
     
     if (!selectedDocument || !selectedParty) {
         
-        UIAlertController *msgActionSheet = [UIAlertController alertControllerWithTitle:nil message:@"Select document series and party name to add new item." preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController *msgActionSheet = [UIAlertController alertControllerWithTitle:nil message:@"Select document series and party name to add a new item." preferredStyle:UIAlertControllerStyleAlert];
         [msgActionSheet addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             [self dismissViewControllerAnimated:YES completion:NULL];
         }]];
@@ -409,7 +414,10 @@ typedef enum {
     
     if (textField.tag == 1000) {
         itemsForPicker = [_itemsArray valueForKey:@"imCode"];
-//        dropdownFor = DropDownForItemNames;
+        if (dropdownFor != DropDownForItemNames) {
+            [_dataPickerView selectRow:0 inComponent:0 animated:YES];
+        }
+        dropdownFor = DropDownForItemNames;
         textField.inputView = _dataPickerView;
     }
     else if (textField.tag == 1001) {
@@ -906,8 +914,9 @@ typedef enum {
     [itemsString replaceCharactersInRange:NSMakeRange(itemsString.length-1, 1) withString:@""];
     [itemsString appendString:@"]"];
     
-    NSString *param = [itemsString stringByReplacingOccurrencesOfString:@"\"" withString:@"%22"];
-    param = [param stringByReplacingOccurrencesOfString:@" " withString:@""];
+    NSString *param = [itemsString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+    //stringByReplacingOccurrencesOfString:@"\"" withString:@"%22"];
+    param = [param stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
@@ -919,37 +928,39 @@ typedef enum {
     
     [postOrder fetchDataForPOSTURLwithStringOutput:urlString completion:^(NSData *responseData, NSError *error) {
         
+        if (error)  {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [SVProgressHUD dismiss];
+                
+                UIAlertController *orderError = [UIAlertController alertControllerWithTitle:@"Submit Order" message:@"There was a problem submitting this order.\nPlease try again." preferredStyle:UIAlertControllerStyleAlert];
+                [orderError addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDestructive handler:nil]];
+                [self presentViewController:orderError animated:YES completion:NULL];
+            });
+            return ;
+        }
+        
         NSString *opStr = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
         
         NSLog(@"Place order output - %@", opStr);
         
-        sleep(2.0);
-        
         dispatch_async(dispatch_get_main_queue(), ^{
             
-            if ([opStr isEqualToString:@""]) {
                 [SVProgressHUD showSuccessWithStatus:@"Order Placed"];
-            
-            [self clearFields];
-            
-            }
-            else    {
-              
-                [SVProgressHUD dismiss];
                 
-                UIAlertController *orderError = [UIAlertController alertControllerWithTitle:@"Error placing order. Please try again." message:nil preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertController *orderError = [UIAlertController alertControllerWithTitle:@"Submit Order" message:opStr preferredStyle:UIAlertControllerStyleAlert];
                 
-                [orderError addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+                [orderError addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                     
-                    [orderError dismissViewControllerAnimated:YES completion:NULL];
+//                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self clearFields];
+//                    });
                     
+                    [orderError dismissViewControllerAnimated:YES completion:^{
+                    }];
                 }]];
                 
                 [self presentViewController:orderError animated:YES completion:NULL];
-                
-            }
         });
-        
     }];
     
 }
@@ -960,12 +971,11 @@ typedef enum {
     
     [confirmResetAlert addAction:[UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
         
-        [confirmResetAlert dismissViewControllerAnimated:YES completion:^{}];
-            
+        [confirmResetAlert dismissViewControllerAnimated:YES completion:^{
             dispatch_async(dispatch_get_main_queue(), ^{
-                
                 [self clearFields];
             });
+        }];
     }]];
     
     [confirmResetAlert addAction:[UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -978,13 +988,16 @@ typedef enum {
 }
 
 - (void)clearFields {
-    selectedValueFromTextfield = @"";
-    selectedDocument = nil;
-    selectedParty = nil;
-    totalAmount = 0;
-    _totalAmountLabel.text = [NSString stringWithFormat:@"Total: %@",[Utility stringWithCurrencySymbolForValue:@"0" forCurrencyCode:DEFAULT_CURRENCY_CODE]];
-    [orderItems removeAllObjects];
-    [_inputTableview reloadData];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        selectedValueFromTextfield = @"";
+        selectedDocument = nil;
+        selectedParty = nil;
+        totalAmount = 0;
+        _totalAmountLabel.text = [NSString stringWithFormat:@"Total: %@",[Utility stringWithCurrencySymbolForValue:@"0" forCurrencyCode:DEFAULT_CURRENCY_CODE]];
+        [orderItems removeAllObjects];
+        [_inputTableview reloadData];
+    });
 }
 
 @end

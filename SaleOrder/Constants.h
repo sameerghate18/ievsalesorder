@@ -62,7 +62,7 @@ typedef enum
 #define kAccessCode @"accessCode"
 #define kPhoneNumber @"phoneNumber"
 
-#define kVerifyCodeURL [NSString stringWithFormat:@"%@/getserviceurl?scocd=",kAppBaseURL]
+#define kVerifyCodeURL(accessCode) [NSString stringWithFormat:@"%@/getserviceurl?scocd=%@",kAppBaseURL,accessCode]
 
 #define kLicenseAddURL(scocd) [NSString stringWithFormat:@"%@/getupdatelic?scocd=%@",kAppBaseURL,scocd];
 #define kGetAllCompanyURL [NSString stringWithFormat:@"%@getallcompany",kAppBaseURL];

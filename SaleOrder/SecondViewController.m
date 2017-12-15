@@ -89,7 +89,10 @@
             }
             [self.orderItems removeAllObjects];
             
-            for (NSDictionary *dictionary in responseData) {
+            NSError *jsonerror = nil;
+            NSArray *array = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingAllowFragments error:&jsonerror];
+            
+            for (NSDictionary *dictionary in array) {
                 
                 OrderHistoryModel *aOrder = [OrderHistoryModel dictionaryToModel:dictionary];
                 [self.orderItems addObject:aOrder];

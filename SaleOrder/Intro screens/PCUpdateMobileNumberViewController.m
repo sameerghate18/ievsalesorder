@@ -53,8 +53,11 @@
     
     if (phoneNumber.length==0) {
         [SVProgressHUD dismiss];
-        UIAlertView *blankAccessCode = [[UIAlertView alloc] initWithTitle:@"IEV" message:@"You need to provide your 10-digit phone number to register." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-        [blankAccessCode show];
+        
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"IEV"message:@"You need to provide your 10-digit phone number to register." preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+        [self presentViewController:alert animated:YES completion:nil];
+
         return;
     }
     
@@ -76,7 +79,7 @@
         
         dispatch_async(dispatch_get_main_queue(), ^{
             
-            NSString *opString = [[NSString alloc] initWithString:responseData];
+            NSString *opString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
             opString = [opString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
             
             if ([opString isEqualToString:@"true"]) {
@@ -98,9 +101,9 @@
             }
             else {
                 
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Update Mobile number" message:@"Some unexpected error has occured. Please try again after sometime." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-                [alert show];
-                
+                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Update Mobile number" message:@"Some unexpected error has occured. Please try again after sometime." preferredStyle:UIAlertControllerStyleAlert];
+                [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+                [self presentViewController:alert animated:YES completion:nil];
             }
         });
         
@@ -136,9 +139,9 @@
         }
         else {
             
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Update Mobile number" message:@"Some unexpected error has occured. Please try again after sometime." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-            [alert show];
-            
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Update Mobile number" message:@"Some unexpected error has occured. Please try again after sometime." preferredStyle:UIAlertControllerStyleAlert];
+            [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+            [self presentViewController:alert animated:YES completion:nil];
         }
     });
 }
@@ -151,9 +154,9 @@
             
             [SVProgressHUD dismiss];
             
-            UIAlertView *noInternetalert = [[UIAlertView alloc] initWithTitle:@"IEV" message:@"Internet connection appears to be unavailable.\nPlease check your connection and try again." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-            [noInternetalert show];
-            
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"IEV" message:@"Internet connection appears to be unavailable.\nPlease check your connection and try again." preferredStyle:UIAlertControllerStyleAlert];
+            [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+            [self presentViewController:alert animated:YES completion:nil];
         });
         return;
     }

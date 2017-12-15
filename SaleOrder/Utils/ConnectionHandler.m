@@ -64,23 +64,17 @@
     
     if ([reachability currentReachabilityStatus] != NotReachable ) {
         
-        NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration] ;
-        [configuration setRequestCachePolicy:NSURLRequestUseProtocolCachePolicy];
-        
-        AFURLSessionManager *session = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
-        
         NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:urlString] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:1800];
-        request.HTTPMethod = khttp_Method_POST;
+        request.HTTPMethod = @"POST";
         
-        NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request uploadProgress:NULL downloadProgress:NULL completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                
-                completionBlock(responseObject,error);
-                
-            });
+        NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration] ;
+        [configuration setRequestCachePolicy:NSURLRequestReloadIgnoringCacheData];
+        
+        NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
+        
+        NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+            completionBlock(data,error);
         }];
-        
         [dataTask resume];
     }
 }
@@ -92,7 +86,7 @@
     if ([reachability currentReachabilityStatus] != NotReachable ) {
         
         NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration] ;
-        [configuration setRequestCachePolicy:NSURLRequestUseProtocolCachePolicy];
+        [configuration setRequestCachePolicy:NSURLRequestReloadIgnoringCacheData];
         
         NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
         
