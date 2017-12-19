@@ -450,6 +450,9 @@
         }
             break;
             
+        case kUpdateDeviceRegisterTag:
+            break;
+            
         default:
             break;
     }
@@ -471,7 +474,36 @@
                            appDel.appUniqueIdentifier,
                            [defaults valueForKey:kPhoneNumber]];
     
-    [updateDevieRegHandler fetchDataForURL:urlString body:nil completion:NULL];
+//    [updateDevieRegHandler fetchDataForURL:urlString body:nil completion:NULL];
+    
+    [updateDevieRegHandler fetchDataForURL:urlString body:nil completion:^(NSData *responseData, NSError *error) {
+        
+        if (error) {
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Device Register" message:@"Device Registration failed. Please try again later." preferredStyle:(UIAlertControllerStyle)UIAlertControllerStyleAlert];
+            [alert addAction:[UIAlertAction actionWithTitle:@"Retry" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                [self updateDeviceRegistration];
+            }]];
+            [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            }]];
+            [self presentViewController:alert animated:YES completion:nil];
+        }
+        else {
+            NSString *outputString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+            outputString = [outputString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+            outputString = [outputString substringWithRange:NSMakeRange(1, outputString.length-2)];
+            
+            if ([outputString caseInsensitiveCompare:@"true"] == NSOrderedSame) {
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Device Register" message:@"Device registration successfully done" preferredStyle:(UIAlertControllerStyle)UIAlertControllerStyleAlert];
+                    [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                    }]];
+                    [self presentViewController:alert animated:YES completion:nil];
+                });
+            }
+        }
+        
+    }];
     
 }
 

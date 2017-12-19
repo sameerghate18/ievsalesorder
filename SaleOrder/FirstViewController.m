@@ -181,6 +181,16 @@ typedef enum {
 
 -(void)getPartyNames    {
     
+    if (!self.partyNamesArray) {
+        self.partyNamesArray = [[NSMutableArray alloc] init];
+    }
+    [_partyNamesArray removeAllObjects];
+    
+    if (selectedDocument.partyModelsArray.count > 0) {
+        [_partyNamesArray addObjectsFromArray:selectedDocument.partyModelsArray];
+        return;
+    }
+    
     [SVProgressHUD showWithStatus:@"Getting parties..."];
     
     AppDelegate *appDel = (AppDelegate*)[[UIApplication sharedApplication] delegate];
@@ -194,9 +204,7 @@ typedef enum {
         dispatch_async(dispatch_get_main_queue(), ^{
             
             if (!error) {
-                if (!self.partyNamesArray) {
-                    self.partyNamesArray = [[NSMutableArray alloc] init];
-                }
+                
                 [_partyNamesArray removeAllObjects];
                 
                 NSError *jsonerror = nil;
@@ -208,6 +216,7 @@ typedef enum {
                     
                     [_partyNamesArray addObject:aParty];
                 }
+                [selectedDocument setPartyModelsArray:_partyNamesArray];
             }
 
             [SVProgressHUD dismiss];
@@ -217,6 +226,15 @@ typedef enum {
 }
 
 -(void)getItems    {
+    
+    if (!self.itemsArray) {
+        self.itemsArray = [[NSMutableArray alloc] init];
+    }
+    [_itemsArray removeAllObjects];
+    if (selectedParty.itemModelsArray > 0) {
+        [_itemsArray addObjectsFromArray:selectedParty.itemModelsArray];
+        return;
+    }
     
     [SVProgressHUD showWithStatus:@"Getting items..."];
     
@@ -231,9 +249,7 @@ typedef enum {
         dispatch_async(dispatch_get_main_queue(), ^{
 
             if (!error) {
-                if (!self.itemsArray) {
-                    self.itemsArray = [[NSMutableArray alloc] init];
-                }
+                
                 [_itemsArray removeAllObjects];
                 
                 NSError *jsonerror = nil;
@@ -245,6 +261,7 @@ typedef enum {
                     
                     [_itemsArray addObject:aParty];
                 }
+                [selectedParty setItemModelsArray:_itemsArray];
             }
             [SVProgressHUD dismiss];
         });
@@ -807,7 +824,7 @@ typedef enum {
     else if (dropdownFor == DropDownForPartyNames)  {
         
         selectedParty = self.partyNamesArray[selectedIndex];
-        
+        selectedParty = selectedDocument.partyModelsArray[selectedIndex];
         [self getItems];
     }
     
@@ -888,7 +905,7 @@ typedef enum {
         
         UIAlertController *noItemAlert = [UIAlertController alertControllerWithTitle:@"No items added in the order." message:nil preferredStyle:UIAlertControllerStyleAlert];
         
-        [noItemAlert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        [noItemAlert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             
             [noItemAlert dismissViewControllerAnimated:YES completion:NULL];
             
@@ -898,6 +915,21 @@ typedef enum {
         
         return;
     }
+    
+    UIAlertController *confirmAlert = [UIAlertController alertControllerWithTitle:@"Confirm Order Submit" message:@"Are you sure you want to submit the order?" preferredStyle:UIAlertControllerStyleAlert];
+    
+    [confirmAlert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        [confirmAlert dismissViewControllerAnimated:false completion:nil];
+    }]];
+    
+    [confirmAlert addAction:[UIAlertAction actionWithTitle:@"Place order" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self initiateOrderSubmission];
+    }]];
+    
+    [self presentViewController:confirmAlert animated:YES completion:NULL];
+}
+
+- (void)initiateOrderSubmission  {
     
     AppDelegate *appDel = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     
@@ -945,24 +977,23 @@ typedef enum {
         
         dispatch_async(dispatch_get_main_queue(), ^{
             
-                [SVProgressHUD showSuccessWithStatus:@"Order Placed"];
+            [SVProgressHUD showSuccessWithStatus:@"Order Placed"];
+            
+            UIAlertController *orderError = [UIAlertController alertControllerWithTitle:@"Submit Order" message:opStr preferredStyle:UIAlertControllerStyleAlert];
+            
+            [orderError addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                 
-                UIAlertController *orderError = [UIAlertController alertControllerWithTitle:@"Submit Order" message:opStr preferredStyle:UIAlertControllerStyleAlert];
+                //                    dispatch_async(dispatch_get_main_queue(), ^{
+                [self clearFields];
+                //                    });
                 
-                [orderError addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                    
-//                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [self clearFields];
-//                    });
-                    
-                    [orderError dismissViewControllerAnimated:YES completion:^{
-                    }];
-                }]];
-                
-                [self presentViewController:orderError animated:YES completion:NULL];
+                [orderError dismissViewControllerAnimated:YES completion:^{
+                }];
+            }]];
+            
+            [self presentViewController:orderError animated:YES completion:NULL];
         });
     }];
-    
 }
 
 -(IBAction)clearAllAction:(id)sender    {

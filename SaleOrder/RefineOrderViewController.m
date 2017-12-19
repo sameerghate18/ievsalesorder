@@ -19,7 +19,7 @@ typedef enum {
 {
     PickerFor pickertype;
     UIAlertController *actionSheet;
-    NSArray *itemsForPicker;
+    NSArray *itemsForPicker, *uniqueItemsForPicker;
     SearchCriteriaModel *model;
     NSString *selectedValueFromPicker;
     UITextField *currentTextfield;
@@ -101,7 +101,12 @@ typedef enum {
         itemsForPicker = [[NSArray alloc] init];
     }
     
+    if (!uniqueItemsForPicker) {
+        uniqueItemsForPicker = [[NSArray alloc] init];
+    }
+    
     itemsForPicker = [_items valueForKey:param];
+    uniqueItemsForPicker = [itemsForPicker valueForKeyPath:@"@distinctUnionOfObjects.self"];
 
     [UIView animateWithDuration:0.2 animations:^{
         self.pickerContainer.frame = CGRectMake(0, self.view.frame.size.height-200, self.view.frame.size.width, 200);
@@ -147,16 +152,16 @@ typedef enum {
 }
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component     {
-    return itemsForPicker.count;
+    return uniqueItemsForPicker.count;
 }
 
 - (nullable NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component       {
-    return itemsForPicker[row];
+    return uniqueItemsForPicker[row];
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component  {
     
-    selectedValueFromPicker = [itemsForPicker objectAtIndex:row];
+    selectedValueFromPicker = uniqueItemsForPicker[row];
     
     switch (pickertype) {
         case PickerForDocument:
@@ -194,6 +199,7 @@ typedef enum {
     
     if (textField.tag == 1000) {
         itemsForPicker = [_items valueForKey:@"doc_desc"];
+        uniqueItemsForPicker = [itemsForPicker valueForKeyPath:@"@distinctUnionOfObjects.self"];
         textField.inputView = _dataPickerView;
         
         if (pickertype != PickerForDocument) {
@@ -203,6 +209,7 @@ typedef enum {
     }
     else if (textField.tag == 1001) {
         itemsForPicker = [_items valueForKey:@"party_name"];
+        uniqueItemsForPicker = [itemsForPicker valueForKeyPath:@"@distinctUnionOfObjects.self"];
         textField.inputView = _dataPickerView;
         if (pickertype != PickerForPartyNames) {
             [_dataPickerView selectRow:0 inComponent:0 animated:YES];
