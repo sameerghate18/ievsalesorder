@@ -74,7 +74,7 @@ typedef enum
 [NSString stringWithFormat:@"%@GetItem?scocd=%@&docsr=%@&doctype=%@&partyno=%@&imloc=%@&loctype=%@",kAppBaseURL,scocd,docsr,kDefaultDocType,partyno,imloc,kDefaultLocType];  \
 
 #define GET_SUBMIT_ORDER_URL(baseURL,scocd,userid,doctype,docsr,imloc,partyno,items,mobno) \
-[NSString stringWithFormat:@"%@/SubmitOrder1?scocd=%@&userid=%@&doctype=%@&docsr=%@&partyst=%@&partyno=%@&imloc=%@&items=%@&mobno=%@",kAppBaseURL,scocd, userid, doctype, docsr, kDefaultPartySt, partyno, imloc, items, mobno]; \
+[NSString stringWithFormat:@"%@/SubmitOrder1?scocd=%@&userid=%@&doctype=%@&docsr=%@&partyst=%@&partyno=%@&imloc=%@&items=%@&mobno=%@",baseURL,scocd, userid, doctype, docsr, kDefaultPartySt, partyno, imloc, items, mobno]; \
 
 #define GET_DOC_SERIES(scocd,userid,doctype) \
 [NSString stringWithFormat:@"%@GetDocSeries?scocd=%@&userid=%@&doctype=%@",kAppBaseURL,scocd,userid,doctype];  \
