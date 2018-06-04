@@ -13,11 +13,16 @@
 @interface DropdownMenuViewController : UIViewController
 
 @property (nonatomic, strong) NSArray *items;
+@property (weak, nonatomic) IBOutlet UITableView *itemsTableview;
 @property (nonatomic, unsafe_unretained) id<DropdownMenuViewControllerDelegate>delegate;
+
+-(void)reloadFiltersTableView;
+
 @end
 
 @protocol DropdownMenuViewControllerDelegate <NSObject>
 
 -(void)dropdownMenu:(DropdownMenuViewController*)dropdown selectedItemIndex:(NSInteger)selectedIndex;
+-(void)dropdownMenu:(DropdownMenuViewController*)dropdown selectedItemIndex:(NSInteger)selectedIndex value:(NSString*)selectedValue;
 
 @end

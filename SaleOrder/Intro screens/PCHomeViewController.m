@@ -7,16 +7,16 @@
 //
 
 #import "PCHomeViewController.h"
-
-#import "PCRejectionsTableViewController.h"
-#import "PCAttendanceTableViewController.h"
-#import "PCCashFlowProjectionTableViewController.h"
-#import "PCInvoicesTableViewController.h"
-#import "PCPOSOTransactionsTableViewController.h"
+#import "LGSideMenuController.h"
+#import "UIViewController+LGSideMenuController.h"
+#import "MainViewController.h"
 #import "PCTilesCollectionCell.h"
-#import "PCPOSOHomeTableViewController.h"
-#import "PCRejectionsViewController.h"
+#import "FirstViewController.h"
+#import "SecondViewController.h"
+#import "MoreViewController.h"
 #import "AppDelegate.h"
+#import "PCSideMenuTableViewController.h"
+#import "DropdownMenuViewController.h"
 
 @interface PCHomeViewController () <UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UICollectionViewDelegate>
 {
@@ -48,9 +48,9 @@
     
     appDel = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     
-    titles = [[NSMutableArray alloc] initWithObjects:@"Daily Sales",@"Cash Flow", @"Rejections",@"Attendance",@"PO/SO Transactions",nil];
+    titles = [[NSMutableArray alloc] initWithObjects:@"Orders",@"New Order", @"About",@"Logout",nil];
     
-    images = [[NSMutableArray alloc] initWithObjects:@"dailysales-home",@"cashflow-home", @"rejections-home",@"attendance-home",@"approvals-home",nil];
+    images = [[NSMutableArray alloc] initWithObjects:@"home_orders_tile",@"home_new_order", @"home_about",@"home_logout",nil];
     
     [_userLabel setText:[NSString stringWithFormat:@"Welcome, %@",appDel.loggedUser.USER_NAME]];
     
@@ -77,15 +77,12 @@
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    return 2;
+    return 1;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    if (section == 1) {
-        return 1;
-    }
-    return titles.count-1;
+    return titles.count;
 }
 
 static NSString *reportsCell = @"reportCell";
@@ -95,64 +92,38 @@ static NSString *transactionsCell = @"transactionCell";
 {
     PCTilesCollectionCell *cell;
     
-    if (indexPath.section == 1) {
-        cell = [collectionView dequeueReusableCellWithReuseIdentifier:transactionsCell forIndexPath:indexPath];
-    }
-    else {
-        
-        cell = [collectionView dequeueReusableCellWithReuseIdentifier:reportsCell forIndexPath:indexPath];
-        
-        cell.titleLabel.text = [titles objectAtIndex:indexPath.row];
-        cell.tileImageview.image = [UIImage imageNamed:[images objectAtIndex:indexPath.row]];
-    }
+    cell = [collectionView dequeueReusableCellWithReuseIdentifier:reportsCell forIndexPath:indexPath];
+    cell.titleLabel.text = [titles objectAtIndex:indexPath.row];
+    cell.tileImageview.image = [UIImage imageNamed:[images objectAtIndex:indexPath.row]];
     
     return cell;
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 1) {
-        return CGSizeMake(225, 85);
-    }
-    
-    if (indexPath.row!=4) {
-        return  CGSizeMake(100, 100);
-    }
-    else {
-        return CGSizeMake(225, 85);
-    }
+        return CGSizeMake(100, 100);
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    UINavigationController *mainNavController = (UINavigationController*)appDel.slideViewController.mainViewController;
-    
-    if (indexPath.section == 1) {
-        
-        if( [mainNavController.topViewController isKindOfClass:[PCPOSOTransactionsTableViewController class]] )
-            [appDel.slideViewController showMainViewControllerAnimated:YES];
-        else
-        {
-            PCPOSOHomeTableViewController * poso = [kStoryboard instantiateViewControllerWithIdentifier:@"PCPOSOHomeTableViewController"];
-            [mainNavController popViewControllerAnimated:NO];
-            [mainNavController pushViewController:poso animated:NO];
-        }
-        
-        return;
-    }
+    MainViewController *mainViewController = (MainViewController *)self.sideMenuController;
+    UINavigationController *mainNavController = (UINavigationController *)mainViewController.rootViewController;
+    PCSideMenuTableViewController *leftMenuVC = [kStoryboard instantiateViewControllerWithIdentifier:@"PCSideMenuTableViewController"];
     
     switch (indexPath.row) {
         case 0:
         {
-            if( [mainNavController.topViewController isKindOfClass:[PCDailySalesViewController class]] )
+            if( [mainNavController.topViewController isKindOfClass:[FirstViewController class]] )
                 
-                [appDel.slideViewController showMainViewControllerAnimated:YES];
+                [mainViewController hideLeftViewAnimated:YES delay:0.0 completionHandler:nil];
             else
             {
-                PCDailySalesViewController * dsvc = [kStoryboard instantiateViewControllerWithIdentifier:@"PCDailySalesViewController"];
-                [mainNavController popViewControllerAnimated:NO];
-                [mainNavController pushViewController:dsvc animated:NO];
+                [mainViewController hideLeftViewAnimated:YES delay:0.0 completionHandler:nil];
+                UINavigationController *navcontroller = [kStoryboard instantiateViewControllerWithIdentifier:@"OrdersNavController"];
+                mainViewController.rootViewController = navcontroller;
+                mainViewController.leftViewController = leftMenuVC;
+                mainViewController.rightViewController = nil;
             }
         }
             
@@ -160,58 +131,38 @@ static NSString *transactionsCell = @"transactionCell";
             
         case 1:
         {
-            if( [mainNavController.topViewController isKindOfClass:[PCCashFlowProjectionTableViewController class]] )
-                [appDel.slideViewController showMainViewControllerAnimated:YES];
+            if( [mainNavController.topViewController isKindOfClass:[SecondViewController class]] )
+                [mainViewController hideLeftViewAnimated:YES delay:0.0 completionHandler:nil];
             else
             {
-                PCCashFlowProjectionTableViewController * cfpvc = [kStoryboard instantiateViewControllerWithIdentifier:@"PCCashFlowProjectionTableViewController"];
-                [mainNavController popViewControllerAnimated:NO];
-                [mainNavController pushViewController:cfpvc animated:NO];
-                //                        [appDel.slideViewController setMainViewController:cfpvc animated:YES];
+                [mainViewController hideLeftViewAnimated:YES delay:0.0 completionHandler:nil];
+                DropdownMenuViewController *rightMenuVC = [kStoryboard instantiateViewControllerWithIdentifier:@"DropdownMenuViewController"];
+                UINavigationController *navcontroller = [kStoryboard instantiateViewControllerWithIdentifier:@"CreateOrderNavController"];
+                mainViewController.rootViewController = navcontroller;
+                mainViewController.leftViewController = leftMenuVC;
+                mainViewController.rightViewController = rightMenuVC;
             }
         }
             break;
             
         case 2:
         {
-            if( [mainNavController.topViewController isKindOfClass:[PCRejectionsViewController class]] )
-                [self.navigationController.slideViewController showMainViewControllerAnimated:YES];
+            if( [mainNavController.topViewController isKindOfClass:[MoreViewController class]] )
+                [mainViewController hideLeftViewAnimated:YES delay:0.0 completionHandler:nil];
             else
             {
-                PCRejectionsTableViewController * rejvc = [kStoryboard instantiateViewControllerWithIdentifier:@"PCRejectionsViewController"];
-                [mainNavController popViewControllerAnimated:NO];
-                [mainNavController pushViewController:rejvc animated:NO];
-                //                        [appDel.slideViewController setMainViewController:rejvc animated:YES];
+                [mainViewController hideLeftViewAnimated:YES delay:0.0 completionHandler:nil];
+                UIViewController *navcontroller = [kStoryboard instantiateViewControllerWithIdentifier:@"AboutViewController"];
+                mainViewController.rootViewController = navcontroller;
+                mainViewController.leftViewController = leftMenuVC;
+                mainViewController.rightViewController = nil;
             }
         }
-            break;
-            
-        case 3:
-        {
-            if( [mainNavController.topViewController isKindOfClass:[PCAttendanceTableViewController class]] )
-                [appDel.slideViewController showMainViewControllerAnimated:YES];
-            else
-            {
-                PCAttendanceTableViewController * attVc = [kStoryboard instantiateViewControllerWithIdentifier:@"PCAttendanceTableViewController"];
-                [mainNavController popViewControllerAnimated:NO];
-                [mainNavController pushViewController:attVc animated:NO];
-                //                        [appDel.slideViewController setMainViewController:attVc animated:YES];
-            }
-        }
-            break;
-            
-        case 4:
-            if( [mainNavController.topViewController isKindOfClass:[PCPOSOTransactionsTableViewController class]] )
-                [appDel.slideViewController showMainViewControllerAnimated:YES];
-            else
-            {
-                PCPOSOHomeTableViewController * poso = [kStoryboard instantiateViewControllerWithIdentifier:@"PCPOSOHomeTableViewController"];
-                [mainNavController popViewControllerAnimated:NO];
-                [mainNavController pushViewController:poso animated:NO];
-            }
-            
             break;
     }
+    
+    mainViewController.leftViewBackgroundBlurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+    mainViewController.rightViewBackgroundBlurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section

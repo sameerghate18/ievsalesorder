@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CustomTextInputViewController">
+            <connections>
+                <outlet property="dropdownPicker" destination="Avi-oQ-5DX" id="ckU-B8-9Hz"/>
+                <outlet property="inputAccessory" destination="ahZ-me-WgR" id="rga-nV-Int"/>
+                <outlet property="searchBar" destination="gn8-Th-Igr" id="t0q-Oh-c1f"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="375"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Avi-oQ-5DX">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="375"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="HEb-BG-zD5"/>
+                        <outlet property="delegate" destination="-1" id="njf-cc-JPc"/>
+                    </connections>
+                </pickerView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="Avi-oQ-5DX" firstAttribute="trailing" secondItem="Q5M-cg-NOt" secondAttribute="trailing" id="7TZ-Zg-uvT"/>
+                <constraint firstItem="Avi-oQ-5DX" firstAttribute="bottom" secondItem="Q5M-cg-NOt" secondAttribute="bottom" id="sEh-OL-7ys"/>
+                <constraint firstItem="Avi-oQ-5DX" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="wDQ-9b-jHq"/>
+                <constraint firstItem="Avi-oQ-5DX" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" id="y3n-Bz-2z9"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
+            <point key="canvasLocation" x="55.5" y="160.5"/>
+        </view>
+        <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="ahZ-me-WgR">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+            <items>
+                <barButtonItem style="plain" id="IAh-fY-pZK">
+                    <searchBar key="customView" contentMode="redraw" placeholder="Search here" showsSearchResultsButton="YES" showsCancelButton="YES" id="gn8-Th-Igr">
+                        <rect key="frame" x="16" y="0.0" width="273" height="44"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                        <textInputTraits key="textInputTraits"/>
+                        <connections>
+                            <outlet property="delegate" destination="-1" id="4La-WY-TxU"/>
+                        </connections>
+                    </searchBar>
+                </barButtonItem>
+                <barButtonItem title="Select" width="85.5" id="Y2F-4u-xQL">
+                    <connections>
+                        <action selector="selectButtonAction:" destination="-1" id="A7e-FG-R5Z"/>
+                    </connections>
+                </barButtonItem>
+            </items>
+            <connections>
+                <outlet property="delegate" destination="-1" id="DOs-at-46b"/>
+            </connections>
+            <point key="canvasLocation" x="56" y="-114"/>
+        </toolbar>
+    </objects>
+</document>

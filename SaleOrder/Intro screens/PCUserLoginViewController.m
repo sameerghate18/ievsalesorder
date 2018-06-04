@@ -17,6 +17,7 @@
 #import "PCDeviceRegisterModel.h"
 #import "PCDeviceRegisterCheckModel.h"
 #import "PCUpdateMobileNumberViewController.h"
+#import "PCSideMenuTableViewController.h"
 
 @interface PCUserLoginViewController () <UITableViewDelegate,UITableViewDataSource, UITextFieldDelegate, ConnectionHandlerDelegate,PCUpdateMobileNumberViewControllerDelegate>
 {
@@ -227,7 +228,7 @@
         
         dispatch_async(dispatch_get_main_queue(), ^{
             
-            if ([outputString  caseInsensitiveCompare:@"IEV001"] == NSOrderedSame) {
+            if ([outputString  caseInsensitiveCompare:@"IEVC001"] == NSOrderedSame) {
                 
                 loginFound =  NO;
                 
@@ -238,7 +239,7 @@
                 }]];
                 [self presentViewController:alert animated:YES completion:nil];
             }
-            else if ([outputString caseInsensitiveCompare:@"IEV002"] == NSOrderedSame) {
+            else if ([outputString caseInsensitiveCompare:@"IEVC002"] == NSOrderedSame) {
                 
                 loginFound =  NO;
                 
@@ -249,7 +250,7 @@
                 }]];
                 [self presentViewController:alert animated:YES completion:nil];
             }
-            else if ([outputString caseInsensitiveCompare:@"IEV003"] == NSOrderedSame) {
+            else if ([outputString caseInsensitiveCompare:@"IEVC003"] == NSOrderedSame) {
                 
                 loginFound =  NO;
                 
@@ -509,11 +510,19 @@
 
 -(void)pushToHomePage
 {
-    
+    /*
     UITabBarController *homeVC = (UITabBarController*)[kStoryboard instantiateViewControllerWithIdentifier:@"TabBarController"];
     homeVC.delegate = appDel;
     appDel.window.rootViewController = homeVC;
     [appDel.window makeKeyAndVisible];
+     */
+    
+    PCSideMenuTableViewController *sideView = (PCSideMenuTableViewController*) appDel.slideViewController.leftViewController;
+    [sideView setuserName];
+    
+    PCHomeViewController *homeVC = [kStoryboard instantiateViewControllerWithIdentifier:@"PCHomeViewController"];
+    
+    [self.navigationController pushViewController:homeVC animated:YES];
 }
 
 -(void)connectionHandler:(ConnectionHandler*)conHandler errorRecievingData:(NSError*)error

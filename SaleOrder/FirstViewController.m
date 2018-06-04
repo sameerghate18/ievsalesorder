@@ -11,6 +11,10 @@
 #import "DropdownMenuViewController.h"
 #import "ConnectionHandler.h"
 #import "AppDelegate.h"
+#import "CustomTextInputViewController.h"
+#import "LGSideMenuController.h"
+#import "UIViewController+LGSideMenuController.h"
+#import "MainViewController.h"
 
 static NSString *dropdownIdentifier = @"dropdownIdentifier";
 static NSString *textfieldIdentifer = @"textfieldIdentifer";
@@ -127,6 +131,10 @@ typedef enum {
     _dataPickerView.delegate = self;
     
     itemsForPicker = [[NSArray alloc] init];
+    
+    MainViewController *mainViewController = (MainViewController *)self.sideMenuController;
+    mainViewController.rightViewSwipeGestureEnabled = FALSE;
+    mainViewController.rootViewCoverColorForRightView= [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.5];
     
     [self getDocSeries];
     totalAmount = 0;
@@ -425,9 +433,10 @@ typedef enum {
     return YES;
 }
 
-- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField    {
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
     
     currentTextfield = nil;
+    MainViewController *mainViewController = (MainViewController *)self.sideMenuController;
     
     if (textField.tag == 1000) {
         itemsForPicker = [_itemsArray valueForKey:@"imCode"];
@@ -435,24 +444,28 @@ typedef enum {
             [_dataPickerView selectRow:0 inComponent:0 animated:YES];
         }
         dropdownFor = DropDownForItemNames;
-        textField.inputView = _dataPickerView;
+//        textField.inputView = _dataPickerView;
     }
     else if (textField.tag == 1001) {
          itemsForPicker = [self.documentsArray valueForKey:@"docDescription"];
         
-        if (dropdownFor != DropDownForDocSeries) {
-            [_dataPickerView selectRow:0 inComponent:0 animated:YES];
-        }
+//        CustomTextInputViewController *input = [[CustomTextInputViewController alloc] initWithNibName:@"CustomTextInputViewController" bundle:[NSBundle mainBundle]];
+//        input.items = itemsForPicker;
+//        textField.inputView = input.view;
+//        textField.inputAccessoryView = input.inputAccessory;
+//        if (dropdownFor != DropDownForDocSeries) {
+//            [_dataPickerView selectRow:0 inComponent:0 animated:YES];
+//        }
         dropdownFor = DropDownForDocSeries;
-        textField.inputView = _dataPickerView;
+//        textField.inputView = _dataPickerView;
     }
     else if (textField.tag == 1002) {
          itemsForPicker = [self.partyNamesArray valueForKey:@"partyName"];
-        if (dropdownFor != DropDownForPartyNames) {
-            [_dataPickerView selectRow:0 inComponent:0 animated:YES];
-        }
+//        if (dropdownFor != DropDownForPartyNames) {
+//            [_dataPickerView selectRow:0 inComponent:0 animated:YES];
+//        }
         dropdownFor = DropDownForPartyNames;
-        textField.inputView = _dataPickerView;
+//        textField.inputView = _dataPickerView;
         
         if (!selectedDocument) {
             UIAlertController *msgActionSheet = [UIAlertController alertControllerWithTitle:nil message:@"Select document series first." preferredStyle:UIAlertControllerStyleAlert];
@@ -461,13 +474,21 @@ typedef enum {
             }]];
             
             [self presentViewController:msgActionSheet animated:YES completion:NULL];
-            
             return NO;
         }
     }
-    [_dataPickerView reloadAllComponents];
+//    [_dataPickerView reloadAllComponents];
         currentTextfield = textField;
-    return YES;
+    
+    DropdownMenuViewController *destVC = (DropdownMenuViewController*)mainViewController.rightViewController;
+    destVC.delegate = self;
+    destVC.items = itemsForPicker;
+    [destVC reloadFiltersTableView];
+    
+    [mainViewController showRightViewAnimated:nil];
+    
+//    [self performSegueWithIdentifier:@"newtodropdown" sender:itemsForPicker];
+    return NO;
 }
 
 
@@ -782,6 +803,9 @@ typedef enum {
         destVC.delegate = self;
         destVC.items = (NSArray*)sender;
         destVC.title = @"Select a document series";
+        self.definesPresentationContext = YES;
+        destVC.view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.3]; // can be with 'alpha'
+        destVC.modalPresentationStyle = UIModalPresentationCurrentContext;
     }
     
 }
@@ -811,22 +835,43 @@ typedef enum {
     }];
 }
 
--(void)dropdownMenu:(DropdownMenuViewController *)dropdown selectedItemIndex:(NSInteger)selectedIndex {
+-(void)dropdownMenu:(DropdownMenuViewController*)dropdown selectedItemIndex:(NSInteger)selectedIndex value:(NSString*)selectedValue {
     
-    if (dropdownFor == DropDownForDocSeries) {
-        selectedDocument = self.documentsArray[selectedIndex];
-        
-//        selectedValueFromPicker = selectedDocument.docDescription;
-        selectedDocSR = selectedDocument.documentSR;
-        
-        [self getPartyNames];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        MainViewController *mainViewController = (MainViewController *)self.sideMenuController;
+        [mainViewController hideLeftViewAnimated];
+    });
+    
+     currentTextfield.text = selectedValue;
+    
+    switch (dropdownFor) {
+        case DropDownForDocSeries:
+            selectedDocument = self.documentsArray[selectedIndex];
+            selectedDocSR = selectedDocument.documentSR;
+            [self getPartyNames];
+            selectedParty = nil;
+            break;
+            
+        case DropDownForPartyNames:
+            selectedParty = self.partyNamesArray[selectedIndex];
+            [self getItems];
+            break;
+            
+        case DropDownForItemNames:
+        {
+            ItemModel *selItem = _itemsArray[selectedIndex];
+            selectedValueFromPicker = _itemCodeArray[selectedIndex];
+            currentTextfield.text = selectedValueFromPicker;
+            selectedItemRate = selItem.imSaleRate;
+            rateTextfield.text = [Utility stringWithCurrencySymbolForValue:selectedItemRate forCurrencyCode:DEFAULT_CURRENCY_CODE];
+        }
+            break;
+            
+        default:
+            break;
     }
-    else if (dropdownFor == DropDownForPartyNames)  {
-        
-        selectedParty = self.partyNamesArray[selectedIndex];
-        selectedParty = selectedDocument.partyModelsArray[selectedIndex];
-        [self getItems];
-    }
+    
+    currentTextfield.text = selectedValueFromPicker = itemsForPicker[selectedIndex];
     
     [_inputTableview reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
 }
@@ -897,10 +942,10 @@ typedef enum {
     return tView;
 }
 
-#pragma mark - 
+#pragma mark -
 
 -(IBAction)placeOrderAction:(id)sender  {
-
+    
     if (orderItems.count == 0) {
         
         UIAlertController *noItemAlert = [UIAlertController alertControllerWithTitle:@"No items added in the order." message:nil preferredStyle:UIAlertControllerStyleAlert];
@@ -1003,10 +1048,11 @@ typedef enum {
     [confirmResetAlert addAction:[UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
         
         [confirmResetAlert dismissViewControllerAnimated:YES completion:^{
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self clearFields];
-            });
+            //            dispatch_async(dispatch_get_main_queue(), ^{
+            
+            //            });
         }];
+        [self clearFields];
     }]];
     
     [confirmResetAlert addAction:[UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {

@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 #import "SSKeychain.h"
+#import "PCSideMenuTableViewController.h"
+#import "MainViewController.h"
 
 #define kAppIdentiier @"com.pcsofterp.IEV"
 #define kAppKeychainIdentifier @"appUniqueCode"
@@ -20,16 +22,13 @@
 
 - (void)instantiateAppFlowWithNavController:(UINavigationController *)rootNav
 {
+    MainViewController *mainViewController = [kStoryboard instantiateViewControllerWithIdentifier:@"MainViewController"];
+    [mainViewController setupWithType:2];
+    mainViewController.rootViewController = rootNav;
+    mainViewController.leftViewWidth = self.window.rootViewController.view.frame.size.width*0.75;
+    mainViewController.rightViewWidth = self.window.rootViewController.view.frame.size.width*0.75;
     
-//    UITabBarController *homeVC = (UITabBarController*)[kStoryboard instantiateViewControllerWithIdentifier:@"TabBarController"];
-    
-//    PCSideMenuTableViewController *pcsvc = [kStoryboard instantiateViewControllerWithIdentifier:@"PCSideMenuTableViewController"];
-//    
-//    _slideViewController = [[MKDSlideViewController alloc] initWithMainViewController:rootNav];
-//    _slideViewController.leftViewController = pcsvc;
-//    _slideViewController.rightViewController = nil;
-    
-    self.window.rootViewController = rootNav;
+    self.window.rootViewController = mainViewController;
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {

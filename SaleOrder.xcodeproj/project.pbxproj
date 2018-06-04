@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		424644A71FD07DDC000B53BD /* MoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 424644A61FD07DDC000B53BD /* MoreViewController.m */; };
 		424C90531E47907000F41DD2 /* SONewOrderItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 424C90521E47907000F41DD2 /* SONewOrderItem.m */; };
+		4255F47F20B97C0B00AFCF37 /* PCSideMenuTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4255F47D20B97C0A00AFCF37 /* PCSideMenuTableViewController.m */; };
+		4255F48220BA548700AFCF37 /* PCHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4255F48120BA548700AFCF37 /* PCHomeViewController.m */; };
+		4255F48620BAAD4700AFCF37 /* PCTilesCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4255F48520BAAD4700AFCF37 /* PCTilesCollectionCell.m */; };
 		428A8EB11CEE282A00DE96C7 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 428A8EA51CEE282A00DE96C7 /* AFHTTPSessionManager.m */; };
 		428A8EB21CEE282A00DE96C7 /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 428A8EA81CEE282A00DE96C7 /* AFNetworkReachabilityManager.m */; };
 		428A8EB31CEE282A00DE96C7 /* AFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = 428A8EAA1CEE282A00DE96C7 /* AFSecurityPolicy.m */; };
@@ -36,6 +39,8 @@
 		42AC7DD91E4ED06E00C58360 /* ItemListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42AC7DD81E4ED06E00C58360 /* ItemListViewController.m */; };
 		42AC7DDC1E4ED09E00C58360 /* ItemDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42AC7DDB1E4ED09E00C58360 /* ItemDetailViewController.m */; };
 		42AC7DDF1E4F384600C58360 /* OrderHistoryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 42AC7DDE1E4F384600C58360 /* OrderHistoryModel.m */; };
+		42AF09CD1FF77C9500C6AFB3 /* CustomTextInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42AF09CB1FF77C9400C6AFB3 /* CustomTextInputViewController.m */; };
+		42AF09CE1FF77C9500C6AFB3 /* CustomTextInputViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42AF09CC1FF77C9400C6AFB3 /* CustomTextInputViewController.xib */; };
 		42B0896D1D088C9B00C62D60 /* IOTBackendNetworker.m in Sources */ = {isa = PBXBuildFile; fileRef = 42B0896C1D088C9B00C62D60 /* IOTBackendNetworker.m */; };
 		42C2AEE51E4E3D5000071DA6 /* OrderItemDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42C2AEE41E4E3D5000071DA6 /* OrderItemDetailsViewController.m */; };
 		42C3AE0A1E52B13E00D7F64B /* TwoLineCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 42C3AE091E52B13E00D7F64B /* TwoLineCellTableViewCell.m */; };
@@ -44,6 +49,14 @@
 		42D4E44D1E55478100E18110 /* RefineOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42D4E44C1E55478100E18110 /* RefineOrderViewController.m */; };
 		42D4E4501E554C0200E18110 /* SearchCriteriaModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 42D4E44F1E554C0200E18110 /* SearchCriteriaModel.m */; };
 		42D89A061E53605A00429600 /* OrderHistoryDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 42D89A051E53605A00429600 /* OrderHistoryDetailModel.m */; };
+		42EBA2C720BF86C000E8F5C1 /* UINavigationController+ExtraMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 42EBA2C620BF86C000E8F5C1 /* UINavigationController+ExtraMethods.m */; };
+		42EF1A6720BDC93D004314B1 /* LGSideMenuHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 42EF1A5E20BDC93D004314B1 /* LGSideMenuHelper.m */; };
+		42EF1A6820BDC93D004314B1 /* LGSideMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 42EF1A6020BDC93D004314B1 /* LGSideMenuView.m */; };
+		42EF1A6920BDC93D004314B1 /* LGSideMenuSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 42EF1A6120BDC93D004314B1 /* LGSideMenuSegue.m */; };
+		42EF1A6A20BDC93D004314B1 /* LGSideMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42EF1A6220BDC93D004314B1 /* LGSideMenuController.m */; };
+		42EF1A6B20BDC93D004314B1 /* LGSideMenuGesturesHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 42EF1A6320BDC93D004314B1 /* LGSideMenuGesturesHandler.m */; };
+		42EF1A6C20BDC93D004314B1 /* UIViewController+LGSideMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42EF1A6420BDC93D004314B1 /* UIViewController+LGSideMenuController.m */; };
+		42EF1A6D20BDC93D004314B1 /* LGSideMenuBorderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 42EF1A6620BDC93D004314B1 /* LGSideMenuBorderView.m */; };
 		42EF79A51CE0EBD000A055A9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 42EF79A41CE0EBD000A055A9 /* main.m */; };
 		42EF79A81CE0EBD000A055A9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 42EF79A71CE0EBD000A055A9 /* AppDelegate.m */; };
 		42EF79AB1CE0EBD000A055A9 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42EF79AA1CE0EBD000A055A9 /* FirstViewController.m */; };
@@ -51,6 +64,7 @@
 		42EF79B11CE0EBD000A055A9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42EF79AF1CE0EBD000A055A9 /* Main.storyboard */; };
 		42EF79B31CE0EBD000A055A9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42EF79B21CE0EBD000A055A9 /* Assets.xcassets */; };
 		42EF79B61CE0EBD000A055A9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42EF79B41CE0EBD000A055A9 /* LaunchScreen.storyboard */; };
+		42FA30BF20BE3D3700EB0B66 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42FA30BD20BE3D3700EB0B66 /* MainViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +72,12 @@
 		424644A61FD07DDC000B53BD /* MoreViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MoreViewController.m; sourceTree = "<group>"; };
 		424C90511E47907000F41DD2 /* SONewOrderItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SONewOrderItem.h; sourceTree = "<group>"; };
 		424C90521E47907000F41DD2 /* SONewOrderItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SONewOrderItem.m; sourceTree = "<group>"; };
+		4255F47D20B97C0A00AFCF37 /* PCSideMenuTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCSideMenuTableViewController.m; sourceTree = "<group>"; };
+		4255F47E20B97C0A00AFCF37 /* PCSideMenuTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCSideMenuTableViewController.h; sourceTree = "<group>"; };
+		4255F48020BA548600AFCF37 /* PCHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCHomeViewController.h; sourceTree = "<group>"; };
+		4255F48120BA548700AFCF37 /* PCHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCHomeViewController.m; sourceTree = "<group>"; };
+		4255F48420BAAD4700AFCF37 /* PCTilesCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCTilesCollectionCell.h; sourceTree = "<group>"; };
+		4255F48520BAAD4700AFCF37 /* PCTilesCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCTilesCollectionCell.m; sourceTree = "<group>"; };
 		428A8EA41CEE282A00DE96C7 /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPSessionManager.h; sourceTree = "<group>"; };
 		428A8EA51CEE282A00DE96C7 /* AFHTTPSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPSessionManager.m; sourceTree = "<group>"; };
 		428A8EA61CEE282A00DE96C7 /* AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworking.h; sourceTree = "<group>"; };
@@ -115,6 +135,9 @@
 		42AC7DDB1E4ED09E00C58360 /* ItemDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemDetailViewController.m; sourceTree = "<group>"; };
 		42AC7DDD1E4F384600C58360 /* OrderHistoryModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderHistoryModel.h; sourceTree = "<group>"; };
 		42AC7DDE1E4F384600C58360 /* OrderHistoryModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderHistoryModel.m; sourceTree = "<group>"; };
+		42AF09CA1FF77C9400C6AFB3 /* CustomTextInputViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CustomTextInputViewController.h; path = SaleOrder/CustomTextInputViewController.h; sourceTree = SOURCE_ROOT; };
+		42AF09CB1FF77C9400C6AFB3 /* CustomTextInputViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = CustomTextInputViewController.m; path = SaleOrder/CustomTextInputViewController.m; sourceTree = SOURCE_ROOT; };
+		42AF09CC1FF77C9400C6AFB3 /* CustomTextInputViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = CustomTextInputViewController.xib; path = SaleOrder/CustomTextInputViewController.xib; sourceTree = SOURCE_ROOT; };
 		42B0896B1D088C9B00C62D60 /* IOTBackendNetworker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IOTBackendNetworker.h; sourceTree = "<group>"; };
 		42B0896C1D088C9B00C62D60 /* IOTBackendNetworker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IOTBackendNetworker.m; sourceTree = "<group>"; };
 		42C2AEE31E4E3D5000071DA6 /* OrderItemDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderItemDetailsViewController.h; sourceTree = "<group>"; };
@@ -130,6 +153,22 @@
 		42D4E44F1E554C0200E18110 /* SearchCriteriaModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchCriteriaModel.m; sourceTree = "<group>"; };
 		42D89A041E53605A00429600 /* OrderHistoryDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderHistoryDetailModel.h; sourceTree = "<group>"; };
 		42D89A051E53605A00429600 /* OrderHistoryDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderHistoryDetailModel.m; sourceTree = "<group>"; };
+		42EBA2C520BF86C000E8F5C1 /* UINavigationController+ExtraMethods.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+ExtraMethods.h"; sourceTree = "<group>"; };
+		42EBA2C620BF86C000E8F5C1 /* UINavigationController+ExtraMethods.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+ExtraMethods.m"; sourceTree = "<group>"; };
+		42EF1A5920BDC93D004314B1 /* LGSideMenuSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGSideMenuSegue.h; sourceTree = "<group>"; };
+		42EF1A5A20BDC93D004314B1 /* LGSideMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGSideMenuView.h; sourceTree = "<group>"; };
+		42EF1A5B20BDC93D004314B1 /* LGSideMenuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGSideMenuController.h; sourceTree = "<group>"; };
+		42EF1A5C20BDC93D004314B1 /* LGSideMenuGesturesHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGSideMenuGesturesHandler.h; sourceTree = "<group>"; };
+		42EF1A5D20BDC93D004314B1 /* LGSideMenuBorderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGSideMenuBorderView.h; sourceTree = "<group>"; };
+		42EF1A5E20BDC93D004314B1 /* LGSideMenuHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGSideMenuHelper.m; sourceTree = "<group>"; };
+		42EF1A5F20BDC93D004314B1 /* UIViewController+LGSideMenuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+LGSideMenuController.h"; sourceTree = "<group>"; };
+		42EF1A6020BDC93D004314B1 /* LGSideMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGSideMenuView.m; sourceTree = "<group>"; };
+		42EF1A6120BDC93D004314B1 /* LGSideMenuSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGSideMenuSegue.m; sourceTree = "<group>"; };
+		42EF1A6220BDC93D004314B1 /* LGSideMenuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGSideMenuController.m; sourceTree = "<group>"; };
+		42EF1A6320BDC93D004314B1 /* LGSideMenuGesturesHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGSideMenuGesturesHandler.m; sourceTree = "<group>"; };
+		42EF1A6420BDC93D004314B1 /* UIViewController+LGSideMenuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+LGSideMenuController.m"; sourceTree = "<group>"; };
+		42EF1A6520BDC93D004314B1 /* LGSideMenuHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGSideMenuHelper.h; sourceTree = "<group>"; };
+		42EF1A6620BDC93D004314B1 /* LGSideMenuBorderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGSideMenuBorderView.m; sourceTree = "<group>"; };
 		42EF79A01CE0EBD000A055A9 /* SaleOrder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SaleOrder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		42EF79A41CE0EBD000A055A9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		42EF79A61CE0EBD000A055A9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -142,6 +181,8 @@
 		42EF79B21CE0EBD000A055A9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		42EF79B51CE0EBD000A055A9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		42EF79B71CE0EBD000A055A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		42FA30BD20BE3D3700EB0B66 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		42FA30BE20BE3D3700EB0B66 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,6 +197,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4255F47C20B97C0A00AFCF37 /* Side Menu */ = {
+			isa = PBXGroup;
+			children = (
+				4255F47D20B97C0A00AFCF37 /* PCSideMenuTableViewController.m */,
+				4255F47E20B97C0A00AFCF37 /* PCSideMenuTableViewController.h */,
+			);
+			path = "Side Menu";
+			sourceTree = "<group>";
+		};
+		4255F48320BAAD4700AFCF37 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				4255F48420BAAD4700AFCF37 /* PCTilesCollectionCell.h */,
+				4255F48520BAAD4700AFCF37 /* PCTilesCollectionCell.m */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
 		428A8EA31CEE282A00DE96C7 /* AFNetworking */ = {
 			isa = PBXGroup;
 			children = (
@@ -189,8 +248,13 @@
 				4298E14A1CEB8171004CAAD6 /* PCUserLoginViewController.m */,
 				4298E14B1CEB8171004CAAD6 /* PCViewController.h */,
 				4298E14C1CEB8171004CAAD6 /* PCViewController.m */,
+				4255F48020BA548600AFCF37 /* PCHomeViewController.h */,
+				4255F48120BA548700AFCF37 /* PCHomeViewController.m */,
 				42C6CB351E4ABE84005397CF /* DropdownMenuViewController.h */,
 				42C6CB361E4ABE84005397CF /* DropdownMenuViewController.m */,
+				42AF09CA1FF77C9400C6AFB3 /* CustomTextInputViewController.h */,
+				42AF09CB1FF77C9400C6AFB3 /* CustomTextInputViewController.m */,
+				42AF09CC1FF77C9400C6AFB3 /* CustomTextInputViewController.xib */,
 			);
 			path = "Intro screens";
 			sourceTree = "<group>";
@@ -286,6 +350,27 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		42EF1A5820BDC93C004314B1 /* LGSideMenuController */ = {
+			isa = PBXGroup;
+			children = (
+				42EF1A5920BDC93D004314B1 /* LGSideMenuSegue.h */,
+				42EF1A5A20BDC93D004314B1 /* LGSideMenuView.h */,
+				42EF1A5B20BDC93D004314B1 /* LGSideMenuController.h */,
+				42EF1A5C20BDC93D004314B1 /* LGSideMenuGesturesHandler.h */,
+				42EF1A5D20BDC93D004314B1 /* LGSideMenuBorderView.h */,
+				42EF1A5E20BDC93D004314B1 /* LGSideMenuHelper.m */,
+				42EF1A5F20BDC93D004314B1 /* UIViewController+LGSideMenuController.h */,
+				42EF1A6020BDC93D004314B1 /* LGSideMenuView.m */,
+				42EF1A6120BDC93D004314B1 /* LGSideMenuSegue.m */,
+				42EF1A6220BDC93D004314B1 /* LGSideMenuController.m */,
+				42EF1A6320BDC93D004314B1 /* LGSideMenuGesturesHandler.m */,
+				42EF1A6420BDC93D004314B1 /* UIViewController+LGSideMenuController.m */,
+				42EF1A6520BDC93D004314B1 /* LGSideMenuHelper.h */,
+				42EF1A6620BDC93D004314B1 /* LGSideMenuBorderView.m */,
+			);
+			path = LGSideMenuController;
+			sourceTree = "<group>";
+		};
 		42EF79971CE0EBD000A055A9 = {
 			isa = PBXGroup;
 			children = (
@@ -308,6 +393,10 @@
 		42EF79A21CE0EBD000A055A9 /* SaleOrder */ = {
 			isa = PBXGroup;
 			children = (
+				42FA30BC20BE3D3700EB0B66 /* MainViewController */,
+				42EF1A5820BDC93C004314B1 /* LGSideMenuController */,
+				4255F48320BAAD4700AFCF37 /* Home */,
+				4255F47C20B97C0A00AFCF37 /* Side Menu */,
 				4298E1651CEB84CF004CAAD6 /* Utils */,
 				4298E1551CEB84C4004CAAD6 /* Models */,
 				4298E1401CEB8171004CAAD6 /* Intro screens */,
@@ -334,6 +423,8 @@
 				42D4E44C1E55478100E18110 /* RefineOrderViewController.m */,
 				424644A51FD07DDC000B53BD /* MoreViewController.h */,
 				424644A61FD07DDC000B53BD /* MoreViewController.m */,
+				42EBA2C520BF86C000E8F5C1 /* UINavigationController+ExtraMethods.h */,
+				42EBA2C620BF86C000E8F5C1 /* UINavigationController+ExtraMethods.m */,
 			);
 			path = SaleOrder;
 			sourceTree = "<group>";
@@ -344,6 +435,15 @@
 				42EF79A41CE0EBD000A055A9 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		42FA30BC20BE3D3700EB0B66 /* MainViewController */ = {
+			isa = PBXGroup;
+			children = (
+				42FA30BD20BE3D3700EB0B66 /* MainViewController.m */,
+				42FA30BE20BE3D3700EB0B66 /* MainViewController.h */,
+			);
+			path = MainViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -408,6 +508,7 @@
 				42EF79B31CE0EBD000A055A9 /* Assets.xcassets in Resources */,
 				42EF79B11CE0EBD000A055A9 /* Main.storyboard in Resources */,
 				4298E1781CEB84CF004CAAD6 /* SVProgressHUD.bundle in Resources */,
+				42AF09CE1FF77C9500C6AFB3 /* CustomTextInputViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -418,18 +519,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4255F48220BA548700AFCF37 /* PCHomeViewController.m in Sources */,
 				4298E1511CEB8171004CAAD6 /* PCUserLoginViewController.m in Sources */,
 				4298E1621CEB84C4004CAAD6 /* PCDeviceRegisterCheckModel.m in Sources */,
+				42EF1A6B20BDC93D004314B1 /* LGSideMenuGesturesHandler.m in Sources */,
 				42EF79AE1CE0EBD000A055A9 /* SecondViewController.m in Sources */,
 				4298E14D1CEB8171004CAAD6 /* PCAccessCodeViewController.m in Sources */,
 				428A8EB31CEE282A00DE96C7 /* AFSecurityPolicy.m in Sources */,
+				42FA30BF20BE3D3700EB0B66 /* MainViewController.m in Sources */,
 				4298E1771CEB84CF004CAAD6 /* MarqueeLabel.m in Sources */,
 				428A8EB11CEE282A00DE96C7 /* AFHTTPSessionManager.m in Sources */,
+				4255F47F20B97C0B00AFCF37 /* PCSideMenuTableViewController.m in Sources */,
 				424644A71FD07DDC000B53BD /* MoreViewController.m in Sources */,
 				4298E1611CEB84C4004CAAD6 /* PCDeviceLicenseModel.m in Sources */,
 				42D4E44D1E55478100E18110 /* RefineOrderViewController.m in Sources */,
 				42C6CB371E4ABE84005397CF /* DropdownMenuViewController.m in Sources */,
 				4298E17D1CEB8528004CAAD6 /* ConnectionHandler.m in Sources */,
+				42EF1A6820BDC93D004314B1 /* LGSideMenuView.m in Sources */,
 				4298E1791CEB84CF004CAAD6 /* SVProgressHUD.m in Sources */,
 				42EF79A81CE0EBD000A055A9 /* AppDelegate.m in Sources */,
 				42C2AEE51E4E3D5000071DA6 /* OrderItemDetailsViewController.m in Sources */,
@@ -439,23 +545,31 @@
 				4298E1501CEB8171004CAAD6 /* PCUpdateMobileNumberViewController.m in Sources */,
 				4298E1751CEB84CF004CAAD6 /* SSKeychain.m in Sources */,
 				424C90531E47907000F41DD2 /* SONewOrderItem.m in Sources */,
+				42EF1A6D20BDC93D004314B1 /* LGSideMenuBorderView.m in Sources */,
+				4255F48620BAAD4700AFCF37 /* PCTilesCollectionCell.m in Sources */,
 				4298E17A1CEB84CF004CAAD6 /* Utility.m in Sources */,
 				4298E1641CEB84C4004CAAD6 /* PCUserModel.m in Sources */,
 				42AC7DDF1E4F384600C58360 /* OrderHistoryModel.m in Sources */,
+				42EF1A6A20BDC93D004314B1 /* LGSideMenuController.m in Sources */,
 				42D89A061E53605A00429600 /* OrderHistoryDetailModel.m in Sources */,
+				42EBA2C720BF86C000E8F5C1 /* UINavigationController+ExtraMethods.m in Sources */,
+				42AF09CD1FF77C9500C6AFB3 /* CustomTextInputViewController.m in Sources */,
 				428A8EB41CEE282A00DE96C7 /* AFURLRequestSerialization.m in Sources */,
 				428A8EB61CEE282A00DE96C7 /* AFURLSessionManager.m in Sources */,
+				42EF1A6920BDC93D004314B1 /* LGSideMenuSegue.m in Sources */,
 				42D4E4501E554C0200E18110 /* SearchCriteriaModel.m in Sources */,
 				428A8EB51CEE282A00DE96C7 /* AFURLResponseSerialization.m in Sources */,
 				42C3AE0A1E52B13E00D7F64B /* TwoLineCellTableViewCell.m in Sources */,
 				428A8EB21CEE282A00DE96C7 /* AFNetworkReachabilityManager.m in Sources */,
 				42B0896D1D088C9B00C62D60 /* IOTBackendNetworker.m in Sources */,
 				4298E1761CEB84CF004CAAD6 /* SSKeychainQuery.m in Sources */,
+				42EF1A6C20BDC93D004314B1 /* UIViewController+LGSideMenuController.m in Sources */,
 				4298E14E1CEB8171004CAAD6 /* PCDemoViewController.m in Sources */,
 				42EF79A51CE0EBD000A055A9 /* main.m in Sources */,
 				4298E1631CEB84C4004CAAD6 /* PCDeviceRegisterModel.m in Sources */,
 				42AC7DD91E4ED06E00C58360 /* ItemListViewController.m in Sources */,
 				4298E1601CEB84C4004CAAD6 /* PCCompanyModel.m in Sources */,
+				42EF1A6720BDC93D004314B1 /* LGSideMenuHelper.m in Sources */,
 				4298E1521CEB8171004CAAD6 /* PCViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

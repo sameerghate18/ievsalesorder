@@ -8,11 +8,15 @@
 
 #import "DropdownMenuViewController.h"
 
-@interface DropdownMenuViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface DropdownMenuViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
 
 {
     int currentCheckmarkIndex;
+    NSString *selectedValue;
 }
+
+@property (nonatomic, strong) NSArray *searchResult;
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 
 @end
 
@@ -21,6 +25,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.searchResult = self.items;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -28,9 +33,14 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)reloadFiltersTableView {
+    self.searchResult = self.items;
+    [self.itemsTableview reloadData];
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section    {
     
-    return _items.count;
+    return self.searchResult.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath  {
@@ -38,12 +48,13 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"identifier"];
     
     if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"identifier"];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"identifier"];
         cell.backgroundColor = [UIColor clearColor];
         cell.textLabel.textColor = [UIColor blackColor];
+        cell.textLabel.font = [UIFont systemFontOfSize:13];
     }
     
-    cell.textLabel.text = _items[indexPath.row];
+    cell.detailTextLabel.text = self.searchResult[indexPath.row];
     
     return cell;
 }
@@ -51,19 +62,59 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     cell.accessoryType = UITableViewCellAccessoryCheckmark;
-    
-    if ([_delegate respondsToSelector:@selector(dropdownMenu:selectedItemIndex:)]) {
-        [_delegate dropdownMenu:self selectedItemIndex:indexPath.row];
+    selectedValue = [self.searchResult objectAtIndex:indexPath.row];
+    if ([_delegate respondsToSelector:@selector(dropdownMenu:selectedItemIndex:value:)]) {
+        [_delegate dropdownMenu:self selectedItemIndex:indexPath.row value:selectedValue];
     }
-    
-    [self dismissViewControllerAnimated:YES completion:NULL];
-    
 }
 
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath   {
     
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     cell.accessoryType = UITableViewCellAccessoryNone;
+}
+
+#pragma mark - Search delegate methods
+
+- (void)filterContentForSearchText:(NSString*)searchText
+{
+    NSPredicate *resultPredicate = [NSPredicate
+                                    predicateWithFormat:@"SELF CONTAINS %@",
+                                    searchText];
+    
+    self.searchResult = [_items filteredArrayUsingPredicate:resultPredicate];
+    [self.itemsTableview reloadData];
+}
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
+{
+    if (searchBar.text.length == 0) {
+        self.searchResult = self.items;
+        [self.itemsTableview reloadData];
+    }
+    else {
+        [self filterContentForSearchText:searchBar.text];
+    }
+}
+
+-(IBAction)selectButtonAction:(id)sender    {
+   
+    if ([_delegate respondsToSelector:@selector(dropdownMenu:selectedItemIndex:value:)]) {
+        
+        NSInteger index = [self.items indexOfObject:selectedValue];
+        [_delegate dropdownMenu:self selectedItemIndex:index value:selectedValue];
+    }
+    
+    [self dismissViewControllerAnimated:YES completion:NULL];
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    
+}
+
+-(IBAction)dimissView:(id)sender    {
+    
+    [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
 /*
