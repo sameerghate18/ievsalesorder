@@ -356,7 +356,7 @@ typedef enum {
     NSString *currencyStr = [Utility stringWithCurrencySymbolForValue:[NSString stringWithFormat:@"%.2f", totalAmount] forCurrencyCode:DEFAULT_CURRENCY_CODE];
     self.totalAmountLabel.text = [NSString stringWithFormat:@"Total: %@", currencyStr];
     
-    _placeOrderButton.backgroundColor = [UIColor colorWithRed:0 green:0.513 blue:0 alpha:1.0];
+    _placeOrderButton.backgroundColor = [UIColor colorWithRed:0 green:0.513725 blue:0 alpha:1.0];
     [_placeOrderButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     
 }
@@ -795,6 +795,7 @@ typedef enum {
         newItmeVC.popupType = ItemPopupTypeAdd;
         newItmeVC.itemsForPicker = [_itemsArray valueForKey:@"imCode"];
         newItmeVC.itemsArray = _itemsArray;
+        newItmeVC.alreadyOrderedItemsArray = orderItems;
     }
     else if ([segue.identifier isEqualToString:@"editItemSegue"]) {
         OrderItemViewController *editItemVC = segue.destinationViewController;
@@ -802,6 +803,7 @@ typedef enum {
         editItemVC.popupType = ItemPopupTypeEdit;
         editItemVC.itemsForPicker = [_itemsArray valueForKey:@"imCode"];
         editItemVC.itemsArray = _itemsArray;
+        editItemVC.alreadyOrderedItemsArray = orderItems;
         SONewOrderItem *itemToEdit = (SONewOrderItem*)sender;
         [editItemVC editOrderItem:itemToEdit];
     }
@@ -1064,6 +1066,10 @@ typedef enum {
 - (void)clearFields {
     
     dispatch_async(dispatch_get_main_queue(), ^{
+        
+        _placeOrderButton.backgroundColor = [UIColor lightGrayColor];
+        [_placeOrderButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        
         selectedValueFromTextfield = @"";
         selectedDocument = nil;
         selectedParty = nil;

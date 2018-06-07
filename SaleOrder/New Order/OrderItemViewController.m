@@ -191,6 +191,21 @@
 -(void)dropdownMenu:(DropdownMenuViewController*)dropdown selectedItemIndex:(NSInteger)selectedIndex value:(NSString*)selectedValue {
     
     selectedValueFromPicker = selectedValue;
+    
+    for (SONewOrderItem *item in self.alreadyOrderedItemsArray) {
+        
+        if ([item.itemCode isEqualToString:selectedValueFromPicker]) {
+            
+            UIAlertController *duplicateItemActionSheet = [UIAlertController alertControllerWithTitle:@"Item code" message:@"This item is already added.\nPlease edit the existing item to make changes." preferredStyle:UIAlertControllerStyleAlert];
+            [duplicateItemActionSheet addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                [duplicateItemActionSheet dismissViewControllerAnimated:true completion:nil];
+            }]];
+            
+            [self presentViewController:duplicateItemActionSheet animated:YES completion:NULL];
+            return;
+        }
+    }
+    
     _itemCodeTextfield.text = selectedValue;
     
     ItemModel *selItem = _itemsArray[selectedIndex];

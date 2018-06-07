@@ -162,11 +162,39 @@ static NSString *transactionsCell = @"transactionCell";
             }
         }
             break;
+            
+        case 3:
+        {
+            UIAlertController *confirmLogoutAlert = [UIAlertController alertControllerWithTitle:@"Logout?" message:@"Are you sure you want to log out?" preferredStyle:UIAlertControllerStyleAlert];
+            
+            [confirmLogoutAlert addAction:[UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+                [self logout];
+            }]];
+            
+            [confirmLogoutAlert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                [confirmLogoutAlert dismissViewControllerAnimated:true completion:nil];
+            }]];
+            
+            [self presentViewController:confirmLogoutAlert animated:true completion:nil];
+            
+            return;
+        }
     }
     
     mainViewController.leftViewBackgroundBlurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
     mainViewController.rightViewBackgroundBlurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
 }
+
+- (void)logout
+{
+    AppDelegate *appDel = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    appDel.loggedUser = nil;
+    UINavigationController *navcontroller = [kStoryboard instantiateViewControllerWithIdentifier:@"RootNavControllerForLogin"];
+    MainViewController *mainViewController = (MainViewController *)self.sideMenuController;
+    mainViewController.rootViewController = navcontroller;
+    [mainViewController hideLeftViewAnimated];
+}
+
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {

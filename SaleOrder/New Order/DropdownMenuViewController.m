@@ -62,7 +62,6 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    cell.accessoryType = UITableViewCellAccessoryCheckmark;
     cell.backgroundColor = [UIColor clearColor];
     NSString  *searchSelectedValue = [self.searchResult objectAtIndex:indexPath.row];
     

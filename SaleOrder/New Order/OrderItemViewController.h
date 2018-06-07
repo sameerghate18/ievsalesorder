@@ -20,7 +20,7 @@ typedef enum {
 
 @property (nonatomic, unsafe_unretained) id<OrderItemViewControllerDelegate>delegate;
 @property (nonatomic) ItemPopupType popupType;
-@property (nonatomic, strong) NSArray *itemsForPicker, *itemsArray, *itemCodeArray;
+@property (nonatomic, strong) NSArray *itemsForPicker, *itemsArray, *itemCodeArray, *alreadyOrderedItemsArray;
 
 -(void)editOrderItem:(SONewOrderItem*)itemDetails;
 
