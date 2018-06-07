@@ -62,6 +62,9 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     self.navigationController.navigationBarHidden = TRUE;
+    MainViewController *mainViewController = (MainViewController *)self.sideMenuController;
+//    mainViewController.leftViewController = nil;
+//    mainViewController.rightViewController = nil;
 }
 
 -(void)viewDidDisappear:(BOOL)animated
@@ -152,7 +155,7 @@ static NSString *transactionsCell = @"transactionCell";
             else
             {
                 [mainViewController hideLeftViewAnimated:YES delay:0.0 completionHandler:nil];
-                UIViewController *navcontroller = [kStoryboard instantiateViewControllerWithIdentifier:@"AboutViewController"];
+                UIViewController *navcontroller = [kStoryboard instantiateViewControllerWithIdentifier:@"AboutRootNavController"];
                 mainViewController.rootViewController = navcontroller;
                 mainViewController.leftViewController = leftMenuVC;
                 mainViewController.rightViewController = nil;

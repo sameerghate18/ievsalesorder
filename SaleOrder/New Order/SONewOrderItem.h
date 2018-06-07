@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface SONewOrderItem : NSObject
+@interface SONewOrderItem : NSObject <NSCopying>
 
 @property (nonatomic, strong) NSString *itemCode;
 @property (nonatomic, strong) NSString *rate;

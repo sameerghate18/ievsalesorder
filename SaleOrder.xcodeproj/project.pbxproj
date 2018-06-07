@@ -36,6 +36,7 @@
 		4298E17A1CEB84CF004CAAD6 /* Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = 4298E1741CEB84CF004CAAD6 /* Utility.m */; };
 		4298E17D1CEB8528004CAAD6 /* ConnectionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 4298E17C1CEB8528004CAAD6 /* ConnectionHandler.m */; };
 		4298E1811CEB8714004CAAD6 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 4298E1801CEB8714004CAAD6 /* Reachability.m */; };
+		42ABF2C620C6FECF0046E555 /* OrderItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42ABF2C520C6FECF0046E555 /* OrderItemViewController.m */; };
 		42AC7DD91E4ED06E00C58360 /* ItemListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42AC7DD81E4ED06E00C58360 /* ItemListViewController.m */; };
 		42AC7DDC1E4ED09E00C58360 /* ItemDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42AC7DDB1E4ED09E00C58360 /* ItemDetailViewController.m */; };
 		42AC7DDF1E4F384600C58360 /* OrderHistoryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 42AC7DDE1E4F384600C58360 /* OrderHistoryModel.m */; };
@@ -49,6 +50,7 @@
 		42D4E44D1E55478100E18110 /* RefineOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42D4E44C1E55478100E18110 /* RefineOrderViewController.m */; };
 		42D4E4501E554C0200E18110 /* SearchCriteriaModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 42D4E44F1E554C0200E18110 /* SearchCriteriaModel.m */; };
 		42D89A061E53605A00429600 /* OrderHistoryDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 42D89A051E53605A00429600 /* OrderHistoryDetailModel.m */; };
+		42D9463C20C8CA1A00839EA9 /* SOModels.m in Sources */ = {isa = PBXBuildFile; fileRef = 42D9463B20C8CA1A00839EA9 /* SOModels.m */; };
 		42EBA2C720BF86C000E8F5C1 /* UINavigationController+ExtraMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 42EBA2C620BF86C000E8F5C1 /* UINavigationController+ExtraMethods.m */; };
 		42EF1A6720BDC93D004314B1 /* LGSideMenuHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 42EF1A5E20BDC93D004314B1 /* LGSideMenuHelper.m */; };
 		42EF1A6820BDC93D004314B1 /* LGSideMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 42EF1A6020BDC93D004314B1 /* LGSideMenuView.m */; };
@@ -129,6 +131,8 @@
 		4298E17C1CEB8528004CAAD6 /* ConnectionHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConnectionHandler.m; sourceTree = "<group>"; };
 		4298E17F1CEB8714004CAAD6 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		4298E1801CEB8714004CAAD6 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		42ABF2C420C6FECF0046E555 /* OrderItemViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OrderItemViewController.h; sourceTree = "<group>"; };
+		42ABF2C520C6FECF0046E555 /* OrderItemViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OrderItemViewController.m; sourceTree = "<group>"; };
 		42AC7DD71E4ED06E00C58360 /* ItemListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemListViewController.h; sourceTree = "<group>"; };
 		42AC7DD81E4ED06E00C58360 /* ItemListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemListViewController.m; sourceTree = "<group>"; };
 		42AC7DDA1E4ED09E00C58360 /* ItemDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemDetailViewController.h; sourceTree = "<group>"; };
@@ -145,14 +149,16 @@
 		42C3AE081E52B13E00D7F64B /* TwoLineCellTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwoLineCellTableViewCell.h; sourceTree = "<group>"; };
 		42C3AE091E52B13E00D7F64B /* TwoLineCellTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwoLineCellTableViewCell.m; sourceTree = "<group>"; };
 		42C6CB331E4A351B005397CF /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		42C6CB351E4ABE84005397CF /* DropdownMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DropdownMenuViewController.h; path = "SaleOrder/Create New Order/DropdownMenuViewController.h"; sourceTree = SOURCE_ROOT; };
-		42C6CB361E4ABE84005397CF /* DropdownMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DropdownMenuViewController.m; path = "SaleOrder/Create New Order/DropdownMenuViewController.m"; sourceTree = SOURCE_ROOT; };
+		42C6CB351E4ABE84005397CF /* DropdownMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DropdownMenuViewController.h; path = "SaleOrder/New Order/DropdownMenuViewController.h"; sourceTree = SOURCE_ROOT; };
+		42C6CB361E4ABE84005397CF /* DropdownMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DropdownMenuViewController.m; path = "SaleOrder/New Order/DropdownMenuViewController.m"; sourceTree = SOURCE_ROOT; };
 		42D4E44B1E55478100E18110 /* RefineOrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RefineOrderViewController.h; sourceTree = "<group>"; };
 		42D4E44C1E55478100E18110 /* RefineOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RefineOrderViewController.m; sourceTree = "<group>"; };
 		42D4E44E1E554C0200E18110 /* SearchCriteriaModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchCriteriaModel.h; sourceTree = "<group>"; };
 		42D4E44F1E554C0200E18110 /* SearchCriteriaModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchCriteriaModel.m; sourceTree = "<group>"; };
 		42D89A041E53605A00429600 /* OrderHistoryDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderHistoryDetailModel.h; sourceTree = "<group>"; };
 		42D89A051E53605A00429600 /* OrderHistoryDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderHistoryDetailModel.m; sourceTree = "<group>"; };
+		42D9463A20C8CA1A00839EA9 /* SOModels.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOModels.h; sourceTree = "<group>"; };
+		42D9463B20C8CA1A00839EA9 /* SOModels.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SOModels.m; sourceTree = "<group>"; };
 		42EBA2C520BF86C000E8F5C1 /* UINavigationController+ExtraMethods.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+ExtraMethods.h"; sourceTree = "<group>"; };
 		42EBA2C620BF86C000E8F5C1 /* UINavigationController+ExtraMethods.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+ExtraMethods.m"; sourceTree = "<group>"; };
 		42EF1A5920BDC93D004314B1 /* LGSideMenuSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGSideMenuSegue.h; sourceTree = "<group>"; };
@@ -250,8 +256,6 @@
 				4298E14C1CEB8171004CAAD6 /* PCViewController.m */,
 				4255F48020BA548600AFCF37 /* PCHomeViewController.h */,
 				4255F48120BA548700AFCF37 /* PCHomeViewController.m */,
-				42C6CB351E4ABE84005397CF /* DropdownMenuViewController.h */,
-				42C6CB361E4ABE84005397CF /* DropdownMenuViewController.m */,
 				42AF09CA1FF77C9400C6AFB3 /* CustomTextInputViewController.h */,
 				42AF09CB1FF77C9400C6AFB3 /* CustomTextInputViewController.m */,
 				42AF09CC1FF77C9400C6AFB3 /* CustomTextInputViewController.xib */,
@@ -272,8 +276,6 @@
 				4298E15D1CEB84C4004CAAD6 /* PCDeviceRegisterModel.m */,
 				4298E15E1CEB84C4004CAAD6 /* PCUserModel.h */,
 				4298E15F1CEB84C4004CAAD6 /* PCUserModel.m */,
-				424C90511E47907000F41DD2 /* SONewOrderItem.h */,
-				424C90521E47907000F41DD2 /* SONewOrderItem.m */,
 				42AC7DDD1E4F384600C58360 /* OrderHistoryModel.h */,
 				42AC7DDE1E4F384600C58360 /* OrderHistoryModel.m */,
 				42D89A041E53605A00429600 /* OrderHistoryDetailModel.h */,
@@ -342,12 +344,48 @@
 			path = Reachability;
 			sourceTree = "<group>";
 		};
+		42ABF2C320C6FE530046E555 /* Orders */ = {
+			isa = PBXGroup;
+			children = (
+				42EF79AC1CE0EBD000A055A9 /* SecondViewController.h */,
+				42EF79AD1CE0EBD000A055A9 /* SecondViewController.m */,
+				42C2AEE31E4E3D5000071DA6 /* OrderItemDetailsViewController.h */,
+				42C2AEE41E4E3D5000071DA6 /* OrderItemDetailsViewController.m */,
+				42AC7DD71E4ED06E00C58360 /* ItemListViewController.h */,
+				42AC7DD81E4ED06E00C58360 /* ItemListViewController.m */,
+				42AC7DDA1E4ED09E00C58360 /* ItemDetailViewController.h */,
+				42AC7DDB1E4ED09E00C58360 /* ItemDetailViewController.m */,
+				42C3AE081E52B13E00D7F64B /* TwoLineCellTableViewCell.h */,
+				42C3AE091E52B13E00D7F64B /* TwoLineCellTableViewCell.m */,
+				42D4E44B1E55478100E18110 /* RefineOrderViewController.h */,
+				42D4E44C1E55478100E18110 /* RefineOrderViewController.m */,
+			);
+			path = Orders;
+			sourceTree = "<group>";
+		};
 		42C6CB321E4A351B005397CF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				42C6CB331E4A351B005397CF /* QuartzCore.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		42D126F320C6229900280F5A /* New Order */ = {
+			isa = PBXGroup;
+			children = (
+				42D9463A20C8CA1A00839EA9 /* SOModels.h */,
+				42D9463B20C8CA1A00839EA9 /* SOModels.m */,
+				424C90511E47907000F41DD2 /* SONewOrderItem.h */,
+				424C90521E47907000F41DD2 /* SONewOrderItem.m */,
+				42EF79A91CE0EBD000A055A9 /* FirstViewController.h */,
+				42EF79AA1CE0EBD000A055A9 /* FirstViewController.m */,
+				42C6CB351E4ABE84005397CF /* DropdownMenuViewController.h */,
+				42C6CB361E4ABE84005397CF /* DropdownMenuViewController.m */,
+				42ABF2C420C6FECF0046E555 /* OrderItemViewController.h */,
+				42ABF2C520C6FECF0046E555 /* OrderItemViewController.m */,
+			);
+			path = "New Order";
 			sourceTree = "<group>";
 		};
 		42EF1A5820BDC93C004314B1 /* LGSideMenuController */ = {
@@ -399,28 +437,16 @@
 				4255F47C20B97C0A00AFCF37 /* Side Menu */,
 				4298E1651CEB84CF004CAAD6 /* Utils */,
 				4298E1551CEB84C4004CAAD6 /* Models */,
+				42ABF2C320C6FE530046E555 /* Orders */,
 				4298E1401CEB8171004CAAD6 /* Intro screens */,
+				42D126F320C6229900280F5A /* New Order */,
 				42EF79A61CE0EBD000A055A9 /* AppDelegate.h */,
 				42EF79A71CE0EBD000A055A9 /* AppDelegate.m */,
-				42EF79A91CE0EBD000A055A9 /* FirstViewController.h */,
-				42EF79AA1CE0EBD000A055A9 /* FirstViewController.m */,
-				42EF79AC1CE0EBD000A055A9 /* SecondViewController.h */,
-				42EF79AD1CE0EBD000A055A9 /* SecondViewController.m */,
 				42EF79AF1CE0EBD000A055A9 /* Main.storyboard */,
 				42EF79B21CE0EBD000A055A9 /* Assets.xcassets */,
 				42EF79B41CE0EBD000A055A9 /* LaunchScreen.storyboard */,
 				42EF79B71CE0EBD000A055A9 /* Info.plist */,
 				42EF79A31CE0EBD000A055A9 /* Supporting Files */,
-				42C2AEE31E4E3D5000071DA6 /* OrderItemDetailsViewController.h */,
-				42C2AEE41E4E3D5000071DA6 /* OrderItemDetailsViewController.m */,
-				42AC7DD71E4ED06E00C58360 /* ItemListViewController.h */,
-				42AC7DD81E4ED06E00C58360 /* ItemListViewController.m */,
-				42AC7DDA1E4ED09E00C58360 /* ItemDetailViewController.h */,
-				42AC7DDB1E4ED09E00C58360 /* ItemDetailViewController.m */,
-				42C3AE081E52B13E00D7F64B /* TwoLineCellTableViewCell.h */,
-				42C3AE091E52B13E00D7F64B /* TwoLineCellTableViewCell.m */,
-				42D4E44B1E55478100E18110 /* RefineOrderViewController.h */,
-				42D4E44C1E55478100E18110 /* RefineOrderViewController.m */,
 				424644A51FD07DDC000B53BD /* MoreViewController.h */,
 				424644A61FD07DDC000B53BD /* MoreViewController.m */,
 				42EBA2C520BF86C000E8F5C1 /* UINavigationController+ExtraMethods.h */,
@@ -532,6 +558,7 @@
 				4255F47F20B97C0B00AFCF37 /* PCSideMenuTableViewController.m in Sources */,
 				424644A71FD07DDC000B53BD /* MoreViewController.m in Sources */,
 				4298E1611CEB84C4004CAAD6 /* PCDeviceLicenseModel.m in Sources */,
+				42D9463C20C8CA1A00839EA9 /* SOModels.m in Sources */,
 				42D4E44D1E55478100E18110 /* RefineOrderViewController.m in Sources */,
 				42C6CB371E4ABE84005397CF /* DropdownMenuViewController.m in Sources */,
 				4298E17D1CEB8528004CAAD6 /* ConnectionHandler.m in Sources */,
@@ -546,6 +573,7 @@
 				4298E1751CEB84CF004CAAD6 /* SSKeychain.m in Sources */,
 				424C90531E47907000F41DD2 /* SONewOrderItem.m in Sources */,
 				42EF1A6D20BDC93D004314B1 /* LGSideMenuBorderView.m in Sources */,
+				42ABF2C620C6FECF0046E555 /* OrderItemViewController.m in Sources */,
 				4255F48620BAAD4700AFCF37 /* PCTilesCollectionCell.m in Sources */,
 				4298E17A1CEB84CF004CAAD6 /* Utility.m in Sources */,
 				4298E1641CEB84C4004CAAD6 /* PCUserModel.m in Sources */,

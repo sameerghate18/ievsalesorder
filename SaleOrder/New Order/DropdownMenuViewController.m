@@ -54,6 +54,7 @@
         cell.textLabel.font = [UIFont systemFontOfSize:13];
     }
     
+    cell.accessoryType = UITableViewCellAccessoryNone;
     cell.detailTextLabel.text = self.searchResult[indexPath.row];
     
     return cell;
@@ -62,9 +63,14 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     cell.accessoryType = UITableViewCellAccessoryCheckmark;
-    selectedValue = [self.searchResult objectAtIndex:indexPath.row];
+    cell.backgroundColor = [UIColor clearColor];
+    NSString  *searchSelectedValue = [self.searchResult objectAtIndex:indexPath.row];
+    
+    NSInteger index = [self.items indexOfObject:searchSelectedValue];
+    selectedValue = [self.items objectAtIndex:index];
+    
     if ([_delegate respondsToSelector:@selector(dropdownMenu:selectedItemIndex:value:)]) {
-        [_delegate dropdownMenu:self selectedItemIndex:indexPath.row value:selectedValue];
+        [_delegate dropdownMenu:self selectedItemIndex:index value:selectedValue];
     }
 }
 
@@ -79,7 +85,7 @@
 - (void)filterContentForSearchText:(NSString*)searchText
 {
     NSPredicate *resultPredicate = [NSPredicate
-                                    predicateWithFormat:@"SELF CONTAINS %@",
+                                    predicateWithFormat:@"SELF CONTAINS[c] %@",
                                     searchText];
     
     self.searchResult = [_items filteredArrayUsingPredicate:resultPredicate];

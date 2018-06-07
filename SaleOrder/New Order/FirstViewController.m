@@ -15,6 +15,8 @@
 #import "LGSideMenuController.h"
 #import "UIViewController+LGSideMenuController.h"
 #import "MainViewController.h"
+#import "OrderItemViewController.h"
+#import "SOModels.h"
 
 static NSString *dropdownIdentifier = @"dropdownIdentifier";
 static NSString *textfieldIdentifer = @"textfieldIdentifer";
@@ -35,49 +37,6 @@ typedef enum {
 @implementation PCInputTableviewCell
 @end
 
-@implementation DocumentModel
-
-+ (DocumentModel*)dictionaryToModel:(NSDictionary*)dictionary   {
-
-    DocumentModel *model = [[DocumentModel alloc] init];
-    model.docDescription = [[dictionary valueForKey:@"DOC_DESCR"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-    model.errorMessage = [dictionary valueForKey:@"ERRORMESSAGE"];
-    model.imLocation = [[dictionary valueForKey:@"IM_LOC"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-    model.documentSR = [[dictionary valueForKey:@"SR"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-    
-    return model;
-}
-@end
-
-@implementation PartyModel
-
-+ (PartyModel*)dictionaryToModel:(NSDictionary*)dictionary  {
-    
-    PartyModel *model = [[PartyModel alloc] init];
-    model.partyName = [[dictionary valueForKey:@"PARTY_NAME"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-    model.errorMessage = [dictionary valueForKey:@"ERRORMESSAGE"];
-    model.partyNumber = [[dictionary valueForKey:@"PARTY_NO"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-    return model;
-    
-}
-
-@end
-
-@implementation ItemModel
-
-+ (ItemModel*)dictionaryToModel:(NSDictionary*)dictionary {
-
-    ItemModel *model = [[ItemModel alloc] init];
-    model.imCode = [dictionary valueForKey:@"IM_CODE"];
-    model.errorMessage = [dictionary valueForKey:@"ERRORMESSAGE"];
-    model.imDescription = [dictionary valueForKey:@"IM_DESCR"];
-    model.imSaleRate = [dictionary valueForKey:@"IM_SALERT"];
-    return model;
-    
-}
-
-
-@end
 
 @implementation PCItemOrderTableviewCell
 
@@ -93,7 +52,7 @@ typedef enum {
 @end
 
 
-@interface FirstViewController () <UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate, DropdownMenuViewControllerDelegate>
+@interface FirstViewController () <UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate, DropdownMenuViewControllerDelegate, OrderItemViewControllerDelegate>
 {
     NSString *selectedValueFromPicker, *selectedValueFromTextfield, *selectedDocSR, *selectedPartyName, *selectedItemRate;
     UIAlertController *actionSheet;
@@ -104,6 +63,7 @@ typedef enum {
     PartyModel *selectedParty;
     DropDownFor dropdownFor;
     UITextField *currentTextfield, *rateTextfield;
+    NSInteger editItemIndex;
     
 }
 @property (nonatomic, strong) NSMutableArray *docSeriesArray, *partyNamesArray, *documentsArray, *itemsArray, *itemCodeArray;
@@ -111,6 +71,7 @@ typedef enum {
 @property (nonatomic, strong) IBOutlet UIView *pickerViewContainer;
 @property (nonatomic, strong) IBOutlet UIPickerView *dataPickerView;
 @property (nonatomic, strong) IBOutlet UILabel *totalAmountLabel;
+@property (nonatomic, strong) IBOutlet UIButton *placeOrderButton;
 @property (strong, nonatomic) id textValidationBlock;
 
 @end
@@ -125,6 +86,9 @@ typedef enum {
                                       initWithTarget:self action:@selector(handleSingleTap:)];
     tapper.cancelsTouchesInView = NO;
     [self.view addGestureRecognizer:tapper];
+    
+    _placeOrderButton.backgroundColor = [UIColor lightGrayColor];
+    [_placeOrderButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     
     _dataPickerView = [[UIPickerView alloc] init];
     _dataPickerView.dataSource = self;
@@ -302,7 +266,10 @@ typedef enum {
         return;
     }
     
+    // TODO: Replace with OrderViewController
     
+    [self performSegueWithIdentifier:@"newItemSegue" sender:nil];
+    /*
     UIAlertController *newItemAlert = [UIAlertController alertControllerWithTitle:@"Add a new item" message:nil preferredStyle:UIAlertControllerStyleAlert];
     
     [newItemAlert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
@@ -371,7 +338,7 @@ typedef enum {
     }]];
     
     [self presentViewController:newItemAlert animated:YES completion:NULL];
-    
+    */
 }
 
 -(void)addNewItem:(SONewOrderItem*)orderItem    {
@@ -388,6 +355,9 @@ typedef enum {
     
     NSString *currencyStr = [Utility stringWithCurrencySymbolForValue:[NSString stringWithFormat:@"%.2f", totalAmount] forCurrencyCode:DEFAULT_CURRENCY_CODE];
     self.totalAmountLabel.text = [NSString stringWithFormat:@"Total: %@", currencyStr];
+    
+    _placeOrderButton.backgroundColor = [UIColor colorWithRed:0 green:0.513 blue:0 alpha:1.0];
+    [_placeOrderButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     
 }
 
@@ -507,13 +477,23 @@ typedef enum {
     
     NSString *currencyStr = [Utility stringWithCurrencySymbolForValue:[NSString stringWithFormat:@"%.2f", totalAmount] forCurrencyCode:DEFAULT_CURRENCY_CODE];
     self.totalAmountLabel.text = [NSString stringWithFormat:@"Total: %@", currencyStr];
+    
+    if (orderItems.count == 0) {
+        _placeOrderButton.backgroundColor = [UIColor lightGrayColor];
+        [_placeOrderButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    }
 }
 
--(IBAction)editItemAction:(id)sender    {
+-(IBAction)editItemAction:(id)sender {
     
     NSIndexPath *indexPath = (NSIndexPath*)sender;
+    editItemIndex = indexPath.row;
     SONewOrderItem *itemToEdit = orderItems[indexPath.row];
     double amountBefore = itemToEdit.amount;
+    
+    [self performSegueWithIdentifier:@"editItemSegue" sender:itemToEdit];
+    
+    /*
     
     UIAlertController *editItemAlert = [UIAlertController alertControllerWithTitle:@"Edit item" message:nil preferredStyle:UIAlertControllerStyleAlert];
     
@@ -587,6 +567,8 @@ typedef enum {
         }]];
         
         [self presentViewController:editItemAlert animated:YES completion:NULL];
+     
+     */
 }
 
 #pragma mark - UITableviewDelegate methods
@@ -807,7 +789,22 @@ typedef enum {
         destVC.view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.3]; // can be with 'alpha'
         destVC.modalPresentationStyle = UIModalPresentationCurrentContext;
     }
-    
+    else if ([segue.identifier isEqualToString:@"newItemSegue"]) {
+        OrderItemViewController *newItmeVC = segue.destinationViewController;
+        newItmeVC.delegate = self;
+        newItmeVC.popupType = ItemPopupTypeAdd;
+        newItmeVC.itemsForPicker = [_itemsArray valueForKey:@"imCode"];
+        newItmeVC.itemsArray = _itemsArray;
+    }
+    else if ([segue.identifier isEqualToString:@"editItemSegue"]) {
+        OrderItemViewController *editItemVC = segue.destinationViewController;
+        editItemVC.delegate = self;
+        editItemVC.popupType = ItemPopupTypeEdit;
+        editItemVC.itemsForPicker = [_itemsArray valueForKey:@"imCode"];
+        editItemVC.itemsArray = _itemsArray;
+        SONewOrderItem *itemToEdit = (SONewOrderItem*)sender;
+        [editItemVC editOrderItem:itemToEdit];
+    }
 }
 
 -(void)presentDropdownMenu:(NSIndexPath*)selectedRow  {
@@ -1075,6 +1072,26 @@ typedef enum {
         [orderItems removeAllObjects];
         [_inputTableview reloadData];
     });
+}
+
+-(void)itemDidUpdate:(SONewOrderItem*)updatedItem beforeEditItem:(SONewOrderItem*)beforeEditItem {
+    
+    SONewOrderItem *beforeUpdate = [orderItems objectAtIndex:editItemIndex];
+    
+    [orderItems replaceObjectAtIndex:editItemIndex withObject:updatedItem];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [_inputTableview reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationFade];
+        double amountBefore = beforeUpdate.amount;
+        totalAmount = totalAmount + (updatedItem.amount - amountBefore);
+        NSString *currencyStr = [Utility stringWithCurrencySymbolForValue:[NSString stringWithFormat:@"%.2f", totalAmount] forCurrencyCode:DEFAULT_CURRENCY_CODE];
+        self.totalAmountLabel.text = [NSString stringWithFormat:@"Total: %@", currencyStr];
+    });
+    
+}
+
+-(void)itemAdded:(SONewOrderItem*)newItem {
+    [self addNewItem:newItem];
 }
 
 @end
