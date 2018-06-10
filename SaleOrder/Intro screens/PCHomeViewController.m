@@ -124,9 +124,10 @@ static NSString *transactionsCell = @"transactionCell";
             {
                 [mainViewController hideLeftViewAnimated:YES delay:0.0 completionHandler:nil];
                 UINavigationController *navcontroller = [kStoryboard instantiateViewControllerWithIdentifier:@"OrdersNavController"];
+                DropdownMenuViewController *rightMenuVC = [kStoryboard instantiateViewControllerWithIdentifier:@"DropdownMenuViewController"];
                 mainViewController.rootViewController = navcontroller;
                 mainViewController.leftViewController = leftMenuVC;
-                mainViewController.rightViewController = nil;
+                mainViewController.rightViewController = rightMenuVC;
             }
         }
             
@@ -155,7 +156,7 @@ static NSString *transactionsCell = @"transactionCell";
             else
             {
                 [mainViewController hideLeftViewAnimated:YES delay:0.0 completionHandler:nil];
-                UIViewController *navcontroller = [kStoryboard instantiateViewControllerWithIdentifier:@"AboutRootNavController"];
+                UINavigationController *navcontroller = [kStoryboard instantiateViewControllerWithIdentifier:@"AboutRootNavController"];
                 mainViewController.rootViewController = navcontroller;
                 mainViewController.leftViewController = leftMenuVC;
                 mainViewController.rightViewController = nil;
@@ -181,8 +182,8 @@ static NSString *transactionsCell = @"transactionCell";
         }
     }
     
-    mainViewController.leftViewBackgroundBlurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
-    mainViewController.rightViewBackgroundBlurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+    mainViewController.leftViewCoverBlurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+    mainViewController.rightViewCoverBlurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
 }
 
 - (void)logout

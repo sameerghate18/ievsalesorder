@@ -7,6 +7,10 @@
 //
 
 #import "RefineOrderViewController.h"
+#import "LGSideMenuController.h"
+#import "UIViewController+LGSideMenuController.h"
+#import "MainViewController.h"
+#import "DropdownMenuViewController.h"
 
 typedef enum {
     PickerForDocument,
@@ -15,7 +19,7 @@ typedef enum {
     PickerForEndDate,
 } PickerFor;
 
-@interface RefineOrderViewController () <UIPickerViewDelegate, UIPickerViewDataSource>
+@interface RefineOrderViewController () <UIPickerViewDelegate, UIPickerViewDataSource, DropdownMenuViewControllerDelegate>
 {
     PickerFor pickertype;
     UIAlertController *actionSheet;
@@ -35,6 +39,9 @@ typedef enum {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.view.backgroundColor = [UIColor colorWithWhite:1 alpha:0.1];
+    
     // Do any additional setup after loading the view.
     model = [[SearchCriteriaModel alloc] init];
 //    model.docDescription = @"*";
@@ -140,11 +147,10 @@ typedef enum {
     
 }
 
-- (IBAction)clearAllAction:(id)sender {
+- (IBAction)dismissAction:(id)sender {
     
     [self dismissViewControllerAnimated:YES completion:^{
     }];
-    
 }
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView  {
@@ -197,24 +203,31 @@ typedef enum {
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField    {
     
+    MainViewController *mainViewController = (MainViewController *)self.sideMenuController;
+    DropdownMenuViewController *destVC = (DropdownMenuViewController*)mainViewController.rightViewController;
+    destVC.delegate = self;
+    
+    currentTextfield = textField;
+    
     if (textField.tag == 1000) {
         itemsForPicker = [_items valueForKey:@"doc_desc"];
         uniqueItemsForPicker = [itemsForPicker valueForKeyPath:@"@distinctUnionOfObjects.self"];
-        textField.inputView = _dataPickerView;
         
-        if (pickertype != PickerForDocument) {
-            [_dataPickerView selectRow:0 inComponent:0 animated:YES];
-        }
+        destVC.items = uniqueItemsForPicker;
+        [destVC reloadFiltersTableView];
+        [mainViewController showRightViewAnimated:nil];
         pickertype = PickerForDocument;
+        return NO;
     }
     else if (textField.tag == 1001) {
         itemsForPicker = [_items valueForKey:@"party_name"];
         uniqueItemsForPicker = [itemsForPicker valueForKeyPath:@"@distinctUnionOfObjects.self"];
-        textField.inputView = _dataPickerView;
-        if (pickertype != PickerForPartyNames) {
-            [_dataPickerView selectRow:0 inComponent:0 animated:YES];
-        }
+        
+        destVC.items = uniqueItemsForPicker;
+        [destVC reloadFiltersTableView];
+        [mainViewController showRightViewAnimated:nil];
         pickertype = PickerForPartyNames;
+        return NO;
     }
     else if (textField.tag == 1002) {
         textField.inputView = datePickerView;
@@ -223,7 +236,6 @@ typedef enum {
         textField.inputView = datePickerView;
     }
     
-    currentTextfield = textField;
     [_dataPickerView reloadAllComponents];
     
     return YES;
@@ -239,6 +251,27 @@ typedef enum {
     }
     
     currentTextfield.text = [Utility stringFromDate:datePicker.date];
+}
+
+-(void)dropdownMenu:(DropdownMenuViewController*)dropdown selectedItemIndex:(NSInteger)selectedIndex value:(NSString*)selectedValue {
+    
+    selectedValueFromPicker = uniqueItemsForPicker[selectedIndex];
+    
+    switch (pickertype) {
+        case PickerForDocument:
+            
+            model.docDescription = selectedValueFromPicker;
+            break;
+            
+        case PickerForPartyNames:
+            model.partyName = selectedValueFromPicker;
+            break;
+            
+        default:
+            break;
+    }
+    
+    currentTextfield.text = selectedValueFromPicker;
 }
 
 /*

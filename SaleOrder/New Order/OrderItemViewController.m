@@ -32,8 +32,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.view.backgroundColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.8];
-    
+//    self.view.backgroundColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.1];
+    self.view.backgroundColor = [UIColor colorWithWhite:1 alpha:0.1];
     UITapGestureRecognizer *tapper = [[UITapGestureRecognizer alloc]
                                       initWithTarget:self action:@selector(handleSingleTap:)];
     tapper.cancelsTouchesInView = NO;
@@ -163,6 +163,11 @@
         [mainViewController showRightViewAnimated:nil];
         return NO;
     } else if (textField.tag == 101) {
+        
+        if (_itemCodeTextfield.text.length == 0) {
+            _itemCodeTextfield.placeholder = @"Please select an item";
+            return NO;
+        }
         currentTextfield = textField;
         return YES;
     } else if (textField.tag == 102) {
