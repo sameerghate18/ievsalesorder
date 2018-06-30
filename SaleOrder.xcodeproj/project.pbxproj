@@ -47,6 +47,7 @@
 		42C3AE0A1E52B13E00D7F64B /* TwoLineCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 42C3AE091E52B13E00D7F64B /* TwoLineCellTableViewCell.m */; };
 		42C6CB341E4A351B005397CF /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42C6CB331E4A351B005397CF /* QuartzCore.framework */; };
 		42C6CB371E4ABE84005397CF /* DropdownMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42C6CB361E4ABE84005397CF /* DropdownMenuViewController.m */; };
+		42CA8EEB20E758C400205CEF /* SOMultiLineTableviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 42CA8EEA20E758C400205CEF /* SOMultiLineTableviewCell.m */; };
 		42D4E44D1E55478100E18110 /* RefineOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42D4E44C1E55478100E18110 /* RefineOrderViewController.m */; };
 		42D4E4501E554C0200E18110 /* SearchCriteriaModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 42D4E44F1E554C0200E18110 /* SearchCriteriaModel.m */; };
 		42D89A061E53605A00429600 /* OrderHistoryDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 42D89A051E53605A00429600 /* OrderHistoryDetailModel.m */; };
@@ -151,6 +152,8 @@
 		42C6CB331E4A351B005397CF /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		42C6CB351E4ABE84005397CF /* DropdownMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DropdownMenuViewController.h; path = "SaleOrder/New Order/DropdownMenuViewController.h"; sourceTree = SOURCE_ROOT; };
 		42C6CB361E4ABE84005397CF /* DropdownMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DropdownMenuViewController.m; path = "SaleOrder/New Order/DropdownMenuViewController.m"; sourceTree = SOURCE_ROOT; };
+		42CA8EE920E758C400205CEF /* SOMultiLineTableviewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOMultiLineTableviewCell.h; sourceTree = "<group>"; };
+		42CA8EEA20E758C400205CEF /* SOMultiLineTableviewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SOMultiLineTableviewCell.m; sourceTree = "<group>"; };
 		42D4E44B1E55478100E18110 /* RefineOrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RefineOrderViewController.h; sourceTree = "<group>"; };
 		42D4E44C1E55478100E18110 /* RefineOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RefineOrderViewController.m; sourceTree = "<group>"; };
 		42D4E44E1E554C0200E18110 /* SearchCriteriaModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchCriteriaModel.h; sourceTree = "<group>"; };
@@ -175,7 +178,7 @@
 		42EF1A6420BDC93D004314B1 /* UIViewController+LGSideMenuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+LGSideMenuController.m"; sourceTree = "<group>"; };
 		42EF1A6520BDC93D004314B1 /* LGSideMenuHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGSideMenuHelper.h; sourceTree = "<group>"; };
 		42EF1A6620BDC93D004314B1 /* LGSideMenuBorderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGSideMenuBorderView.m; sourceTree = "<group>"; };
-		42EF79A01CE0EBD000A055A9 /* SaleOrder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SaleOrder.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		42EF79A01CE0EBD000A055A9 /* IEV Sales.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "IEV Sales.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		42EF79A41CE0EBD000A055A9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		42EF79A61CE0EBD000A055A9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		42EF79A71CE0EBD000A055A9 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -359,6 +362,8 @@
 				42C3AE091E52B13E00D7F64B /* TwoLineCellTableViewCell.m */,
 				42D4E44B1E55478100E18110 /* RefineOrderViewController.h */,
 				42D4E44C1E55478100E18110 /* RefineOrderViewController.m */,
+				42CA8EE920E758C400205CEF /* SOMultiLineTableviewCell.h */,
+				42CA8EEA20E758C400205CEF /* SOMultiLineTableviewCell.m */,
 			);
 			path = Orders;
 			sourceTree = "<group>";
@@ -423,7 +428,7 @@
 		42EF79A11CE0EBD000A055A9 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				42EF79A01CE0EBD000A055A9 /* SaleOrder.app */,
+				42EF79A01CE0EBD000A055A9 /* IEV Sales.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -489,7 +494,7 @@
 			);
 			name = SaleOrder;
 			productName = SaleOrder;
-			productReference = 42EF79A01CE0EBD000A055A9 /* SaleOrder.app */;
+			productReference = 42EF79A01CE0EBD000A055A9 /* IEV Sales.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -599,6 +604,7 @@
 				4298E1601CEB84C4004CAAD6 /* PCCompanyModel.m in Sources */,
 				42EF1A6720BDC93D004314B1 /* LGSideMenuHelper.m in Sources */,
 				4298E1521CEB8171004CAAD6 /* PCViewController.m in Sources */,
+				42CA8EEB20E758C400205CEF /* SOMultiLineTableviewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -667,6 +673,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "IEV Sales";
 				PROVISIONING_PROFILE = "99315a7b-0a14-42d9-a6b2-129094bf5335";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -685,7 +692,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.pcsofterp.ievsaleorder;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "IEV Sales";
 				PROVISIONING_PROFILE = "4371b402-21b4-41e3-97a3-0529c8b2d3aa";
 				PROVISIONING_PROFILE_SPECIFIER = IEVSaleOrderDistAdhocProfile;
 			};
@@ -741,6 +748,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "IEV Sales";
 				PROVISIONING_PROFILE = "6b8e5d55-2079-430d-9496-f66f37f6353b";
 				SDKROOT = iphoneos;
 			};
@@ -789,6 +797,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "IEV Sales";
 				PROVISIONING_PROFILE = "99315a7b-0a14-42d9-a6b2-129094bf5335";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -808,7 +817,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.pcsofterp.ievsaleorder;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "IEV Sales";
 				PROVISIONING_PROFILE = "2ee1a1a5-572e-467c-b734-6647218eee5d";
 				PROVISIONING_PROFILE_SPECIFIER = IEVSaleOrder_Development;
 			};
@@ -826,7 +835,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.pcsofterp.ievsaleorder;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "IEV Sales";
 				PROVISIONING_PROFILE = "81fa1edb-0c4a-455b-a8ee-6e47dabd17a7";
 				PROVISIONING_PROFILE_SPECIFIER = IEVSaleOrderAppStoreProfile;
 			};

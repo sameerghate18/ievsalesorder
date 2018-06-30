@@ -148,7 +148,31 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    [self performSegueWithIdentifier:@"orderDetailsSegue" sender:indexPath];
+//    [self performSegueWithIdentifier:@"orderDetailsSegue" sender:indexPath];
+}
+
+-(IBAction)presentRefineScreen:(id)sender {
+    [self performSegueWithIdentifier:@"refineResultsSegue" sender:sender];
+}
+
+- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
+    
+    if ([identifier isEqualToString:@"refineResultsSegue"])  {
+        
+        if (self.orderItems.count == 0) {
+            
+            UIAlertController *noDataAlert = [UIAlertController alertControllerWithTitle:@"Refine" message:@"No items to filter" preferredStyle:UIAlertControllerStyleAlert];
+            
+            [noDataAlert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+                [noDataAlert dismissViewControllerAnimated:YES completion:NULL];
+            }]];
+            
+            [self presentViewController:noDataAlert animated:YES completion:NULL];
+            return NO;
+        }
+        return YES;
+    }
+     return YES;
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender     {
@@ -164,11 +188,10 @@
     }
     else if ([segue.identifier isEqualToString:@"refineResultsSegue"])  {
         
-        RefineOrderViewController *searchVC = (RefineOrderViewController*)[segue destinationViewController];
-        searchVC.delegate = self;
-        searchVC.items = _orderItems;
+            RefineOrderViewController *searchVC = (RefineOrderViewController*)[segue destinationViewController];
+            searchVC.delegate = self;
+            searchVC.items = _orderItems;
     }
-    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath  {

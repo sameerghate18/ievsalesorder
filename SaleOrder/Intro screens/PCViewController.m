@@ -199,9 +199,11 @@ typedef enum {
                 [SVProgressHUD dismiss];
                 errorString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
                 errorString = [errorString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-                errorString = [errorString substringWithRange:NSMakeRange(1, errorString.length-2)];
-                errorString = [errorString capitalizedString];
                 
+                if (errorString.length > 0) {
+                    errorString = [errorString substringWithRange:NSMakeRange(1, errorString.length-2)];
+                    errorString = [errorString capitalizedString];
+                }
                 if ([errorString  caseInsensitiveCompare:@"IEV C003"] == NSOrderedSame) {
                     
                     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Sign in" message:@"Invalid connection string to connect to company.\nPlease try again." preferredStyle:UIAlertControllerStyleAlert];

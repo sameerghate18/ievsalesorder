@@ -221,8 +221,10 @@
         
         outputString = [outputString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
         
-        outputString = [outputString substringWithRange:NSMakeRange(1, outputString.length-2)];
-        outputString = [outputString capitalizedString];
+        if (outputString.length > 0) {
+            outputString = [outputString substringWithRange:NSMakeRange(1, outputString.length-2)];
+            outputString = [outputString capitalizedString];
+        }
         
         __block BOOL loginFound = NO;
         
@@ -305,8 +307,10 @@
             
             outputString = [outputString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
             
-            outputString = [outputString substringWithRange:NSMakeRange(1, outputString.length-2)];
-            outputString = [outputString capitalizedString];
+            if (outputString.length > 0) {
+                outputString = [outputString substringWithRange:NSMakeRange(1, outputString.length-2)];
+                outputString = [outputString capitalizedString];
+            }
             
             __block BOOL loginFound = NO;
             
@@ -491,7 +495,10 @@
         else {
             NSString *outputString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
             outputString = [outputString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-            outputString = [outputString substringWithRange:NSMakeRange(1, outputString.length-2)];
+           
+            if (outputString.length > 0) {
+                outputString = [outputString substringWithRange:NSMakeRange(1, outputString.length-2)];
+            }
             
             if ([outputString caseInsensitiveCompare:@"true"] == NSOrderedSame) {
                 

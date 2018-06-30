@@ -599,8 +599,11 @@ typedef enum{
                     [SVProgressHUD dismiss];
                     errorString = [[NSString alloc] initWithString:responseData];
                     errorString = [errorString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-                    errorString = [errorString substringWithRange:NSMakeRange(1, errorString.length-2)];
-                    errorString = [errorString capitalizedString];
+                    
+                    if (errorString.length > 0) {
+                        errorString = [errorString substringWithRange:NSMakeRange(1, errorString.length-2)];
+                        errorString = [errorString capitalizedString];
+                    }
                     
                     if ([errorString  caseInsensitiveCompare:@"IEV C001"] == NSOrderedSame) {
                         

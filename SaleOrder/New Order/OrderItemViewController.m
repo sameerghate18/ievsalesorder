@@ -49,6 +49,7 @@
         [self editOrderItem:_editItemObj];
         [self.addButton setTitle:@"Done" forState:UIControlStateNormal];
     }
+    
 }
 
 - (void)handleSingleTap:(UITapGestureRecognizer *)sender
@@ -85,6 +86,12 @@
 - (IBAction)addButtonAction:(id)sender {
 
     if (!(_itemCodeTextfield.text.length>0 && _itemQtyTextfield.text.length>0 && _itemRateTextfield.text.length>0)) {
+        UIAlertController *incompleteFieldsAlert = [UIAlertController alertControllerWithTitle:@"Add / Edit item" message:@"Please provide all the details" preferredStyle:UIAlertControllerStyleAlert];
+        [incompleteFieldsAlert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [incompleteFieldsAlert dismissViewControllerAnimated:true completion:nil];
+        }]];
+        
+        [self presentViewController:incompleteFieldsAlert animated:YES completion:NULL];
         return;
     }
     
@@ -115,6 +122,13 @@
 - (IBAction)editButtonAction:(id)sender {
     
     if (!(_itemCodeTextfield.text.length>0 && _itemQtyTextfield.text.length>0 && _itemRateTextfield.text.length>0)) {
+        
+        UIAlertController *incompleteFieldsAlert = [UIAlertController alertControllerWithTitle:@"Add / Edit item" message:@"Please provide all the details" preferredStyle:UIAlertControllerStyleAlert];
+        [incompleteFieldsAlert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [incompleteFieldsAlert dismissViewControllerAnimated:true completion:nil];
+        }]];
+        
+        [self presentViewController:incompleteFieldsAlert animated:YES completion:NULL];
         return;
     }
     

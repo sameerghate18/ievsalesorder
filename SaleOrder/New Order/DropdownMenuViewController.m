@@ -7,6 +7,8 @@
 //
 
 #import "DropdownMenuViewController.h"
+#import "MainViewController.h"
+#import "SOMultiLineTableviewCell.h"
 
 @interface DropdownMenuViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
 
@@ -45,17 +47,13 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath  {
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"identifier"];
+    SOMultiLineTableviewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"identifier"];
     
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"identifier"];
-        cell.backgroundColor = [UIColor clearColor];
-        cell.textLabel.textColor = [UIColor blackColor];
-        cell.textLabel.font = [UIFont systemFontOfSize:13];
-    }
-    
+    cell.backgroundColor = [UIColor clearColor];
+//    cell.textLabel.textColor = [UIColor blackColor];
+//    cell.textLabel.font = [UIFont systemFontOfSize:13];
     cell.accessoryType = UITableViewCellAccessoryNone;
-    cell.detailTextLabel.text = self.searchResult[indexPath.row];
+    cell.multilineLabel.text = self.searchResult[indexPath.row];
     
     return cell;
 }
@@ -68,8 +66,12 @@
     NSInteger index = [self.items indexOfObject:searchSelectedValue];
     selectedValue = [self.items objectAtIndex:index];
     
+    MainViewController *mainViewController = (MainViewController *)self.sideMenuController;
+    
     if ([_delegate respondsToSelector:@selector(dropdownMenu:selectedItemIndex:value:)]) {
         [_delegate dropdownMenu:self selectedItemIndex:index value:selectedValue];
+        
+        [mainViewController hideRightViewAnimated:YES completionHandler:nil];
     }
 }
 
@@ -77,6 +79,10 @@
     
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     cell.accessoryType = UITableViewCellAccessoryNone;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 56.0;
 }
 
 #pragma mark - Search delegate methods
