@@ -48,6 +48,7 @@
 		42C6CB341E4A351B005397CF /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42C6CB331E4A351B005397CF /* QuartzCore.framework */; };
 		42C6CB371E4ABE84005397CF /* DropdownMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42C6CB361E4ABE84005397CF /* DropdownMenuViewController.m */; };
 		42CA8EEB20E758C400205CEF /* SOMultiLineTableviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 42CA8EEA20E758C400205CEF /* SOMultiLineTableviewCell.m */; };
+		42CA8EEE20E767F000205CEF /* SONewOrderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 42CA8EED20E767F000205CEF /* SONewOrderTableViewCell.m */; };
 		42D4E44D1E55478100E18110 /* RefineOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42D4E44C1E55478100E18110 /* RefineOrderViewController.m */; };
 		42D4E4501E554C0200E18110 /* SearchCriteriaModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 42D4E44F1E554C0200E18110 /* SearchCriteriaModel.m */; };
 		42D89A061E53605A00429600 /* OrderHistoryDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 42D89A051E53605A00429600 /* OrderHistoryDetailModel.m */; };
@@ -154,6 +155,8 @@
 		42C6CB361E4ABE84005397CF /* DropdownMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DropdownMenuViewController.m; path = "SaleOrder/New Order/DropdownMenuViewController.m"; sourceTree = SOURCE_ROOT; };
 		42CA8EE920E758C400205CEF /* SOMultiLineTableviewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOMultiLineTableviewCell.h; sourceTree = "<group>"; };
 		42CA8EEA20E758C400205CEF /* SOMultiLineTableviewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SOMultiLineTableviewCell.m; sourceTree = "<group>"; };
+		42CA8EEC20E767F000205CEF /* SONewOrderTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SONewOrderTableViewCell.h; sourceTree = "<group>"; };
+		42CA8EED20E767F000205CEF /* SONewOrderTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SONewOrderTableViewCell.m; sourceTree = "<group>"; };
 		42D4E44B1E55478100E18110 /* RefineOrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RefineOrderViewController.h; sourceTree = "<group>"; };
 		42D4E44C1E55478100E18110 /* RefineOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RefineOrderViewController.m; sourceTree = "<group>"; };
 		42D4E44E1E554C0200E18110 /* SearchCriteriaModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchCriteriaModel.h; sourceTree = "<group>"; };
@@ -389,6 +392,8 @@
 				42C6CB361E4ABE84005397CF /* DropdownMenuViewController.m */,
 				42ABF2C420C6FECF0046E555 /* OrderItemViewController.h */,
 				42ABF2C520C6FECF0046E555 /* OrderItemViewController.m */,
+				42CA8EEC20E767F000205CEF /* SONewOrderTableViewCell.h */,
+				42CA8EED20E767F000205CEF /* SONewOrderTableViewCell.m */,
 			);
 			path = "New Order";
 			sourceTree = "<group>";
@@ -589,6 +594,7 @@
 				42AF09CD1FF77C9500C6AFB3 /* CustomTextInputViewController.m in Sources */,
 				428A8EB41CEE282A00DE96C7 /* AFURLRequestSerialization.m in Sources */,
 				428A8EB61CEE282A00DE96C7 /* AFURLSessionManager.m in Sources */,
+				42CA8EEE20E767F000205CEF /* SONewOrderTableViewCell.m in Sources */,
 				42EF1A6920BDC93D004314B1 /* LGSideMenuSegue.m in Sources */,
 				42D4E4501E554C0200E18110 /* SearchCriteriaModel.m in Sources */,
 				428A8EB51CEE282A00DE96C7 /* AFURLResponseSerialization.m in Sources */,

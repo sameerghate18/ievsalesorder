@@ -17,12 +17,14 @@
 #import "MainViewController.h"
 #import "OrderItemViewController.h"
 #import "SOModels.h"
+#import "SONewOrderTableViewCell.h"
 
 static NSString *dropdownIdentifier = @"dropdownIdentifier";
 static NSString *textfieldIdentifer = @"textfieldIdentifer";
 static NSString *submitIdentifer = @"submitIdentifer";
 static NSString *newItemIdentifier = @"newItemIdentifier";
 static NSString *noitemIdentifier = @"noitemIdentifier";
+static NSString *newCellIdentifier = @"newCellIdentifier";
 
 typedef enum {
     DropDownForDocSeries,
@@ -52,7 +54,7 @@ typedef enum {
 @end
 
 
-@interface FirstViewController () <UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate, DropdownMenuViewControllerDelegate, OrderItemViewControllerDelegate>
+@interface FirstViewController () <UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate, DropdownMenuViewControllerDelegate, OrderItemViewControllerDelegate, SONewOrderTableViewCellDelegate>
 {
     NSString *selectedValueFromPicker, *selectedValueFromTextfield, *selectedDocSR, *selectedPartyName, *selectedItemRate;
     UIAlertController *actionSheet;
@@ -64,7 +66,7 @@ typedef enum {
     DropDownFor dropdownFor;
     UITextField *currentTextfield, *rateTextfield;
     NSInteger editItemIndex;
-    
+    SONewOrderTableViewCell *selectedCell;
 }
 @property (nonatomic, strong) NSMutableArray *docSeriesArray, *partyNamesArray, *documentsArray, *itemsArray, *itemCodeArray;
 @property (nonatomic, strong) IBOutlet UITableView *inputTableview;
@@ -580,7 +582,7 @@ typedef enum {
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section    {
     
     if (section == 0) {
-        return 4;
+        return 2;
     }
     else  {
         
@@ -598,26 +600,48 @@ typedef enum {
     PCInputTableviewCell *inputCell = [tableView dequeueReusableCellWithIdentifier:textfieldIdentifer];
     PCDropdownTableviewCell *dropdownCell = [tableView dequeueReusableCellWithIdentifier:dropdownIdentifier];
     PCItemOrderTableviewCell *orderItemCell = [tableView dequeueReusableCellWithIdentifier:newItemIdentifier];
+    SONewOrderTableViewCell *orderParameterCell = [tableView dequeueReusableCellWithIdentifier:newCellIdentifier];
+    
     UITableViewCell *noItemsCell = [tableView dequeueReusableCellWithIdentifier:noitemIdentifier];
     
     if (indexPath.section == 0) {
         
         switch (indexPath.row) {
             case 0 :
-                inputCell.headerLabel.text  =@"Document Series";
-                inputCell.inputTextfield.tag = 1001;
-                inputCell.dropdownImage.hidden = FALSE;
-                inputCell.inputTextfield.text = selectedDocument.docDescription;
-                inputCell.inputTextfield.delegate = self;
-                return inputCell;
+                
+                orderParameterCell.cellTitle = @"Tap to select a document";
+                orderParameterCell.parameter1TitleLabel.text = @"Document Series";
+                orderParameterCell.parameter1ValueLabel.text = selectedDocument.docDescription;
+                orderParameterCell.parameter2TitleLabel.text = @"Location:";
+                orderParameterCell.parameter2ValueLabel.text = selectedDocument.imLocation;
+                orderParameterCell.editButton.tag = 1001;
+                orderParameterCell.blankViewButton.tag = 1001;
+                orderParameterCell.delegate = self;
+                
+//                inputCell.headerLabel.text  =@"Document Series";
+//                inputCell.inputTextfield.tag = 1001;
+//                inputCell.dropdownImage.hidden = FALSE;
+//                inputCell.inputTextfield.text = selectedDocument.docDescription;
+//                inputCell.inputTextfield.delegate = self;
+                return orderParameterCell;
                 
             case 1 :
                 
-                dropdownCell.headerLabel.text = @"Location : ";
-                dropdownCell.valueLabel.text = selectedDocument.imLocation;
-                dropdownCell.selectionStyle = UITableViewCellSelectionStyleNone;
-                dropdownCell.dropdownImage.hidden = TRUE;
-                return dropdownCell;
+                orderParameterCell.cellTitle = @"Tap to select a Party name";
+                orderParameterCell.parameter1TitleLabel.text = @"Party Name";
+                orderParameterCell.parameter1ValueLabel.text = selectedParty.partyName;
+                orderParameterCell.parameter2TitleLabel.text = @"Party Code:";
+                orderParameterCell.parameter2ValueLabel.text = selectedParty.partyNumber;
+                orderParameterCell.editButton.tag = 1002;
+                orderParameterCell.blankViewButton.tag = 1002;
+                orderParameterCell.delegate = self;
+                return orderParameterCell;
+                
+//                dropdownCell.headerLabel.text = @"Location : ";
+//                dropdownCell.valueLabel.text = selectedDocument.imLocation;
+//                dropdownCell.selectionStyle = UITableViewCellSelectionStyleNone;
+//                dropdownCell.dropdownImage.hidden = TRUE;
+//                return dropdownCell;
                 
                 break;
                 
@@ -691,13 +715,13 @@ typedef enum {
     if (indexPath.section == 0) {
         
         if ((indexPath.row == 0) || (indexPath.row == 2))  {
-            rowHeight = 100.0;
+            rowHeight = 130.0;
         }
         else if ((indexPath.row == 1) || (indexPath.row == 3))  {
-            rowHeight = 50.0;
+            rowHeight = 130.0;
         }
     }
-    else if (indexPath.section == 1)    {
+    else if (indexPath.section == 1) {
         
         if (orderItems.count == 0) {
             rowHeight = 76.0;
@@ -707,42 +731,6 @@ typedef enum {
         }
     }
     return rowHeight                                                      ;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-//    if (indexPath.section == 0) {
-//        if (indexPath.row == 0) {
-//        
-//            dropdownFor = DropDownForDocSeries;
-//            NSArray *objectsArray = [self.documentsArray valueForKey:@"docDescription"];
-//            [self performSegueWithIdentifier:@"newtodropdown" sender:objectsArray];
-//        }
-//        else if (indexPath.row == 2)   {
-//            
-//            if (!selectedDocument) {
-//                UIAlertController *msgActionSheet = [UIAlertController alertControllerWithTitle:nil message:@"Select document series first." preferredStyle:UIAlertControllerStyleAlert];
-//                [msgActionSheet addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-//                    [self dismissViewControllerAnimated:YES completion:NULL];
-//                }]];
-//                
-//                [self presentViewController:msgActionSheet animated:YES completion:NULL];
-//                return;
-//            }
-//            
-//            dropdownFor = DropDownForPartyNames;
-//            NSArray *objectsArray = [self.partyNamesArray valueForKey:@"partyName"];
-//            [self performSegueWithIdentifier:@"newtodropdown" sender:objectsArray];
-//        }
-//    }
-    
-    if (indexPath.section == 1)    {
-        
-        if (orderItems.count == 0) {
-        }
-        else    {
-        }
-    }
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath   {
@@ -819,13 +807,6 @@ typedef enum {
     [blurEffectView setFrame:self.pickerViewContainer.bounds];
     [self.pickerViewContainer addSubview:blurEffectView];
     
-//    // Vibrancy effect
-//    UIVibrancyEffect *vibrancyEffect = [UIVibrancyEffect effectForBlurEffect:blurEffect];
-//    UIVisualEffectView *vibrancyEffectView = [[UIVisualEffectView alloc] initWithEffect:vibrancyEffect];
-//    [vibrancyEffectView setFrame:self.pickerViewContainer.bounds];
-//
-//    [[blurEffectView contentView] addSubview:vibrancyEffectView];
-    
     self.pickerViewContainer.frame = actionSheet.view.bounds;
     [actionSheet.view addSubview:self.pickerViewContainer];
     
@@ -847,12 +828,33 @@ typedef enum {
         case DropDownForDocSeries:
             selectedDocument = self.documentsArray[selectedIndex];
             selectedDocSR = selectedDocument.documentSR;
+            
+            selectedCell.cellTitle = @"Tap to select a document";
+            selectedCell.parameter1TitleLabel.text = @"Document Series";
+            selectedCell.parameter1ValueLabel.text = selectedDocument.docDescription;
+            selectedCell.parameter2TitleLabel.text = @"Location:";
+            selectedCell.parameter2ValueLabel.text = selectedDocument.imLocation;
+            selectedCell.blankViewButton.tag = 1001;
+            selectedCell.delegate = self;
+            selectedCell.blankView.hidden = true;
+            
+            [_inputTableview reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
+            
             [self getPartyNames];
             selectedParty = nil;
             break;
             
         case DropDownForPartyNames:
             selectedParty = self.partyNamesArray[selectedIndex];
+            
+            selectedCell.cellTitle = @"Tap to select a Party name";
+            selectedCell.parameter1TitleLabel.text = @"Party Name";
+            selectedCell.parameter1ValueLabel.text = selectedParty.partyName;
+            selectedCell.parameter2TitleLabel.text = @"Party Code:";
+            selectedCell.parameter2ValueLabel.text = selectedParty.partyNumber;
+            selectedCell.blankViewButton.tag = 1002;
+            selectedCell.delegate = self;
+            selectedCell.blankView.hidden = true;
             [self getItems];
             break;
             
@@ -872,7 +874,7 @@ typedef enum {
     
     currentTextfield.text = selectedValueFromPicker = itemsForPicker[selectedIndex];
     
-    [_inputTableview reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
+//    [_inputTableview reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
 }
 
 -(IBAction)dismissActionSheet:(id)sender   {
@@ -883,62 +885,42 @@ typedef enum {
     [actionSheet dismissViewControllerAnimated:YES completion:NULL];
 }
 
-#pragma mark - UIPickerViewDelegate
+#pragma mark - SONewOrderTableViewCellDelegate
 
-- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView  {
-    return 1;
-}
-
-- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component     {
-    return itemsForPicker.count;
-}
-
-- (nullable NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component       {
-    return itemsForPicker[row];
-}
-
-- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component  {
+-(void)parameterCell:(SONewOrderTableViewCell*)cell didPressEditButton:(UIButton*)editButton {
     
-    switch (dropdownFor) {
-        case DropDownForDocSeries:
-            selectedDocument = self.documentsArray[row];
-            selectedParty = nil;
-            break;
-            
-        case DropDownForPartyNames:
-            selectedParty = self.partyNamesArray[row];
-            break;
-            
-        case DropDownForItemNames:
-        {
-            ItemModel *selItem = _itemsArray[row];
-            selectedValueFromPicker = _itemCodeArray[row];
-            currentTextfield.text = selectedValueFromPicker;
-            selectedItemRate = selItem.imSaleRate;
-            rateTextfield.text = [Utility stringWithCurrencySymbolForValue:selectedItemRate forCurrencyCode:DEFAULT_CURRENCY_CODE];
+    selectedCell = cell;
+    if (true) {
+        
+        MainViewController *mainViewController = (MainViewController *)self.sideMenuController;
+        
+        if (editButton.tag == 1001) {
+            dropdownFor = DropDownForDocSeries;
+            itemsForPicker = [self.documentsArray valueForKey:@"docDescription"];
         }
-            break;
+        else if (editButton.tag == 1002)   {
             
-        default:
-            break;
-    }
-    
-    currentTextfield.text = selectedValueFromPicker = itemsForPicker[row];
-    
-    [_inputTableview reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
-}
+            if (!selectedDocument) {
+                UIAlertController *msgActionSheet = [UIAlertController alertControllerWithTitle:nil message:@"Select document series first." preferredStyle:UIAlertControllerStyleAlert];
+                [msgActionSheet addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                    [self dismissViewControllerAnimated:YES completion:NULL];
+                }]];
+                
+                [self presentViewController:msgActionSheet animated:YES completion:NULL];
+                return;
+            }
+            dropdownFor = DropDownForPartyNames;
+            itemsForPicker = [self.partyNamesArray valueForKey:@"partyName"];
+        }
+        
+        DropdownMenuViewController *destVC = (DropdownMenuViewController*)mainViewController.rightViewController;
+        destVC.delegate = self;
+        destVC.items = itemsForPicker;
+        [destVC reloadFiltersTableView];
 
-- (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view{
-    UILabel* tView = (UILabel*)view;
-    if (!tView){
-        tView = [[UILabel alloc] init];
-        // Setup label properties - frame, font, colors etc
-        [tView setFont:[UIFont systemFontOfSize:16]];
-        [tView setTextAlignment:NSTextAlignmentCenter];
+        [mainViewController showRightViewAnimated:nil];
     }
-    // Fill the label text here
-    tView.text = itemsForPicker[row];
-    return tView;
+    
 }
 
 #pragma mark -
