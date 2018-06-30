@@ -54,11 +54,11 @@ typedef enum {
 @end
 
 
-@interface FirstViewController () <UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate, DropdownMenuViewControllerDelegate, OrderItemViewControllerDelegate, SONewOrderTableViewCellDelegate>
+@interface FirstViewController () <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, DropdownMenuViewControllerDelegate, OrderItemViewControllerDelegate, SONewOrderTableViewCellDelegate>
 {
     NSString *selectedValueFromPicker, *selectedValueFromTextfield, *selectedDocSR, *selectedPartyName, *selectedItemRate;
     UIAlertController *actionSheet;
-    NSMutableArray *orderItems;
+    NSMutableArray *orderItems, *stateOfCellsArray;
     NSArray *itemsForPicker;
     double totalAmount;
     DocumentModel *selectedDocument;
@@ -89,12 +89,10 @@ typedef enum {
     tapper.cancelsTouchesInView = NO;
     [self.view addGestureRecognizer:tapper];
     
+    stateOfCellsArray = [[NSMutableArray alloc] initWithObjects:[NSNumber numberWithBool:false], [NSNumber numberWithBool:false], nil];
+    
     _placeOrderButton.backgroundColor = [UIColor lightGrayColor];
     [_placeOrderButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    
-    _dataPickerView = [[UIPickerView alloc] init];
-    _dataPickerView.dataSource = self;
-    _dataPickerView.delegate = self;
     
     itemsForPicker = [[NSArray alloc] init];
     
@@ -608,7 +606,7 @@ typedef enum {
         
         switch (indexPath.row) {
             case 0 :
-                
+            {
                 orderParameterCell.cellTitle = @"Tap to select a document";
                 orderParameterCell.parameter1TitleLabel.text = @"Document Series";
                 orderParameterCell.parameter1ValueLabel.text = selectedDocument.docDescription;
@@ -616,6 +614,14 @@ typedef enum {
                 orderParameterCell.parameter2ValueLabel.text = selectedDocument.imLocation;
                 orderParameterCell.editButton.tag = 1001;
                 orderParameterCell.blankViewButton.tag = 1001;
+                
+                NSNumber *num = [stateOfCellsArray objectAtIndex:indexPath.row];
+                if (num.boolValue == false) {
+                    orderParameterCell.blankView.hidden = false;
+                } else {
+                    orderParameterCell.blankView.hidden = true;
+                }
+                
                 orderParameterCell.delegate = self;
                 
 //                inputCell.headerLabel.text  =@"Document Series";
@@ -624,9 +630,10 @@ typedef enum {
 //                inputCell.inputTextfield.text = selectedDocument.docDescription;
 //                inputCell.inputTextfield.delegate = self;
                 return orderParameterCell;
+            }
                 
             case 1 :
-                
+            {
                 orderParameterCell.cellTitle = @"Tap to select a Party name";
                 orderParameterCell.parameter1TitleLabel.text = @"Party Name";
                 orderParameterCell.parameter1ValueLabel.text = selectedParty.partyName;
@@ -635,6 +642,13 @@ typedef enum {
                 orderParameterCell.editButton.tag = 1002;
                 orderParameterCell.blankViewButton.tag = 1002;
                 orderParameterCell.delegate = self;
+                
+                NSNumber *num = [stateOfCellsArray objectAtIndex:indexPath.row];
+                if (num.boolValue == false) {
+                    orderParameterCell.blankView.hidden = false;
+                } else {
+                    orderParameterCell.blankView.hidden = true;
+                }
                 return orderParameterCell;
                 
 //                dropdownCell.headerLabel.text = @"Location : ";
@@ -642,7 +656,7 @@ typedef enum {
 //                dropdownCell.selectionStyle = UITableViewCellSelectionStyleNone;
 //                dropdownCell.dropdownImage.hidden = TRUE;
 //                return dropdownCell;
-                
+            }
                 break;
                 
             case 2 :
@@ -836,8 +850,11 @@ typedef enum {
             selectedCell.parameter2ValueLabel.text = selectedDocument.imLocation;
             selectedCell.blankViewButton.tag = 1001;
             selectedCell.delegate = self;
-            selectedCell.blankView.hidden = true;
             
+            selectedCell.blankView.hidden = true;
+            [stateOfCellsArray replaceObjectAtIndex:0 withObject:[NSNumber numberWithBool:true]];
+            
+            [stateOfCellsArray replaceObjectAtIndex:1 withObject:[NSNumber numberWithBool:false]];
             [_inputTableview reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
             
             [self getPartyNames];
@@ -854,7 +871,10 @@ typedef enum {
             selectedCell.parameter2ValueLabel.text = selectedParty.partyNumber;
             selectedCell.blankViewButton.tag = 1002;
             selectedCell.delegate = self;
+            
             selectedCell.blankView.hidden = true;
+            [stateOfCellsArray replaceObjectAtIndex:1 withObject:[NSNumber numberWithBool:true]];
+            
             [self getItems];
             break;
             
@@ -1048,6 +1068,9 @@ typedef enum {
 - (void)clearFields {
     
     dispatch_async(dispatch_get_main_queue(), ^{
+        
+        [stateOfCellsArray replaceObjectAtIndex:0 withObject:[NSNumber numberWithBool:false]];
+        [stateOfCellsArray replaceObjectAtIndex:1 withObject:[NSNumber numberWithBool:false]];
         
         _placeOrderButton.backgroundColor = [UIColor lightGrayColor];
         [_placeOrderButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];

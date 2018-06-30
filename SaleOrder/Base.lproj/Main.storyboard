@@ -436,15 +436,26 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uvd-cf-E0g">
-                                                                <rect key="frame" x="293" y="27" width="44" height="44"/>
+                                                                <rect key="frame" x="293" y="36" width="44" height="25"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="height" constant="44" id="6Pw-f7-08S"/>
+                                                                    <constraint firstAttribute="height" constant="25" id="6Pw-f7-08S"/>
                                                                     <constraint firstAttribute="width" constant="44" id="u9H-mY-Deq"/>
                                                                 </constraints>
                                                                 <fontDescription key="fontDescription" type="italicSystem" pointSize="12"/>
                                                                 <state key="normal" title="Change">
                                                                     <color key="titleColor" red="0.0" green="0.32957173909999998" blue="0.58270542510000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 </state>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                        <integer key="value" value="5"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                                                        <integer key="value" value="3"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColor">
+                                                                        <color key="value" red="0.0088390193262928799" green="0.13005790389676228" blue="0.67173619923857864" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
                                                                 <connections>
                                                                     <action selector="editButtonPressed:" destination="o9e-PK-RiI" eventType="touchUpInside" id="Tam-Ls-PvO"/>
                                                                 </connections>
@@ -975,7 +986,7 @@
                                 <color key="backgroundColor" red="0.99607843139999996" green="0.8980392157" blue="0.27450980390000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="identifier" rowHeight="56" id="Bqf-CG-Exs" customClass="SOMultiLineTableviewCell">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="identifier" rowHeight="56" id="Bqf-CG-Exs" customClass="SOMultiLineTableviewCell">
                                         <rect key="frame" x="0.0" y="28" width="250" height="56"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Bqf-CG-Exs" id="m8f-2y-PJ4">
@@ -983,7 +994,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="B4u-oI-tTz">
-                                                    <rect key="frame" x="15" y="11" width="220" height="34"/>
+                                                    <rect key="frame" x="15" y="11" width="95" height="34"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
