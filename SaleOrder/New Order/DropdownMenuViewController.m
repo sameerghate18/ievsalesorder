@@ -32,6 +32,10 @@
     self.searchResult = self.items;
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    _searchBar.text = @"";
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -90,6 +94,7 @@
     if ([_delegate respondsToSelector:@selector(dropdownMenu:selectedItemIndex:value:)]) {
         [_delegate dropdownMenu:self selectedItemIndex:index value:selectedValue];
         
+        _searchBar.text = @"";
         [mainViewController hideRightViewAnimated:YES completionHandler:nil];
     }
 }
@@ -114,9 +119,17 @@
 
 - (void)filterContentForSearchText:(NSString*)searchText
 {
-    NSPredicate *resultPredicate = [NSPredicate
-                                    predicateWithFormat:@"SELF CONTAINS[c] %@",
-                                    searchText];
+    NSPredicate *resultPredicate;
+    
+    if (_cellType == cellTypeTwoLine) {
+        resultPredicate = [NSPredicate
+                           predicateWithFormat:@"SELF.line1Text contains[c] %@ OR SELF.line2Text contains[c] %@",
+                           searchText, searchText];
+    } else if (_cellType == cellTypeSingleLine) {
+        resultPredicate = [NSPredicate
+                           predicateWithFormat:@"SELF CONTAINS[c] %@",
+                           searchText];
+    }
     
     self.searchResult = [_items filteredArrayUsingPredicate:resultPredicate];
     [self.itemsTableview reloadData];
