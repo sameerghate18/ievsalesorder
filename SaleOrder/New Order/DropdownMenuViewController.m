@@ -9,6 +9,8 @@
 #import "DropdownMenuViewController.h"
 #import "MainViewController.h"
 #import "SOMultiLineTableviewCell.h"
+#import "TwoLineCellTableViewCell.h"
+#import "SOTwoLineCellModel.h"
 
 @interface DropdownMenuViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
 
@@ -47,24 +49,41 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath  {
     
-    SOMultiLineTableviewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"identifier"];
+    UITableViewCell *cell;
     
-    cell.backgroundColor = [UIColor clearColor];
-//    cell.textLabel.textColor = [UIColor blackColor];
-//    cell.textLabel.font = [UIFont systemFontOfSize:13];
-    cell.accessoryType = UITableViewCellAccessoryNone;
-    cell.multilineLabel.text = self.searchResult[indexPath.row];
+    if (_cellType == cellTypeSingleLine) {
+        SOMultiLineTableviewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"identifier"];
+        cell.multilineLabel.text = self.searchResult[indexPath.row];
+        return cell;
+    } else if (_cellType == cellTypeTwoLine) {
+        TwoLineCellTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"twoLineIdentifier"];
+        SOTwoLineCellModel *itemAtIndex = self.searchResult[indexPath.row];
+        cell.titleLabel.text = itemAtIndex.line1Text;
+        cell.descriptionLabel.text = [itemAtIndex.line2Text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        return cell;
+    }
     
+//    cell.backgroundColor = [UIColor clearColor];
+//    cell.accessoryType = UITableViewCellAccessoryNone;
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     cell.backgroundColor = [UIColor clearColor];
-    NSString  *searchSelectedValue = [self.searchResult objectAtIndex:indexPath.row];
     
-    NSInteger index = [self.items indexOfObject:searchSelectedValue];
-    selectedValue = [self.items objectAtIndex:index];
+    NSInteger index = 0;
+    
+    if (_cellType == cellTypeSingleLine) {
+        NSString  *searchSelectedValue = [self.searchResult objectAtIndex:indexPath.row];
+        index = [self.items indexOfObject:searchSelectedValue];
+        selectedValue = [self.items objectAtIndex:index];
+    } else if (_cellType == cellTypeTwoLine) {
+        SOTwoLineCellModel  *searchSelectedItem = [self.searchResult objectAtIndex:indexPath.row];
+        index = [self.items indexOfObject:searchSelectedItem];
+        SOTwoLineCellModel *selectedItem = [self.items objectAtIndex:index];
+        selectedValue = selectedItem.line1Text;
+    }
     
     MainViewController *mainViewController = (MainViewController *)self.sideMenuController;
     
@@ -82,6 +101,12 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (_cellType == cellTypeTwoLine) {
+        return 56.0;
+    } else if (_cellType == cellTypeSingleLine) {
+        return 68.0;
+    }
     return 56.0;
 }
 

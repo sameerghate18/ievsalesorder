@@ -13,6 +13,7 @@
 #import "DropdownMenuViewController.h"
 #import "SONewOrderItem.h"
 #import "SOModels.h"
+#import "SOTwoLineCellModel.h"
 
 @interface OrderItemViewController () <UITextFieldDelegate, DropdownMenuViewControllerDelegate>
 {
@@ -173,6 +174,7 @@
         DropdownMenuViewController *destVC = (DropdownMenuViewController*)mainViewController.rightViewController;
         destVC.delegate = self;
         destVC.items = self.itemsForPicker;
+        destVC.cellType = cellTypeTwoLine;
         [destVC reloadFiltersTableView];
         [mainViewController showRightViewAnimated:nil];
         return NO;

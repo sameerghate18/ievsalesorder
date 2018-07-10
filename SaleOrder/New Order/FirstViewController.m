@@ -18,6 +18,7 @@
 #import "OrderItemViewController.h"
 #import "SOModels.h"
 #import "SONewOrderTableViewCell.h"
+#import "SOTwoLineCellModel.h"
 
 static NSString *dropdownIdentifier = @"dropdownIdentifier";
 static NSString *textfieldIdentifer = @"textfieldIdentifer";
@@ -269,77 +270,7 @@ typedef enum {
     // TODO: Replace with OrderViewController
     
     [self performSegueWithIdentifier:@"newItemSegue" sender:nil];
-    /*
-    UIAlertController *newItemAlert = [UIAlertController alertControllerWithTitle:@"Add a new item" message:nil preferredStyle:UIAlertControllerStyleAlert];
-    
-    [newItemAlert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
-        textField.placeholder = @"Item code";
-        textField.keyboardType = UIKeyboardTypeNumberPad;
-        textField.tag = 1000;
-        textField.delegate = self;
-    }];
-    
-    [newItemAlert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
-        textField.placeholder = @"Rate";
-        textField.keyboardType = UIKeyboardTypeNumberPad;
-        rateTextfield = textField;
-        textField.tag = 1003;
-        textField.delegate = self;
-    }];
-    
-    [newItemAlert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
-        textField.placeholder = @"Quantity";
-        textField.keyboardType = UIKeyboardTypeNumberPad;
-        textField.tag = 1004;
-        textField.delegate = self;
-    }];
-    
-    __block BOOL shouldDismiss = YES;
-    
-    [newItemAlert addAction:[UIAlertAction actionWithTitle:@"Add item" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        
-        for (UITextField *tf in newItemAlert.textFields) {
-            if (tf.text.length == 0) {
-                tf.text = @"Cannot be left blank";
-                shouldDismiss = NO;
-                return ;
-            }
-            selectedItemRate = rateTextfield.text;
-        }
-        
-//        if (currentTextfield.text == nil) {
-//            currentTextfield.text = @"Cannot be left blank";
-//            return;
-//        }
-        
-        SONewOrderItem *newItem = [[SONewOrderItem alloc] init];
-
-        newItem.itemCode = selectedValueFromPicker;
-        NSString *rateText = newItemAlert.textFields[1].text;
-        
-        NSString *rateStr = [selectedItemRate stringByReplacingCharactersInRange:NSMakeRange(0, 1) withString:@""];
-        newItem.rate = [rateStr stringByReplacingOccurrencesOfString:@"," withString:@""];
-        newItem.quantity = newItemAlert.textFields.lastObject.text;
-        
-        double rate = [newItem.rate doubleValue];
-        double qty = [newItem.quantity doubleValue];
-        double amount = rate*qty;
-        
-        newItem.amount = amount;
-        
-        [self addNewItem:newItem];
-        
-    }]];
-    
-    [newItemAlert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        
-        [newItemAlert dismissViewControllerAnimated:YES completion:NULL];
-        
-    }]];
-    
-    [self presentViewController:newItemAlert animated:YES completion:NULL];
-    */
-}
+   }
 
 -(void)addNewItem:(SONewOrderItem*)orderItem    {
     
@@ -786,6 +717,7 @@ typedef enum {
         DropdownMenuViewController *destVC = segue.destinationViewController;
         destVC.delegate = self;
         destVC.items = (NSArray*)sender;
+        destVC.cellType = cellTypeSingleLine;
         destVC.title = @"Select a document series";
         self.definesPresentationContext = YES;
         destVC.view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.3]; // can be with 'alpha'
@@ -795,7 +727,7 @@ typedef enum {
         OrderItemViewController *newItmeVC = segue.destinationViewController;
         newItmeVC.delegate = self;
         newItmeVC.popupType = ItemPopupTypeAdd;
-        newItmeVC.itemsForPicker = [_itemsArray valueForKey:@"imCode"];
+        newItmeVC.itemsForPicker = [self dataForDropDownPicker:_itemsArray];
         newItmeVC.itemsArray = _itemsArray;
         newItmeVC.alreadyOrderedItemsArray = orderItems;
     }
@@ -803,7 +735,7 @@ typedef enum {
         OrderItemViewController *editItemVC = segue.destinationViewController;
         editItemVC.delegate = self;
         editItemVC.popupType = ItemPopupTypeEdit;
-        editItemVC.itemsForPicker = [_itemsArray valueForKey:@"imCode"];
+        editItemVC.itemsForPicker = [self dataForDropDownPicker:_itemsArray];
         editItemVC.itemsArray = _itemsArray;
         editItemVC.alreadyOrderedItemsArray = orderItems;
         SONewOrderItem *itemToEdit = (SONewOrderItem*)sender;
@@ -811,7 +743,19 @@ typedef enum {
     }
 }
 
--(void)presentDropdownMenu:(NSIndexPath*)selectedRow  {
+-(NSArray*)dataForDropDownPicker:(NSArray*)array {
+    
+    NSMutableArray *arrayForPicker = [[NSMutableArray alloc] init];
+    for (ItemModel *model in array) {
+        SOTwoLineCellModel *obj = [[SOTwoLineCellModel alloc] init];
+        obj.line1Text = model.imCode;
+        obj.line2Text = model.imDescription;
+        [arrayForPicker addObject:obj];
+    }
+    return arrayForPicker;
+}
+
+-(void)presentDropdownMenu:(NSIndexPath*)selectedRow {
     
     actionSheet = [UIAlertController alertControllerWithTitle:@"Select a value" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     actionSheet.view.backgroundColor = [UIColor clearColor];
@@ -935,6 +879,7 @@ typedef enum {
         
         DropdownMenuViewController *destVC = (DropdownMenuViewController*)mainViewController.rightViewController;
         destVC.delegate = self;
+        destVC.cellType = cellTypeSingleLine;
         destVC.items = itemsForPicker;
         [destVC reloadFiltersTableView];
 

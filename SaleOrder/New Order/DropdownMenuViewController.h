@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+typedef enum {
+    cellTypeSingleLine,
+    cellTypeTwoLine
+} LeftMenuCellType;
+
 @protocol DropdownMenuViewControllerDelegate;
 
 @interface DropdownMenuViewController : UIViewController
@@ -15,6 +20,7 @@
 @property (nonatomic, strong) NSArray *items;
 @property (weak, nonatomic) IBOutlet UITableView *itemsTableview;
 @property (nonatomic, unsafe_unretained) id<DropdownMenuViewControllerDelegate>delegate;
+@property (nonatomic) LeftMenuCellType cellType;
 
 -(void)reloadFiltersTableView;
 

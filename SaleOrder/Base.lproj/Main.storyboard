@@ -436,7 +436,7 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uvd-cf-E0g">
-                                                                <rect key="frame" x="293" y="36" width="44" height="25"/>
+                                                                <rect key="frame" x="293" y="37" width="44" height="25"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="25" id="6Pw-f7-08S"/>
                                                                     <constraint firstAttribute="width" constant="44" id="u9H-mY-Deq"/>
@@ -986,15 +986,17 @@
                                 <color key="backgroundColor" red="0.99607843139999996" green="0.8980392157" blue="0.27450980390000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="identifier" rowHeight="56" id="Bqf-CG-Exs" customClass="SOMultiLineTableviewCell">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="identifier" rowHeight="56" id="Bqf-CG-Exs" customClass="SOMultiLineTableviewCell">
                                         <rect key="frame" x="0.0" y="28" width="250" height="56"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Bqf-CG-Exs" id="m8f-2y-PJ4">
                                             <rect key="frame" x="0.0" y="0.0" width="250" height="55.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="B4u-oI-tTz">
-                                                    <rect key="frame" x="15" y="11" width="95" height="34"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="B4u-oI-tTz">
+                                                    <rect key="frame" x="15" y="11" width="220" height="34"/>
+                                                    <string key="text">Label
+labrl</string>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -1002,8 +1004,8 @@
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
+                                                <constraint firstItem="B4u-oI-tTz" firstAttribute="trailing" secondItem="m8f-2y-PJ4" secondAttribute="trailingMargin" id="5NG-we-9St"/>
                                                 <constraint firstItem="B4u-oI-tTz" firstAttribute="bottom" secondItem="m8f-2y-PJ4" secondAttribute="bottomMargin" id="AGw-64-tyU"/>
-                                                <constraint firstItem="B4u-oI-tTz" firstAttribute="trailing" secondItem="m8f-2y-PJ4" secondAttribute="trailingMargin" id="heP-XM-Jzh"/>
                                                 <constraint firstItem="B4u-oI-tTz" firstAttribute="top" secondItem="m8f-2y-PJ4" secondAttribute="topMargin" id="mru-iQ-hfU"/>
                                                 <constraint firstItem="B4u-oI-tTz" firstAttribute="leading" secondItem="m8f-2y-PJ4" secondAttribute="leadingMargin" id="nku-Bp-93d"/>
                                             </constraints>
@@ -1011,6 +1013,50 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <outlet property="multilineLabel" destination="B4u-oI-tTz" id="CGT-6w-c2K"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="twoLineIdentifier" rowHeight="68" id="xFo-0V-RiS" customClass="TwoLineCellTableViewCell">
+                                        <rect key="frame" x="0.0" y="84" width="250" height="68"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="xFo-0V-RiS" id="29n-Ye-Yu9">
+                                            <rect key="frame" x="0.0" y="0.0" width="250" height="67.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="Mux-mV-I61">
+                                                    <rect key="frame" x="15" y="8" width="220" height="32"/>
+                                                    <string key="text">Label
+labrl</string>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="13"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="gTa-OQ-KZe">
+                                                    <rect key="frame" x="15" y="48" width="220" height="15"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="15" id="FvO-v4-Qp6"/>
+                                                    </constraints>
+                                                    <string key="text">Label
+labrl</string>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="Mux-mV-I61" secondAttribute="trailing" constant="15" id="7LA-Fn-2aD"/>
+                                                <constraint firstAttribute="bottom" secondItem="gTa-OQ-KZe" secondAttribute="bottom" constant="4.5" id="TuH-Ie-wNa"/>
+                                                <constraint firstAttribute="trailing" secondItem="gTa-OQ-KZe" secondAttribute="trailing" constant="15" id="aQT-o0-FNc"/>
+                                                <constraint firstItem="Mux-mV-I61" firstAttribute="leading" secondItem="29n-Ye-Yu9" secondAttribute="leadingMargin" id="diJ-TB-ioU"/>
+                                                <constraint firstItem="Mux-mV-I61" firstAttribute="top" secondItem="29n-Ye-Yu9" secondAttribute="topMargin" constant="-3" id="gsr-7x-ryM"/>
+                                                <constraint firstItem="gTa-OQ-KZe" firstAttribute="top" secondItem="Mux-mV-I61" secondAttribute="bottom" constant="8.5" id="kA1-wE-UpJ"/>
+                                                <constraint firstItem="gTa-OQ-KZe" firstAttribute="leading" secondItem="29n-Ye-Yu9" secondAttribute="leading" constant="15" id="q5R-9w-wBT"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <outlet property="descriptionLabel" destination="gTa-OQ-KZe" id="ehD-SR-rQI"/>
+                                            <outlet property="titleLabel" destination="Mux-mV-I61" id="g8Y-Iu-dAA"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -1055,7 +1101,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hAJ-9c-9H8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2387.1999999999998" y="-482.60869565217394"/>
+            <point key="canvasLocation" x="-2388.8000000000002" y="-483.50824587706148"/>
         </scene>
         <!--New Order-->
         <scene sceneID="jax-1g-pjO">

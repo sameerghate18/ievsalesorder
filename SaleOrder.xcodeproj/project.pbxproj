@@ -43,6 +43,7 @@
 		42AF09CD1FF77C9500C6AFB3 /* CustomTextInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42AF09CB1FF77C9400C6AFB3 /* CustomTextInputViewController.m */; };
 		42AF09CE1FF77C9500C6AFB3 /* CustomTextInputViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42AF09CC1FF77C9400C6AFB3 /* CustomTextInputViewController.xib */; };
 		42B0896D1D088C9B00C62D60 /* IOTBackendNetworker.m in Sources */ = {isa = PBXBuildFile; fileRef = 42B0896C1D088C9B00C62D60 /* IOTBackendNetworker.m */; };
+		42B80DA820F3DB0F002ECF7A /* SOTwoLineCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 42B80DA720F3DB0F002ECF7A /* SOTwoLineCellModel.m */; };
 		42C2AEE51E4E3D5000071DA6 /* OrderItemDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42C2AEE41E4E3D5000071DA6 /* OrderItemDetailsViewController.m */; };
 		42C3AE0A1E52B13E00D7F64B /* TwoLineCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 42C3AE091E52B13E00D7F64B /* TwoLineCellTableViewCell.m */; };
 		42C6CB341E4A351B005397CF /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42C6CB331E4A351B005397CF /* QuartzCore.framework */; };
@@ -146,6 +147,8 @@
 		42AF09CC1FF77C9400C6AFB3 /* CustomTextInputViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = CustomTextInputViewController.xib; path = SaleOrder/CustomTextInputViewController.xib; sourceTree = SOURCE_ROOT; };
 		42B0896B1D088C9B00C62D60 /* IOTBackendNetworker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IOTBackendNetworker.h; sourceTree = "<group>"; };
 		42B0896C1D088C9B00C62D60 /* IOTBackendNetworker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IOTBackendNetworker.m; sourceTree = "<group>"; };
+		42B80DA620F3DB0F002ECF7A /* SOTwoLineCellModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOTwoLineCellModel.h; sourceTree = "<group>"; };
+		42B80DA720F3DB0F002ECF7A /* SOTwoLineCellModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SOTwoLineCellModel.m; sourceTree = "<group>"; };
 		42C2AEE31E4E3D5000071DA6 /* OrderItemDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderItemDetailsViewController.h; sourceTree = "<group>"; };
 		42C2AEE41E4E3D5000071DA6 /* OrderItemDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderItemDetailsViewController.m; sourceTree = "<group>"; };
 		42C3AE081E52B13E00D7F64B /* TwoLineCellTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwoLineCellTableViewCell.h; sourceTree = "<group>"; };
@@ -394,6 +397,8 @@
 				42ABF2C520C6FECF0046E555 /* OrderItemViewController.m */,
 				42CA8EEC20E767F000205CEF /* SONewOrderTableViewCell.h */,
 				42CA8EED20E767F000205CEF /* SONewOrderTableViewCell.m */,
+				42B80DA620F3DB0F002ECF7A /* SOTwoLineCellModel.h */,
+				42B80DA720F3DB0F002ECF7A /* SOTwoLineCellModel.m */,
 			);
 			path = "New Order";
 			sourceTree = "<group>";
@@ -580,6 +585,7 @@
 				42EF79AB1CE0EBD000A055A9 /* FirstViewController.m in Sources */,
 				4298E1811CEB8714004CAAD6 /* Reachability.m in Sources */,
 				4298E1501CEB8171004CAAD6 /* PCUpdateMobileNumberViewController.m in Sources */,
+				42B80DA820F3DB0F002ECF7A /* SOTwoLineCellModel.m in Sources */,
 				4298E1751CEB84CF004CAAD6 /* SSKeychain.m in Sources */,
 				424C90531E47907000F41DD2 /* SONewOrderItem.m in Sources */,
 				42EF1A6D20BDC93D004314B1 /* LGSideMenuBorderView.m in Sources */,

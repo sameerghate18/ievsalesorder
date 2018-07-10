@@ -212,6 +212,7 @@ typedef enum {
     if (textField.tag == 1000) {
         itemsForPicker = [_items valueForKey:@"doc_desc"];
         uniqueItemsForPicker = [itemsForPicker valueForKeyPath:@"@distinctUnionOfObjects.self"];
+        destVC.cellType = cellTypeSingleLine;
         
         destVC.items = uniqueItemsForPicker;
         [destVC reloadFiltersTableView];

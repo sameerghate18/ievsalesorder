@@ -148,7 +148,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-//    [self performSegueWithIdentifier:@"orderDetailsSegue" sender:indexPath];
+    [self performSegueWithIdentifier:@"orderDetailsSegue" sender:indexPath];
 }
 
 -(IBAction)presentRefineScreen:(id)sender {
